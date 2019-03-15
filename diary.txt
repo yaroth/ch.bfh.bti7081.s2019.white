@@ -1,0 +1,2 @@
+15.03.2019:   - Git Repository erstellt
+              - Milestone "Interview erstellt" spezifische Aufgaben siehe Issues von Interview
