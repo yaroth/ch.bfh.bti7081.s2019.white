@@ -1,2 +1,4 @@
 15.03.2019:   - Git Repository erstellt
+              - Telegram für Chatkommunikation bestimmt
+              - Git für Aufgabenmanagement bestimmt (Milestones für Aufgaben, Issues für Teilaufgaben)
               - Milestone "Interview erstellt" spezifische Aufgaben siehe Issues von Interview
