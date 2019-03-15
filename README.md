@@ -8,3 +8,9 @@ Group members:
 - Nikola Ristic
 - Marco Mueller
 - Yann Roth
+
+Patient Management System (PMS): 
+- target user group: (ambulant) patient
+- mental health problem: depression
+
+Aim: develop a java-based web application
