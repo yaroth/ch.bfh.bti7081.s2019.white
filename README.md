@@ -5,9 +5,9 @@ Group members:
 - Nico Lieberherr
 - Remo Hofmann
 - Lukas Zoller
-- Nikola Ristic
 - Marco Mueller
 - Yann Roth
+- Elias Vihma
 
 Patient Management System (PMS): 
 - target user group: (ambulant) patient
