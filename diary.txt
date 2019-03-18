@@ -5,3 +5,11 @@
               - Milestone "Kickoff" erstellt
 
 18.03.2019:   - Dokument "Mögliche Interviewfragen" erstellt
+              - Kickoffmeeting gehalten. Beschlüsse:
+                  - Kommunikationskanal: Telegramchat
+                  - Aufgabenorganisation: Git: Aufgaben in Milestones, Unteraufgaben in Issues (mit zugeordnetem Milestone) beschreiben
+                  - in diesem Dokument (diary.txt) Protokoll über alle Aktionen halten
+                  - im Dokument openQuestions.txt offene, nicht zugeordnete Fragen festhalten. Punkte bei Milestone/Issueerstellung löschen
+              - Dokument openQuestions.txt erstellt
+              
+              
