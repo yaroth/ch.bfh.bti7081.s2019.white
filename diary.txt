@@ -3,3 +3,5 @@
               - Git für Aufgabenmanagement bestimmt (Milestones für Aufgaben, Issues für Teilaufgaben)
               - Milestone "Interview erstellt" spezifische Aufgaben siehe Issues von Interview
               - Milestone "Kickoff" erstellt
+
+18.03.2019:   - Dokument "Mögliche Interviewfragen" erstellt
