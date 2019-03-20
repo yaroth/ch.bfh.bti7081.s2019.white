@@ -12,4 +12,6 @@
                   - im Dokument openQuestions.txt offene, nicht zugeordnete Fragen festhalten. Punkte bei Milestone/Issueerstellung löschen
               - Dokument openQuestions.txt erstellt
               
+20.03.2019:   -"Mögliche Interviewfragen" ergänzt.
+              
               
