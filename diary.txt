@@ -12,7 +12,15 @@
                   - im Dokument openQuestions.txt offene, nicht zugeordnete Fragen festhalten. Punkte bei Milestone/Issueerstellung löschen
               - Dokument openQuestions.txt erstellt
               
-20.03.2019:   -"Mögliche Interviewfragen" ergänzt.
-              - Remo macht Interview am 21.3.2019.
+20.03.2019:   - Projektmeeting gehalten
+                  - Online research sowie Interviews bis Freitag um Problem zu motivieren
+                  - Interviews zugeordnet
+              - Remo macht Interview am 21.3.2019 (Patient)
+              - Lukas macht Interview am 21.03.2019 (Case Manager)
+              - Elias macht Interview am 21.03.2019 (Pflegepersonal)
+              - Milestone "task01_design_thinking" erstellt
+              - Info von Vogel: Storyboards für Mobile können erstellt werden.
+              
+          
               
               
