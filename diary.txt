@@ -21,6 +21,11 @@
               - Milestone "task01_design_thinking" erstellt
               - Info von Vogel: Storyboards für Mobile können erstellt werden.
               
-          
+22.3.2019:  - Basisproblem eruiert
+            - scoping
+            - research
+            - synthesis: 3 Personae erstellt
+            - design: partially
+            - desig - storyboards gemäss Issue-Verteilung auf Github
               
               
