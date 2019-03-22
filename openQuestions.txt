@@ -1,1 +1,2 @@
-
+- user "patient" is not included in the users list. Ask teacher!
+Answer: generate 'use case' for patient - depression. Task description coming!
