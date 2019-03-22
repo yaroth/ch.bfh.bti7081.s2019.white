@@ -21,6 +21,6 @@
               - Milestone "task01_design_thinking" erstellt
               - Info von Vogel: Storyboards für Mobile können erstellt werden.
               
-          
+22.03.2019:   - Beginn mit design thinking concept          
               
               
