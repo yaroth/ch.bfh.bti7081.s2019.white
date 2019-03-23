@@ -27,5 +27,6 @@
             - synthesis: 3 Personae erstellt
             - design: partially
             - desig - storyboards gemäss Issue-Verteilung auf Github
+            - Lukas: Interview mit Case Managerin durchgeführt
               
               
