@@ -30,7 +30,12 @@
             - Lukas: Interview mit Case Managerin durchgeführt
               
 25.3.2019:  - Storyboards vorgestellt und diskutiert.
-            - Punkte für Storyboards verteilen.
+            - Punkte für Storyboards verteilt.
             - Most promising storyboards ausgewählt.
             - Prototypes für 'Stimmung', 'Tips', 'Aufgaben' erarbeitet. Besprochen.
+            - Aufgaben für Mittwoch, 27.3. verteilt:
+                - Homescreen Vorschläge -> wer will
+                - Benutzerführung -> Yann (und wer sonst auch noch will!)
+                - verschiedene Prototype Designs möglichst detailliert ausarbeiten -> jeder für sich (wer will)
+                - Ziel: pro <=> contra Diskussion auslösen.
 
