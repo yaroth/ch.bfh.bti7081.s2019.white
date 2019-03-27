@@ -39,3 +39,14 @@
                 - verschiedene Prototype Designs möglichst detailliert ausarbeiten -> jeder für sich (wer will)
                 - Ziel: pro <=> contra Diskussion auslösen.
 
+27.03.2019: - Meeting Abstimmung Projektname => einigung auf despresso
+            - Diskussion Homescreen
+                - muss einfach sein, nicht überladen
+                - mood Erfassung zentral
+                - mood Erfassung bereits swipebar (gut/schlecht)
+                - jeweils 2 Kacheln unten (auf homescreen links kalender, rechts tips, usw.)
+                - nächster Kalendereintrag mit Check funktion und Uhrzeit auf homescreen.
+            - Aufgaben bis Freitag
+                - Nico und Yann halten den Vortrag
+                - Lukas macht Design fertig (homescreen und tips)
+                - Remo schreibt Protokoll
