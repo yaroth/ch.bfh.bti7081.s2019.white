@@ -57,3 +57,5 @@
                 -get activity suggestions
             - Dokumentation Requirements erstellt.
                 -Aufgaben verteilt (Anhand Kapitel. Zuteilung siehe Issues).
+            - Milestone "task02_Systems_Requirements" sowie Subtasks erstellt (siehe Issues)
+                
