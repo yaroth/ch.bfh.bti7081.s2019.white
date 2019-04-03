@@ -61,6 +61,6 @@
             
 03.04.2019: - Meeting zu Requirements Dokument
                 - Beschluss: bis am Freitag erster Entwurf des zugeteilten Kapitels
-                - Usecase descriptions besprochen
+                - Use case descriptions besprochen: 'activity diagrams' ist nicht notwendig.
               
                 
