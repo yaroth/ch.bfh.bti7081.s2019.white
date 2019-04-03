@@ -1,16 +1,15 @@
 System evolution
 
 Annahmen:
-- Java basiert.
-- Vaadin für GUI.
-- Client-Server Applikation
-- Netzwerkverbindung notwendig
-- Therapeut muss bestimmte Patientendaten remote sichten können. Welche Daten, muss zu einem späteren Zeitpunkt bestimmt werden.
+- Programmiersprache: Java.
+- Fürs grafische Interface: Vaadin.
+- Client-Server Applikation: private Daten werden nur patientenseitig gehalten. Daten, die vom Therapeuten gesichtet werden können, müssen an einen Server geschickt werden, so dass der Therapeut diese sichten kann. Welche Daten das sind, muss zu einem späteren Zeitpunkt bestimmt werden. Beispielhaft: der Kalender könnte für den Therapeuten einsichtbar sein.
+- Datenschutz: eine sichere Verbindung zwischen dem Client und dem Server muss gewährleistet sein.
 
 
 Mögliche Änderungen:
-- Datenschutz kann in Zukunft erleichtert oder erschwert werden, je nach Bestimmungen
-- Applikation ist zur Zeit nur auf ein einziges Gerät konzipiert. Könnte in Zukunft auf mehrere Geräte ausgeweitet werden (z.B. Smartphone, Tablet, Desktop)
+- Datenschutz kann in Zukunft erleichtert oder erschwert werden, je nach Bestimmungen.
+- Applikation ist zur Zeit nur auf ein einziges Gerät konzipiert. Könnte in Zukunft auf mehrere Geräte ausgeweitet werden.
 - Neben Stimmung, Tips und Kalendereinträge könnten in Zukunft weitere Themen hinzukommen.
 
 
