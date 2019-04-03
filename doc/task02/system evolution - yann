@@ -11,6 +11,7 @@ assumptions:
 - Vaadin for GUI.
 - client-server application
 - needs network connection
+- therapist needs access to view certain patient data (which ones needs to be defined)
 
 possible changes:
 - privacy could be relaxed or restricted depending on external priorities.
