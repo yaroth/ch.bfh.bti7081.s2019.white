@@ -1,19 +1,16 @@
 System evolution
 
-Task description:
-This should describe the fundamental assumptions on which the system is based, and any anticipated
-changes due to hardware evolution, changing user needs, and so on. This section is useful for system
-designers as it may help them avoid design decisions that would constrain likely future changes to the system.
+Annahmen:
+- Java basiert.
+- Vaadin für GUI.
+- Client-Server Applikation
+- Netzwerkverbindung notwendig
+- Therapeut muss bestimmte Patientendaten remote sichten können. Welche Daten, muss zu einem späteren Zeitpunkt bestimmt werden.
 
 
-assumptions:
-- Java based.
-- Vaadin for GUI.
-- client-server application
-- needs network connection
-- therapist needs access to view certain patient data (which ones needs to be defined)
+Mögliche Änderungen:
+- Datenschutz kann in Zukunft erleichtert oder erschwert werden, je nach Bestimmungen
+- Applikation ist zur Zeit nur auf ein einziges Gerät konzipiert. Könnte in Zukunft auf mehrere Geräte ausgeweitet werden (z.B. Smartphone, Tablet, Desktop)
+- Neben Stimmung, Tips und Kalendereinträge könnten in Zukunft weitere Themen hinzukommen.
 
-possible changes:
-- privacy could be relaxed or restricted depending on external priorities.
-- application could switch from single device to multiple device, so that user can view / enter data from different devices (smartphone, tablet, desktop browser)
 
