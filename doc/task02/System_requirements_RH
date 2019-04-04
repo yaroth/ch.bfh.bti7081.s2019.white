@@ -1,0 +1,27 @@
+Die Systemanforderungen unserer Applikation lassen sich wie folgt gliedern:
+1. Durch die Anforderung, dass sowohl der Patient selber (mobile und desktop), wie auch das Pflegepersonal auf gemeinsame Daten zugreifen kann, bietet sich ein Client-Server-Aufbau an.
+2. Die Daten werden idealerweise in einer Datenbank auf dem Server abgespeichert.
+3. Da es sich um heikle Patientendaten handeln kann, welche übertragen und gespeichert werden, ist besonderer Wert auf Sicherheit zu legen.
+4. Bisherige Use-Cases benötigen keine Schnittstelle zu Umsystemen, jedoch könnte dies in Zukunft ausgeweitet werden.
+5. Das System muss skalierbar bei Wachstum sein.
+
+Genauer beschrieben, lassen sich folgende detailanforderungen zu den oben genannten Grundanforderungen spezifizieren:
+1. - Der Patient kann Daten eingeben.
+   - Die Daten des Patienten werden auf dem Gerät des Patienten zwischengespeichert.
+   - Sobald eine Verbindung zum Server besteht, werden die Daten hochgeladen.
+   - Aktivitätsbeispiele werden auf dem Zentralen Server gespeichert.
+   - Die Aktivitäten werden auch auf dem Endgerät des Patienten gespeichert.
+   - Sobald neue Aktivitäten hinzu kommen, werden diese bei Verbindung zum Server mit dem Endgerät synchronisiert.
+2. - Die Datenbank ist Zentral auf einem Server gespeichert.
+   - Die Informationen müssen pro Benutzer gespeichert werden.
+   - Eine Rollenverteilung muss gemacht werden (Patienten sehen nur ihre Daten, Pflegepersonal sieht die Daten ihrer Patienten, Administratoren sehen alle Daten)
+3. - Der Datenbankserver darf vom Internet nicht erreichbar sein (Firewallzone)
+   - Spezielle Server, welche Internet-facing sind, haben die Berechtigung, auf den Datenbankserver zuzugreifen (Firewall-Regel oder gar Verkabelung)
+   - Der Datentransfer von Client zu Server muss verschlüsselt statt finden.
+   - Der User muss jederzeit in der Lage sein, all seine Daten zu löschen.
+   - Ein Starkes Passwort muss beim Einrichten erstellt werden.
+4. - Mögliche Schnittstelen für die Zukunft sind aufs Internet ausgerichtet (zB: Wetter, Medikamente, Krankheitsbilder etc.)
+5. - Die Zentrale Datenbank muss leistungsfähig genug sein, um eine zuvor definierte Anzahl an Transaktionen pro Sekunde zu gewährleisten.
+   - Ab einer bestimmten Grösse, muss auch der Datenbankserver duplizierbar sein.
+   - Datenbankserver müssen in der Lage sein, miteinander zu kommunizieren.
+   - Die Internet-Facing-Server sind einfach duplizierbar und werden bei mehr Kunden automatisch hochgefahren und angesteuert.
