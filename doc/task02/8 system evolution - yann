@@ -1,0 +1,16 @@
+System evolution
+
+Annahmen:
+- Programmiersprache: Java.
+- Fürs grafische Interface: Vaadin.
+- Client-Server Applikation: private Daten werden nur patientenseitig gehalten. Daten, die vom Therapeuten gesichtet werden können, müssen an einen Server geschickt werden, so dass der Therapeut diese sichten kann. Welche Daten das sind, muss zu einem späteren Zeitpunkt bestimmt werden. Beispielhaft: der Kalender könnte für den Therapeuten einsehbar sein.
+- Datenschutz: eine sichere Verbindung zwischen dem Client und dem Server muss gewährleistet sein.
+- Ideal wäre eine Smartphone App. Grund: das Gerät hat der Patient immer dabei.
+
+
+Mögliche Änderungen (in Zukunft):
+- Datenschutz kann in Zukunft erleichtert oder erschwert werden, je nach Bestimmungen.
+- Applikation ist zur Zeit nur auf ein einziges Gerät konzipiert. Könnte in Zukunft auf mehrere Geräte ausgeweitet werden.(Fitnessband, Armbanduhr, VR Brille)
+- Neben Stimmung, Tips und Kalendereinträge könnten in Zukunft weitere Themen hinzukommen.
+
+
