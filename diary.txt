@@ -63,5 +63,11 @@
                 - Beschluss: bis am Freitag erster Entwurf des zugeteilten Kapitels
                 - Use case descriptions besprochen
                 - User requirements definitions: 'activity diagrams' ist nicht notwendig.
+
+5.4.2019:   - Meeting zum Requirements Dokument
+                - Bestehende Dokumente besprochen und Anpassungen entschieden.
+                - Bitte alle Anpassungen bis Sonntag vornhemen
+                - Lukas erstellt das finale Dokument
+                - Montagabend, 1. Lektion: alle zusammen Dokument finalisieren.
               
                 
