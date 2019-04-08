@@ -4,6 +4,7 @@ Page      Criteria                Comment
 11        realism                 gute Aufteilung der Ziele (Muss/Soll/Kann)!
 19        realism/inconsistency   auf Vorseite wird im Text auf nicht umgesetztes verwiesen (durch die knappe Zeit). Hier sollen aber 
                                   zusätzlich ein Screenreader und eine Tastaturnavigation gebaut werden. Dies scheint viel zu sein.
+                                  Soll das Programm nicht auch nur von Ärzten benutzt werden?
 19        realism/inconsistency   gleicher Issue: im Vortext wird auf Loginfunktion verzichtet, hier soll sie wieder gebaut werden. 
                                   Was nun? Scheint aufwendig zu sein.
 20(4.2.2) realism                 Wiederum ist von einem eigenen RZ die Rede. Ist sicher für die Security am besten, aber im Rahmen dieses
