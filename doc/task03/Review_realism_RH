@@ -1,0 +1,10 @@
+Page      Criteria                Comment
+8         realism                 ein eigenes RZ scheint zu beginn unreaistisch (kosten und know-how)
+9         realism                 gut durchdachtes Infrastrukturkonzept, jedoch scheint dies in der gegeben Zeit nicht machbar zu sein
+11        realism                 gute Aufteilung der Ziele (Muss/Soll/Kann)!
+19        realism/inconsistency   auf Vorseite wird im Text auf nicht umgesetztes verwiesen (durch die knappe Zeit). Hier sollen aber 
+                                  zusätzlich ein Screenreader und eine Tastaturnavigation gebaut werden. Dies scheint viel zu sein.
+19        realism/inconsistency   gleicher Issue: im Vortext wird auf Loginfunktion verzichtet, hier soll sie wieder gebaut werden. 
+                                  Was nun? Scheint aufwendig zu sein.
+20(4.2.2) realism                 Wiederum ist von einem eigenen RZ die Rede. Ist sicher für die Security am besten, aber im Rahmen dieses
+                                  Projekts nicht umsetzbar. Idee eine zetifizierten Hosters ist aber gut.
