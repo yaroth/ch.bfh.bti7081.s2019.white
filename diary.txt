@@ -73,5 +73,6 @@
 08.04.2019: - Besprechung Dokument und Präsentation
                 - Präsentation hochgeladen.
                 - Feedback eingearbeitet.
+                - Kriterien für Requirements Document Review verteilt
               
                 
