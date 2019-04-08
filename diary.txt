@@ -21,7 +21,7 @@
               - Milestone "task01_design_thinking" erstellt
               - Info von Vogel: Storyboards für Mobile können erstellt werden.
               
-22.3.2019:  - Basisproblem eruiert
+22.03.2019: - Basisproblem eruiert
             - scoping
             - research
             - synthesis: 3 Personae erstellt
@@ -29,7 +29,7 @@
             - desig - storyboards gemäss Issue-Verteilung auf Github
             - Lukas: Interview mit Case Managerin durchgeführt
               
-25.3.2019:  - Storyboards vorgestellt und diskutiert.
+25.03.2019: - Storyboards vorgestellt und diskutiert.
             - Punkte für Storyboards verteilt.
             - Most promising storyboards ausgewählt.
             - Prototypes für 'Stimmung', 'Tips', 'Aufgaben' erarbeitet. Besprochen.
@@ -64,13 +64,14 @@
                 - Use case descriptions besprochen
                 - User requirements definitions: 'activity diagrams' ist nicht notwendig.
 
-5.4.2019:   - Meeting zum Requirements Dokument
+05.04.2019: - Meeting zum Requirements Dokument
                 - Bestehende Dokumente besprochen und Anpassungen entschieden.
                 - Bitte alle Anpassungen bis Sonntag vornhemen
                 - Lukas erstellt das finale Dokument
                 - Montagabend, 1. Lektion: alle zusammen Dokument finalisieren.
                 
-8.4.2019:   - Besprechung Dokument und Präsentation
+08.04.2019: - Besprechung Dokument und Präsentation
+                - Präsentation hochgeladen.
                 - Feedback eingearbeitet.
               
                 
