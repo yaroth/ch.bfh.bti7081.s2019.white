@@ -1,0 +1,6 @@
+﻿Page	Criteria	Explanation/Comments/Improvements
+11	Consistency	Überschrift des Use Case Diagramms spricht von Auswerten "mit" dem Patienten. Use Case Diagramm beschreibt jedoch einen Use Case, in welchem der Patient ebenfalls auswerten kann.
+14	Consistency	Überschrift des Use Case Diagramms "Fortschritt dem Patienten zeigen" spricht davon, dass der Arzt dem Patienten einen Report zeigt. Das Diagramm beschreibt jedoch eine Situation, in welcher sich der Patient einen Report anzeigen lässt. Falls nur der Arzt mit der Applikation interagiert, sollte vom Patienten kein Pfeil ins Use Case Diagramm gehen.
+14	Consistency	Das System soll scheinbar nur von Ärzten verwendet werden (direkte Interaktion). Das Use Case Diagramm "Sitzungstermin vereinbaren" beschreibt eine Situation, in welcher der Patient direkt mit dem System interagiert (Termin akzeptieren). 
+18	Consistency	Tabelle 4.1.1: Akteure: Arzt, Patient. Das impliziert die direkte Interaktion des Patienten mit dem System. Dies scheint laut Einführung jedoch nicht der Fall zu sein. Direkt interagiert scheinbar nur der Arzt.
+19	Consistency	Laut Einführung scheinen Patienten keine Interaktion mit dem System zu haben. Jedoch wird von Nutzern mit Behinderung gesprochen, was auf Patienten zu schliessen lässt.
