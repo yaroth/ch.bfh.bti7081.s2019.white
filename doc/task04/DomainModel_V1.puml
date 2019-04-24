@@ -1,0 +1,32 @@
+@startuml
+
+
+object Patient
+object CurrentMoodDocumentation
+object CalendarEntry
+object Calendar
+object TipList
+object Tip
+object Therapist
+
+Patient "1" -- "1...n" TipList : consults
+Patient "1" -- "1...n" Tip : creates
+Patient "1" -- "1...n" CalendarEntry : creates
+Patient "1" -- "1" Calendar : consults
+Patient "1" -- "1...n" CurrentMoodDocumentation : creates
+CurrentMoodDocumentation "1...n" --|> "1" Calendar : updates
+CurrentMoodDocumentation "1...n" --|> "1" Therapist : alerts
+CurrentMoodDocumentation "1...n" <|-- "1...n" Therapist : consults
+CalendarEntry "1...n" -- "1" Calendar : updates
+Calendar -- Therapist : consults
+Tip "1...n" --|> "1" TipList : updates
+Tip "1...n" -- "1" Therapist : creates
+
+
+
+
+
+
+
+
+@enduml
