@@ -74,5 +74,8 @@
                 - Präsentation hochgeladen.
                 - Feedback eingearbeitet.
                 - Kriterien für Requirements Document Review verteilt
-              
+                
+24.04.2019: - Task 4 erhalten
+            - Domain model V1 erstellt
+       
                 
