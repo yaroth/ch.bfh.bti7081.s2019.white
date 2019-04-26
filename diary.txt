@@ -77,5 +77,14 @@
                 
 24.04.2019: - Task 4 erhalten
             - Domain model V1 erstellt
-       
-                
+            - Ordner task04 erstellt
+            
+26.04.209:  - Teammeeting: Aufgaben verteilt
+                - Remo: Klassendiagramm auf Papier bis Freitag Abend
+                - Nico: Klassendiagramm überarbeiten bis Sonntag Mittag
+                - Yann: Klassendiagramm elektronisch visualisieren (z.B. PlantUML)
+                - Marco: Sequenzdiagramm Patient erstellt Kalendereintrag
+                - Lukas: Sequenzdiagram Kalender gibt Notification zu Task
+                - Elias: Feedback zu Sequenzdiagrammen geben bis Sonntag Mittag
+                - Allgemeine Bemerkung: Klassendiagramm soll Sequenzdiagramme beachten
+             - Aufgaben in Git erfasst.
