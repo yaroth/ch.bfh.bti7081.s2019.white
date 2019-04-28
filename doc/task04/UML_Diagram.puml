@@ -1,0 +1,99 @@
+@startuml
+
+
+/' Define the dependencies'/
+Entry <|-- ToDo
+Entry <|-- Activity
+Entry <|-- MoodEntry
+
+User <|-- PatientUser
+User <|-- TherapistUser
+
+
+/' Define the class details'/
+class User {
+userData
+login()
+change()
+}
+
+class PatientUser{
+addTherapist(self)
+addActivity(self)
+addEntry(self)
+addMood(self)
+checkCalendar(self)
+checkActivityList(self)
+}
+
+class TherapistUser{
+List: Patient
+addTherapist(self)
+addActivity(Patient)
+addEntry(self)
+addMood(self)
+addCalendarEntry(s/patient)
+checkCalendar(s/patient)
+checkActivityList(self)
+}
+
+class AuthController {
+List: User
+List: PW
+addUser(userPW)
+removeUser(User)
+authCheck(userPW): bool
+}
+
+class Calendar {
+List: Entry
+update()
+toList(Entry)
+}
+
+class ActivityList {
+List: Activity
+addActivity(???)
+showList(????)
+}
+
+class Entry {
+DateTime: StartTime
+Time: Duration
+Type: ???
+addToCalendar()
+}
+
+class ToDo {
+SubType: ???
+Description: String
+}
+
+class Activity {
+SubType: ???
+FilterValues: List
+Description: String
+}
+
+class MoodEntry{
+Good: boolean
+GoodLevel: int
+Severity: int
+Description: String
+}
+
+/' Define entity relations (?)'/
+User "1..*" -> "1" AuthController
+
+PatientUser "1..*" -> "1" TherapistUser
+PatientUser "1" --> "1..*" Entry
+PatientUser "1" -> "1" Calendar
+PatientUser "1" --> "1" ActivityList
+
+TherapistUser "1..*" --> "1..*" Entry
+TherapistUser "1" -> "1" Calendar
+TherapistUser "1" --> "1" ActivityList
+
+Entry "1..*" -> "1" Calendar
+
+@enduml
