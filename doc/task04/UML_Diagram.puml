@@ -28,13 +28,10 @@ checkActivityList(self)
 
 class TherapistUser{
 List: Patient
-addTherapist(self)
 addActivity(Patient)
-addEntry(self)
-addMood(self)
 addCalendarEntry(s/patient)
 checkCalendar(s/patient)
-checkActivityList(self)
+addActivity(Activity)
 }
 
 class AuthController {
@@ -53,24 +50,24 @@ toList(Entry)
 
 class ActivityList {
 List: Activity
-addActivity(???)
-showList(????)
+addActivity(Activity)
+showList(Activity)
 }
 
 class Entry {
 DateTime: StartTime
 Time: Duration
-Type: ???
+Type: Enum
 addToCalendar()
 }
 
 class ToDo {
-SubType: ???
+SubType: Enum
 Description: String
 }
 
 class Activity {
-SubType: ???
+SubType: Enum
 FilterValues: List
 Description: String
 }
@@ -91,7 +88,7 @@ PatientUser "1" -> "1" Calendar
 PatientUser "1" --> "1" ActivityList
 
 TherapistUser "1..*" --> "1..*" Entry
-TherapistUser "1" -> "1" Calendar
+TherapistUser "1..*" -> "1..*" Calendar
 TherapistUser "1" --> "1" ActivityList
 
 Entry "1..*" -> "1" Calendar
