@@ -89,4 +89,6 @@
                 - Allgemeine Bemerkung: Klassendiagramm soll Sequenzdiagramme beachten
              - Aufgaben in Git erfasst.
              
-27.04.2019: -Sequenzdiagramm "CreateCalendarEntry"(v1) erstellt.
+27.04.2019: - Sequenzdiagramm "CreateCalendarEntry"(v1) erstellt.
+
+29.04.2019: - Domain model, Sequenzdiagramme, Klassendiagramm präsentiert. Feedback zusammengefasst und hochgeladen.
