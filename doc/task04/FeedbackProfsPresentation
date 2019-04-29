@@ -1,0 +1,13 @@
+﻿Rückmeldung zur Präsentation von den Professoren:
+- Domain model:
+	- Verbindung zwischen Kalender und MoodDocumentation sowie Kalender und Tipos
+	- Keine Vererbungspfeile sondern Assoziationspfeile verwenden.
+	- Kardinalität Patient - Tipps: 1...n --> Tipp vom Therapeut verfasst kann für mehrere Patienten gelten.
+
+- Sequenzdiagramme:
+	- gestrichelte Objektlinie heisst Objekt ist im Speicher, jedoch noch nicht aktiv
+	- Asynchrone Pfeile (leerer Pfeilkopf) verwenden
+
+- Klassendiagramm:
+	- Über alle Diagramme dieselben Begriffe verwenden
+	- Pfeil von Entry nach ActivityList
