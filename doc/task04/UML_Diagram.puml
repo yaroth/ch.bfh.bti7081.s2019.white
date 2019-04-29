@@ -1,9 +1,17 @@
 @startuml
 
+skinparam nodesep 100
+/'skinparam ranksep 200'/
+
+left header
+Testheader Yann
+endheader
+
+title Klassendiagramm
 
 /' Define the dependencies'/
 Entry <|-- ToDo
-Entry <|-- Activity
+Entry <|-- Tip
 Entry <|-- MoodEntry
 
 User <|-- PatientUser
@@ -19,19 +27,19 @@ change()
 
 class PatientUser{
 addTherapist(self)
-addActivity(self)
+addTip(self)
 addEntry(self)
 addMood(self)
 checkCalendar(self)
-checkActivityList(self)
+checkTipList(self)
 }
 
 class TherapistUser{
 List: Patient
-addActivity(Patient)
+addTip(Patient)
 addCalendarEntry(s/patient)
 checkCalendar(s/patient)
-addActivity(Activity)
+addTip(Tip)
 }
 
 class AuthController {
@@ -48,10 +56,10 @@ update()
 toList(Entry)
 }
 
-class ActivityList {
-List: Activity
-addActivity(Activity)
-showList(Activity)
+class TipList {
+List: Tip
+addTip(Tip)
+showList(Tip)
 }
 
 class Entry {
@@ -66,7 +74,7 @@ SubType: Enum
 Description: String
 }
 
-class Activity {
+class Tip {
 SubType: Enum
 FilterValues: List
 Description: String
@@ -85,11 +93,11 @@ User "1..*" -> "1" AuthController
 PatientUser "1..*" -> "1" TherapistUser
 PatientUser "1" --> "1..*" Entry
 PatientUser "1" -> "1" Calendar
-PatientUser "1" --> "1" ActivityList
+PatientUser "1" --> "1" TipList
 
 TherapistUser "1..*" --> "1..*" Entry
 TherapistUser "1..*" -> "1..*" Calendar
-TherapistUser "1" --> "1" ActivityList
+TherapistUser "1" --> "1" TipList
 
 Entry "1..*" -> "1" Calendar
 
