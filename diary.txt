@@ -92,3 +92,11 @@
 27.04.2019: - Sequenzdiagramm "CreateCalendarEntry"(v1) erstellt.
 
 29.04.2019: - Domain model, Sequenzdiagramme, Klassendiagramm präsentiert. Feedback zusammengefasst und hochgeladen.
+
+1.4.2019:   - Task 05 & 06 erhalten. Diskutiert.
+            - Marco: macht Issues
+            - Marco: Product Backlog, fängt Sprint Backlog an
+            - Remo: Deployment diagram
+            - Lukas: Klassendiagram
+            - Nico: Milestones & Issues
+            - Elias: weiter mit sprint backlog, Feedbacks auf Anfrage
