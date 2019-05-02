@@ -1,0 +1,43 @@
+@startuml
+
+actor User
+
+
+package "Client" {
+component Browser
+
+}
+
+package "Server" {
+package "Secure Layer"{
+node dbServ1 [
+Database Server
+]
+
+interface "DB Interface" as dbint
+
+database db1[
+SQLite
+(Memory DB)
+]
+}
+
+package "Internet Layer" {
+node webServ1 [
+Web Server
+]
+interface "Web Interface" as webint
+}
+
+}
+
+User -- Browser
+Browser - webint
+webint - webServ1
+webServ1 -- dbint
+dbint -- dbServ1
+
+dbServ1 -- db1
+
+
+@enduml
