@@ -29,6 +29,7 @@ package GUI {
     header("despresso")
     __
     + updateNextTask()
+    + addListener()
     }
 
     class SettingsView {
