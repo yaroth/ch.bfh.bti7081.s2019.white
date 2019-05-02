@@ -1,0 +1,97 @@
+@startuml
+
+skinparam nodesep 100
+/'skinparam ranksep 200'/
+
+left header
+Class diagram: Main View
+endheader
+
+title Class diagram: Main View
+
+/' Define the dependencies
+Entry <|-- ToDo
+'/
+
+
+/' Define the class details'/
+
+package GUI {
+    class MainView {
+    ButtonClick-functions are created
+    with respective Buttons
+    ..
+    settingsButton
+    tipButton
+    taskConfirmButton
+    calendarButton
+    moodSlider
+    header("despresso")
+    __
+    + updateNextTask()
+    }
+
+    class SettingsView {
+    }
+    class CalendarView {
+    }
+    class MoodView {
+    }
+    class TipView {
+    }
+}
+
+package Presentation {
+    class MainPresenter{
+    + showSettingsView()
+    + showTipView()
+    + showCalendarView()
+    + showMoodView()
+    + taskConfirmButtonClick()
+    }
+
+    class SettingsPresenter {
+    + showSettingsView()
+    }
+    class CalendarPresenter {
+    + showCalendarView()
+    }
+    class TipPresenter {
+    + showTipView()
+    }
+    class MoodPresenter {
+    + showMoodView()
+    }
+}
+
+package Logic {
+    class MainModel {
+    Calendar
+    + updateTaskConfirmed()
+    }
+
+    class Calendar {
+    List calendarEntries
+    + getNextEntry()
+    }
+}
+
+/' Define entity relations (?)'/
+
+MainPresenter "1" <--> "1" MainView
+CalendarView "1" <--> "1" MainPresenter
+TipView "1" <--> "1" MainPresenter
+MoodView "1" <--> "1" MainPresenter
+MainPresenter "1" <-> "1" SettingsPresenter
+MainPresenter "1" <-> "1" CalendarPresenter
+MainPresenter "1" <-> "1" TipPresenter
+MainPresenter "1" <-> "1" MoodPresenter
+SettingsView "1" <--> "1" SettingsPresenter
+
+
+
+MainPresenter "1" <--> "1" MainModel
+
+MainModel "1" <-> "1" Calendar
+
+@enduml
