@@ -16,6 +16,9 @@ Entry <|-- ToDo
 
 /' Define the class details'/
 
+package vaadin {
+}
+
 package GUI {
     class MainView {
     ButtonClick-functions are created
@@ -28,8 +31,11 @@ package GUI {
     moodSlider
     header("despresso")
     __
-    + updateNextTask()
     + addListener()
+    }
+
+    class HomeView {
+    + updateNextTask()
     }
 
     class SettingsView {
@@ -49,6 +55,10 @@ package Presentation {
     + showCalendarView()
     + showMoodView()
     + taskConfirmButtonClick()
+    }
+
+    class HomePresenter {
+    + showHomeView()
     }
 
     class SettingsPresenter {
@@ -82,20 +92,20 @@ package Logic {
 
 /' Define entity relations (?)'/
 
+vaadin <. GUI
+
 MainPresenter "1" <--> "1" MainView
 MainPresenter "1" <-> "1" SettingsPresenter
 MainPresenter "1" <-> "1" CalendarPresenter
 MainPresenter "1" <-> "1" TipPresenter
 MainPresenter "1" <-> "1" MoodPresenter
 SettingsView "1" <--> "1" SettingsPresenter
+HomeView "1" <--> "1" HomePresenter
 Calendar "1" <-> "n" CalendarEntry
-TipView "1" <--> "1" TipPresenter
+TipView "1" -- "1" TipPresenter
 CalendarView "1" <--> "1" CalendarPresenter
 MoodView "1" <--> "1" MoodPresenter
-CalendarPresenter "1" <-> "1" TipPresenter
-MoodPresenter "1" <-> "1" TipPresenter
-CalendarPresenter "1" <-> "1" MoodPresenter
-
+HomePresenter "1" <-> MainPresenter
 
 MainPresenter "1" <--> "1" MainModel
 
