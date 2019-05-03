@@ -75,20 +75,26 @@ package Logic {
     List calendarEntries
     + getNextEntry()
     }
+
+    class CalendarEntry {
+    }
 }
 
 /' Define entity relations (?)'/
 
 MainPresenter "1" <--> "1" MainView
-CalendarView "1" <--> "1" MainPresenter
-TipView "1" <--> "1" MainPresenter
-MoodView "1" <--> "1" MainPresenter
 MainPresenter "1" <-> "1" SettingsPresenter
 MainPresenter "1" <-> "1" CalendarPresenter
 MainPresenter "1" <-> "1" TipPresenter
 MainPresenter "1" <-> "1" MoodPresenter
 SettingsView "1" <--> "1" SettingsPresenter
-
+Calendar "1" <-> "n" CalendarEntry
+TipView "1" <--> "1" TipPresenter
+CalendarView "1" <--> "1" CalendarPresenter
+MoodView "1" <--> "1" MoodPresenter
+CalendarPresenter "1" <-> "1" TipPresenter
+MoodPresenter "1" <-> "1" TipPresenter
+CalendarPresenter "1" <-> "1" MoodPresenter
 
 
 MainPresenter "1" <--> "1" MainModel
