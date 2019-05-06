@@ -100,4 +100,8 @@
             - Nico: Milestones & Issues
             - Elias: weiter mit sprint backlog, Feedbacks auf Anfrage
             
-3.5.2019: -Scrum File V2: Product backlog erstellt, Sprint Backlog erstllet.
+3.5.2019:   - Scrum File V2: Product backlog erstellt, Sprint Backlog erstllet.
+            - Elias: Milestones & Issues erstellen / bearbeiten
+            - Lukas: Klassendiagramm überarbeiten
+            - Marco: Scrum Doku
+            - Yann: für Task 1 Grundgerüst nach Vaadin erstellen
