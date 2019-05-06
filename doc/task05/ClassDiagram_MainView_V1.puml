@@ -3,10 +3,6 @@
 skinparam nodesep 100
 /'skinparam ranksep 200'/
 
-left header
-Class diagram: Main View
-endheader
-
 title Class diagram: Main View
 
 /' Define the dependencies
@@ -20,22 +16,6 @@ package vaadin {
 }
 
 package GUI {
-    class MainView {
-    settingsButton
-    calendarButton
-    mainButton
-    tipButton
-    header("despresso")
-    __
-    + addListener()
-    }
-
-    class HomeView {
-    taskConfirmButton
-    moodSlider
-    + updateNextTask()
-    }
-
     class SettingsView {
     + addListener()
     }
@@ -48,6 +28,20 @@ package GUI {
     class TipView {
     + addListener()
     }
+    class HomeView {
+        Button: taskConfirmButton
+        Slider: moodSlider
+        + updateNextTask()
+        }
+    class MainView {
+        Button: settingsButton
+        Button: calendarButton
+        Button: mainButton
+        Button: tipButton
+        header("despresso")
+        __
+        + addListener()
+        }
 }
 
 package Presentation {
@@ -56,7 +50,7 @@ package Presentation {
     + showTipView()
     + showCalendarView()
     + showMoodView()
-    + taskConfirmButtonClick()
+    + confirmNextTask()
     }
 
     class HomePresenter {
