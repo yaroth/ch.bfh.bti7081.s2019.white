@@ -21,30 +21,32 @@ package vaadin {
 
 package GUI {
     class MainView {
-    ButtonClick-functions are created
-    with respective Buttons
-    ..
     settingsButton
-    tipButton
-    taskConfirmButton
     calendarButton
-    moodSlider
+    mainButton
+    tipButton
     header("despresso")
     __
     + addListener()
     }
 
     class HomeView {
+    taskConfirmButton
+    moodSlider
     + updateNextTask()
     }
 
     class SettingsView {
+    + addListener()
     }
     class CalendarView {
+    + addListener()
     }
     class MoodView {
+    + addListener()
     }
     class TipView {
+    + addListener()
     }
 }
 
@@ -94,21 +96,21 @@ package Logic {
 
 vaadin <. GUI
 
-MainPresenter "1" <--> "1" MainView
-MainPresenter "1" <-> "1" SettingsPresenter
-MainPresenter "1" <-> "1" CalendarPresenter
-MainPresenter "1" <-> "1" TipPresenter
-MainPresenter "1" <-> "1" MoodPresenter
-SettingsView "1" <--> "1" SettingsPresenter
-HomeView "1" <--> "1" HomePresenter
-Calendar "1" <-> "n" CalendarEntry
+MainPresenter "1" -- "1" MainView
+MainPresenter "1" -> "1" SettingsPresenter
+MainPresenter "1" -> "1" CalendarPresenter
+MainPresenter "1" -> "1" TipPresenter
+MainPresenter "1" -> "1" MoodPresenter
+SettingsView "1" -- "1" SettingsPresenter
+HomeView "1" --> "1" HomePresenter
+Calendar "1" -> "n" CalendarEntry
 TipView "1" -- "1" TipPresenter
-CalendarView "1" <--> "1" CalendarPresenter
-MoodView "1" <--> "1" MoodPresenter
-HomePresenter "1" <-> MainPresenter
+CalendarView "1" -- "1" CalendarPresenter
+MoodView "1" -- "1" MoodPresenter
+HomePresenter "1" - MainPresenter
 
-MainPresenter "1" <--> "1" MainModel
+MainPresenter "1" -- "1" MainModel
 
-MainModel "1" <-> "1" Calendar
+MainModel "1" -> "1" Calendar
 
 @enduml
