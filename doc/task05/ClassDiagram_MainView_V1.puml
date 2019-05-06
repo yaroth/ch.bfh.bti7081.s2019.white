@@ -96,7 +96,7 @@ MainPresenter "1" -> "1" CalendarPresenter
 MainPresenter "1" -> "1" TipPresenter
 MainPresenter "1" -> "1" MoodPresenter
 SettingsView "1" -- "1" SettingsPresenter
-HomeView "1" --> "1" HomePresenter
+HomeView "1" -- "1" HomePresenter
 Calendar "1" -> "n" CalendarEntry
 TipView "1" -- "1" TipPresenter
 CalendarView "1" -- "1" CalendarPresenter
