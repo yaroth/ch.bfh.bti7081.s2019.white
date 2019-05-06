@@ -105,3 +105,4 @@
             - Lukas: Klassendiagramm überarbeiten
             - Marco: Scrum Doku
             - Yann: für Task 1 Grundgerüst nach Vaadin erstellen
+            - Sprint Planning für Sprint 1 durchgeführt
