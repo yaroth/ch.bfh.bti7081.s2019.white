@@ -12,4 +12,4 @@ out/
 .project
 
 # compiled binary
-bin/
+target/
