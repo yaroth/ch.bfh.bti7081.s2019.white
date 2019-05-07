@@ -15,7 +15,7 @@ Entry <|-- ToDo
 package vaadin {
 }
 
-package GUI {
+package view {
     class SettingsView {
     + addListener()
     }
@@ -29,32 +29,37 @@ package GUI {
     + addListener()
     }
     class HomeView {
-        Button: taskConfirmButton
         Slider: moodSlider
+        Label: nextTask
+        Button: nextTaskDone
         + updateNextTask()
         }
     class MainView {
-        Button: settingsButton
-        Button: calendarButton
-        Button: mainButton
-        Button: tipButton
+        Button: home
         header("despresso")
+        Button: settings
+        ..
+        Button: mood
+        Button: calendar
+        Button: tips
         __
         + addListener()
         }
 }
 
-package Presentation {
+package presenter {
     class MainPresenter{
+    + showHomeView()
     + showSettingsView()
-    + showTipView()
-    + showCalendarView()
     + showMoodView()
-    + confirmNextTask()
+    + showCalendarView()
+    + showTipsView()
     }
 
     class HomePresenter {
     + showHomeView()
+    + confirmNextTask()
+    + saveMoodEntry()
     }
 
     class SettingsPresenter {
@@ -71,14 +76,14 @@ package Presentation {
     }
 }
 
-package Logic {
+package logic {
     class MainModel {
     Calendar
     + updateTaskConfirmed()
     }
 
     class Calendar {
-    List calendarEntries
+    List: calendarEntries
     + getNextEntry()
     }
 
@@ -88,7 +93,7 @@ package Logic {
 
 /' Define entity relations (?)'/
 
-vaadin <. GUI
+vaadin <. view
 
 MainPresenter "1" -- "1" MainView
 MainPresenter "1" -> "1" SettingsPresenter
