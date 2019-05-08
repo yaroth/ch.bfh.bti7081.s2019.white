@@ -82,9 +82,21 @@ package logic {
     + updateTaskConfirmed()
     }
 
-    class Calendar {
+    class CalendarModel {
     List: calendarEntries
     + getNextEntry()
+    }
+
+    class MoodModel {
+        }
+
+    class TipModel {
+    }
+
+    class SettingsModel {
+    }
+
+    class HomeModel {
     }
 
     class CalendarEntry {
@@ -95,21 +107,34 @@ package logic {
 
 vaadin <. view
 
+/' Presenter - View'/
 MainPresenter "1" -- "1" MainView
-MainPresenter "1" -> "1" SettingsPresenter
-MainPresenter "1" -> "1" CalendarPresenter
-MainPresenter "1" -> "1" TipPresenter
-MainPresenter "1" -> "1" MoodPresenter
 SettingsView "1" -- "1" SettingsPresenter
 HomeView "1" -- "1" HomePresenter
-Calendar "1" -> "n" CalendarEntry
 TipView "1" -- "1" TipPresenter
 CalendarView "1" -- "1" CalendarPresenter
 MoodView "1" -- "1" MoodPresenter
-HomePresenter "1" - MainPresenter
 
+/' View - View'/
+MainView "1" -> "1" HomeView
+MainView "1" -> "1" SettingsView
+MainView "1" -> "1" CalendarView
+MainView "1" -> "1" TipView
+MainView "1" -> "1" HomeView
+MainView "1" -> "1" MoodView
+
+/' Presenter - Model'/
 MainPresenter "1" -- "1" MainModel
+TipPresenter "1" -- "1" TipModel
+MoodPresenter "1" -- "1" MoodModel
+SettingsPresenter "1" -- "1" SettingsModel
+HomePresenter "1" -- "1" HomeModel
+CalendarPresenter "1" -- "1" CalendarModel
 
-MainModel "1" -> "1" Calendar
+
+CalendarModel "1" -> "n" CalendarEntry
+
+MainModel "1" -> "1" CalendarModel
+
 
 @enduml
