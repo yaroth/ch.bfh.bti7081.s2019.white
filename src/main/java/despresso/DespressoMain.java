@@ -5,7 +5,9 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import despresso.logic.MainModel;
 import despresso.presenter.MainPresenter;
+import despresso.view.HomeViewImpl;
 import despresso.view.MainViewImpl;
+import despresso.view.SettingsViewImpl;
 
 /**
  * The main view contains several buttons and  listeners.
@@ -27,7 +29,11 @@ public class DespressoMain extends VerticalLayout {
     public DespressoMain() {
         // Create the model and the Vaadin view implementation
         MainModel model = new MainModel();
-        MainViewImpl view = new MainViewImpl();
+
+        // Views
+        HomeViewImpl homeView = new HomeViewImpl();
+        SettingsViewImpl settingsView = new SettingsViewImpl();
+        MainViewImpl view = new MainViewImpl(homeView, settingsView);
         // The presenter connects the model and view
         new MainPresenter(model, view);
         // The view implementation is a Vaadin component

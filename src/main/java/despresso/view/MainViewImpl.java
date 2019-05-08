@@ -1,5 +1,6 @@
 package despresso.view;
 
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -17,11 +18,16 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
     private static String SETTINGS = "Settings";
 
     private Label label = new Label("despresso");
+    private HorizontalLayout mainArea = new HorizontalLayout();
+    private HomeViewImpl homeView;
+    private SettingsViewImpl settingsView;
+
 
     private List<ObserverInterface> listeners = new ArrayList<>();
 
-    public MainViewImpl() {
-
+    public MainViewImpl(HomeViewImpl homeView, SettingsViewImpl settingsView) {
+        this.homeView = homeView;
+        this.settingsView = settingsView;
         // TODO: attach header to top
         // home - header - settings -> navigation
         HorizontalLayout header = new HorizontalLayout();
@@ -33,10 +39,8 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
         // TODO: define main area dimensions & load homeArea from HomeView
         // This is just to show that we have a main area which then will need to
         // filled with content.
-        HorizontalLayout mainArea = new HorizontalLayout();
         mainArea.setHeight("200px");
-        Label mainAreaLabel = new Label("Main Area Label for testing purposes only!");
-        mainArea.add(mainAreaLabel);
+        mainArea.add(this.homeView.getComponent());
         add(mainArea);
 
         // TODO: attach footer to bottom
@@ -52,6 +56,7 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
                 listener.update(event);
         });
     }
+
     @Override
     public void removeObserver(ObserverInterface observer) {
         listeners.remove(observer);
@@ -63,5 +68,8 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
 
     }
 
-
+    public void insertMainAreaContent(Component mainAreaComponent) {
+        mainArea.removeAll();
+        mainArea.add(mainAreaComponent);
+    }
 }

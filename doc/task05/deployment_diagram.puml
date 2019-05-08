@@ -6,14 +6,15 @@ actor User
 
 
 package "Client" {
-component Browser
+node Browser
 
 }
 
 package "Server" {
 
 node webServ1 [
-Web Server
+Web Application Server
+(Jetty)
 ]
 
 interface "Web Interface" as webint

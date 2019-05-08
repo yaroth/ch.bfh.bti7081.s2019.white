@@ -7,17 +7,16 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
-
+public class SettingsViewImpl extends VerticalLayout implements SubjectInterface {
 
     private List<ObserverInterface> listeners = new ArrayList<>();
 
-    public HomeViewImpl() {
+    public SettingsViewImpl() {
         HorizontalLayout line1 = new HorizontalLayout();
-        Label label1 = new Label("HOME label 1");
+        Label label1 = new Label("SETTINGS some label 1");
         line1.add(label1);
         HorizontalLayout line2 = new HorizontalLayout();
-        Label label2 = new Label("HOME label 2");
+        Label label2 = new Label("SETTINGS some label 2");
         line2.add(label2);
         this.add(line1);
         this.add(line2);
