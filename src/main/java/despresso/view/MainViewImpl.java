@@ -59,7 +59,7 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
     private Button createButton(String text) {
         return new Button(text, event -> {
             for (ObserverInterface listener : listeners)
-                listener.update(event, text);
+                listener.update(event);
         });
     }
 
@@ -74,10 +74,6 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
 
     }
 
-    public void insertMainAreaContent(Component mainAreaComponent) {
-        mainArea.removeAll();
-        mainArea.add(mainAreaComponent);
-    }
 
     public void loadSettingsView(ClickEvent event) {
         mainArea.removeAll();

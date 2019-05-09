@@ -5,5 +5,5 @@ import com.vaadin.flow.component.button.Button;
 
 public interface ObserverInterface {
 
-    void update(ClickEvent<Button> event, String btnLabel);
+    void update(ClickEvent<Button> event);
 }

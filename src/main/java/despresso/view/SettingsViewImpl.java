@@ -11,14 +11,15 @@ import java.util.List;
 
 public class SettingsViewImpl extends VerticalLayout implements SubjectInterface {
 
+    private Label label;
     private List<ObserverInterface> listeners = new ArrayList<>();
 
     public SettingsViewImpl() {
         HorizontalLayout line1 = new HorizontalLayout();
-        Label label1 = new Label("SETTINGS some label 1");
-        line1.add(label1);
+        label = new Label("SETTINGS some label 1");
+        line1.add(label);
         HorizontalLayout line2 = new HorizontalLayout();
-        Button btn1 = new Button("click me");
+        Button btn1 = createButton("click me");
         line2.add(btn1);
         this.add(line1);
         this.add(line2);
@@ -36,7 +37,14 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
 
     }
 
-    public VerticalLayout getComponent() {
-        return this;
+    public void setLabel(String label) {
+        this.label.setText(label);
+    }
+
+    private Button createButton(String text) {
+        return new Button(text, event -> {
+            for (ObserverInterface listener : listeners)
+                listener.update(event);
+        });
     }
 }
