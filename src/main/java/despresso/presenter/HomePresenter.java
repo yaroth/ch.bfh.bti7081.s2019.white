@@ -1,16 +1,24 @@
 package despresso.presenter;
 
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.button.Button;
+import despresso.logic.HomeModel;
 import despresso.view.HomeViewImpl;
 
-public class HomePresenter  {
+public class HomePresenter implements ObserverInterface {
 
-    private MainPresenter mainPresenter;
+    private HomeModel homeModel;
     private HomeViewImpl view;
 
-    public HomePresenter(MainPresenter mainPresenter, HomeViewImpl view) {
-        this.mainPresenter = mainPresenter;
+    public HomePresenter(HomeModel homeModel, HomeViewImpl view) {
+        this.homeModel = homeModel;
         this.view = view;
+        this.view.addObserver(this);
     }
 
 
+    @Override
+    public void update(ClickEvent<Button> event) {
+
+    }
 }

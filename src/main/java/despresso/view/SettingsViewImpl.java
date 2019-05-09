@@ -16,11 +16,14 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
 
     public SettingsViewImpl() {
         HorizontalLayout line1 = new HorizontalLayout();
-        label = new Label("SETTINGS some label 1");
+        label = new Label("Click the button below");
         line1.add(label);
         HorizontalLayout line2 = new HorizontalLayout();
         Button btn1 = createButton("click me");
-        line2.add(btn1);
+        Button btn2 = createButton("reset");
+        Button btn = new Button("test");
+//        btn.addClickListener()
+        line2.add(btn1, btn2);
         this.add(line1);
         this.add(line2);
 

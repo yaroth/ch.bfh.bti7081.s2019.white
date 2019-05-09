@@ -18,6 +18,11 @@ public class SettingsPresenter implements ObserverInterface {
 
     @Override
     public void update(ClickEvent<Button> event) {
-        view.setLabel(model.doSomething());
+        if (event.getSource().getText().equals("click me")) {
+            // here the model is returning some value
+            view.setLabel(model.doSomething());
+        } else if (event.getSource().getText().equals("reset")) {
+            view.setLabel(model.doSomethingElse());
+        }
     }
 }
