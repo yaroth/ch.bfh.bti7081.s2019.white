@@ -1,10 +1,6 @@
 package despresso.presenter;
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.button.Button;
-import despresso.logic.MainModel;
 import despresso.view.HomeViewImpl;
-import despresso.view.ObserverInterface;
 
 public class HomePresenter  {
 

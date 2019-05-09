@@ -3,6 +3,7 @@ package despresso.view;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import despresso.presenter.ObserverInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,4 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
 
     }
 
-    public VerticalLayout getComponent() {
-        return this;
-    }
 }

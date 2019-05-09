@@ -5,9 +5,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import despresso.logic.MainModel;
 import despresso.presenter.MainPresenter;
-import despresso.view.HomeViewImpl;
-import despresso.view.MainViewImpl;
-import despresso.view.SettingsViewImpl;
+import despresso.view.*;
 
 /**
  * The main view contains several buttons and  listeners.
@@ -33,7 +31,10 @@ public class DespressoMain extends VerticalLayout {
         // Views
         HomeViewImpl homeView = new HomeViewImpl();
         SettingsViewImpl settingsView = new SettingsViewImpl();
-        MainViewImpl view = new MainViewImpl(homeView, settingsView);
+        MoodViewImpl moodView = new MoodViewImpl();
+        CalendarViewImpl calendarView = new CalendarViewImpl();
+        TipsViewImpl tipsView = new TipsViewImpl();
+        MainViewImpl view = new MainViewImpl(homeView, settingsView, moodView, calendarView, tipsView);
         // The presenter connects the model and view
         new MainPresenter(model, view);
         // The view implementation is a Vaadin component
