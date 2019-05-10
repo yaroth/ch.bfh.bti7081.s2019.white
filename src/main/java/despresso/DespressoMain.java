@@ -4,8 +4,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import despresso.logic.MainModel;
+import despresso.logic.MoodModel;
 import despresso.logic.SettingsModel;
 import despresso.presenter.MainPresenter;
+import despresso.presenter.MoodPresenter;
 import despresso.presenter.SettingsPresenter;
 import despresso.view.*;
 
@@ -38,7 +40,10 @@ public class DespressoMain extends VerticalLayout {
         SettingsModel settingsModel = new SettingsModel();
         SettingsPresenter settingsPresenter = new SettingsPresenter(settingsModel, settingsView);
 
+        // Mood MVP
         MoodViewImpl moodView = new MoodViewImpl();
+        MoodModel moodModel = new MoodModel();
+        MoodPresenter moodPresenter = new MoodPresenter(moodModel, moodView);
 
         CalendarViewImpl calendarView = new CalendarViewImpl();
 
