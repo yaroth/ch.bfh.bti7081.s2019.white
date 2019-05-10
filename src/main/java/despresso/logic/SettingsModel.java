@@ -2,11 +2,11 @@ package despresso.logic;
 
 public class SettingsModel {
 
-    public String doSomething() {
+    public String getClickMeResult() {
         return "Button clicked!";
     }
 
-    public String doSomethingElse() {
+    public String getResetResult() {
         return "Test reset!";
     }
 

@@ -8,6 +8,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import despresso.Views;
 import despresso.presenter.ObserverInterface;
+import org.atmosphere.interceptor.AtmosphereResourceStateRecovery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,8 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
     private CalendarViewImpl calendarView;
     private TipsViewImpl tipsView;
 
+    // Buttons
+    private Button homeBtn, settingsBtn, moodBtn, calendarBtn, tipsBtn;
 
     private List<ObserverInterface> listeners = new ArrayList<>();
 
@@ -37,9 +40,11 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
         // TODO: attach header to top
         // home - header - settings -> navigation
         HorizontalLayout header = new HorizontalLayout();
-        header.add(createButton(Views.HOME));
+        homeBtn = createButton(Views.HOME);
+        header.add(homeBtn);
         header.add(label);
-        header.add(createButton(Views.SETTINGS));
+        settingsBtn = createButton(Views.SETTINGS);
+        header.add(settingsBtn);
         add(header);
 
         // TODO: define main area dimensions & load homeArea from HomeView
@@ -52,14 +57,28 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
         // TODO: attach footer to bottom
         // navigation
         HorizontalLayout footer = new HorizontalLayout();
-        footer.add(createButton(Views.MOOD), createButton(Views.CALENDAR), createButton(Views.TIPS));
+        moodBtn = createButton(Views.MOOD);
+        calendarBtn = createButton(Views.CALENDAR);
+        tipsBtn = createButton(Views.TIPS);
+        footer.add(moodBtn,calendarBtn,tipsBtn);
         add(footer);
     }
 
     private Button createButton(String text) {
         return new Button(text, event -> {
-            for (ObserverInterface listener : listeners)
-                listener.update(event);
+            for (ObserverInterface listener : listeners) {
+                if (event.getSource().equals(homeBtn)) {
+                    listener.update(Views.HOME);
+                } else if (event.getSource().equals(settingsBtn)) {
+                    listener.update(Views.SETTINGS);
+                } else if (event.getSource().equals(moodBtn)) {
+                    listener.update(Views.MOOD);
+                } else if (event.getSource().equals(calendarBtn)) {
+                    listener.update(Views.CALENDAR);
+                } else if (event.getSource().equals(tipsBtn)) {
+                    listener.update(Views.TIPS);
+                }
+            }
         });
     }
 
@@ -75,27 +94,27 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
     }
 
 
-    public void loadSettingsView(ClickEvent event) {
+    public void loadSettingsView() {
         mainArea.removeAll();
         mainArea.add(settingsView);
     }
 
-    public void loadHomeView(ClickEvent<Button> event) {
+    public void loadHomeView() {
         mainArea.removeAll();
         mainArea.add(homeView);
     }
 
-    public void loadMoodView(ClickEvent<Button> event) {
+    public void loadMoodView() {
         mainArea.removeAll();
         mainArea.add(moodView);
     }
 
-    public void loadCalendarView(ClickEvent<Button> event) {
+    public void loadCalendarView() {
         mainArea.removeAll();
         mainArea.add(calendarView);
     }
 
-    public void loadTipsView(ClickEvent<Button> event) {
+    public void loadTipsView() {
         mainArea.removeAll();
         mainArea.add(tipsView);
     }

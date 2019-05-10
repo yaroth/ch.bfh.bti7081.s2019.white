@@ -33,4 +33,3 @@ public class SettingsPresenter implements ObserverInterface {
         }
     }
 }
-
