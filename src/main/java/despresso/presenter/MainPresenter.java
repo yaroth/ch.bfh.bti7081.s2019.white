@@ -20,18 +20,18 @@ public class MainPresenter implements ObserverInterface {
     // generic implementation so that presenter COULD do sth
     // when loading a new view into the main area.
     @Override
-    public void update(ClickEvent<Button> event) {
+    public void update(String viewName) {
         model.doSomething();
-        if (Views.HOME.equals(event.getSource().getText())) {
-            view.loadHomeView(event);
-        } else if (Views.SETTINGS.equals(event.getSource().getText())){
-            view.loadSettingsView(event);
-        }else if (Views.MOOD.equals(event.getSource().getText())){
-            view.loadMoodView(event);
-        }else if (Views.CALENDAR.equals(event.getSource().getText())){
-            view.loadCalendarView(event);
-        }else if (Views.TIPS.equals(event.getSource().getText())){
-            view.loadTipsView(event);
+        if (viewName.equals(Views.HOME)) {
+            view.loadHomeView();
+        } else if (viewName.equals(Views.SETTINGS)) {
+            view.loadSettingsView();
+        } else if (viewName.equals(Views.MOOD)) {
+            view.loadMoodView();
+        } else if (viewName.equals(Views.CALENDAR)) {
+            view.loadCalendarView();
+        } else if (viewName.equals(Views.TIPS )) {
+            view.loadTipsView();
         }
     }
 }

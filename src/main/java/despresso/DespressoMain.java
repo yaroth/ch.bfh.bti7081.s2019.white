@@ -54,5 +54,6 @@ public class DespressoMain extends VerticalLayout {
         new MainPresenter(model, view);
         // The view implementation is a Vaadin component
         add(view);
+
     }
 }
