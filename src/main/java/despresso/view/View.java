@@ -13,7 +13,7 @@ public class View extends VerticalLayout implements SubjectInterface {
     Button createButton(String text) {
         return new Button(text, event -> {
             for (ObserverInterface listener : listeners)
-                listener.update(event);
+                listener.update(event.getSource().getText());
         });
     }
 
