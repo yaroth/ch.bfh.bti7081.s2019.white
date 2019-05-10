@@ -16,7 +16,7 @@ public class MoodPresenter implements ObserverInterface {
     }
 
     @Override
-    public void update(ClickEvent<Button> event) {
+    public void update(String someString) {
         model.doSomething();
     }
 }
