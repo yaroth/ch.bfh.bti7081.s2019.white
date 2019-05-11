@@ -9,10 +9,12 @@ import despresso.presenter.ObserverInterface;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import static java.util.Map.entry;
 
 public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
 
-    private MoodPresenter presenter;
     private String selectedMood = "None";
     private List<ObserverInterface> listeners = new ArrayList<>();
     private VerticalLayout mainLayout = new VerticalLayout();
@@ -24,10 +26,10 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
     }
 
     // Create standard button, event passes string value of the button
-    private Button createButton(String value) {
-        return new Button(value, event -> {
+    private Button createButton(String command) {
+        return new Button(ACTIONS.get(command), event -> {
             for (ObserverInterface listener : listeners)
-                listener.update(value);
+                listener.update(command);
         });
     }
 
@@ -49,11 +51,6 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
     public void addObserver(ObserverInterface observer) {
         listeners.add(observer);
 
-    }
-
-    // Set presenter for explicit calls
-    public void setPresenter(MoodPresenter presenter) {
-        this.presenter = presenter;
     }
 
     ///////////////////////////////////////////////////////
@@ -140,6 +137,7 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
         mainLayout = newLayout;
     }
 
+    // Reset the mood view
     public void resetView() {
         this.remove(mainLayout);
         mainLayout = new VerticalLayout();
@@ -154,4 +152,12 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
     public String getSelectedMood() {
         return selectedMood;
     }
+
+    // Immutable map to translate commands to button labels
+    private static Map<String, String> ACTIONS = Map.ofEntries(
+            entry("Save", "Shave"),
+            entry("Undo", "Undo"),
+            entry("Specify", "Specify"),
+            entry("Confirm", "Confirm")
+    );
 }
