@@ -3,7 +3,10 @@ package despresso.presenter;
 
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
+import despresso.logic.TipDuration;
+import despresso.logic.TipLocation;
 import despresso.logic.TipModel;
+import despresso.logic.TipType;
 import despresso.view.TipsViewImpl;
 
 public class TipPresenter implements ObserverInterface{
@@ -14,6 +17,7 @@ public class TipPresenter implements ObserverInterface{
     public TipPresenter(TipsViewImpl view, TipModel tipModel) {
         this.tipModel = tipModel;
         this.tipView = view;
+        this.tipView.setTipList(this.tipModel.getTipList());
         this.tipView.addObserver(this);
     }
 
@@ -23,9 +27,14 @@ public class TipPresenter implements ObserverInterface{
 
     @Override
     public void update(ClickEvent<Button> event) {
+        System.out.println("TipPresenter.update() executed...");
+        this.tipModel.filterTipList(TipDuration.LONG, TipType.BODY, TipLocation.ATHOME);
         this.tipView.testLabel.setText("Some Button Clicked");
-
+        System.out.println("Update Method of TipPresenter executed.");
     }
+
+
+
 }
 
 
