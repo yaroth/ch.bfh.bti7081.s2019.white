@@ -14,12 +14,19 @@ public class MoodModel {
     }
 
     public void setMood(String newMood) {
-        System.out.println("Setting mood to " + newMood);
         this.moodState.setCurrentMood(newMood);
         this.presenter.moodUpdated(newMood);
     }
 
     public ArrayList<String> specifyMood() {
         return moodState.splitMood();
+    }
+
+    public void resetMood() {
+        this.moodState.setCurrentMood("None");
+    }
+
+    public void undoMoodSelection() {
+        this.moodState.undoMoodSelection();
     }
 }

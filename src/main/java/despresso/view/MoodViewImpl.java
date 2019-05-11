@@ -4,6 +4,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import despresso.presenter.MoodPresenter;
 import despresso.presenter.ObserverInterface;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
 
+    private MoodPresenter presenter;
     private String selectedMood = "None";
     private List<ObserverInterface> listeners = new ArrayList<>();
     private VerticalLayout mainLayout = new VerticalLayout();
@@ -21,7 +23,7 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
         initView();
     }
 
-    // Passes the context of what has changed to the listener, so they can get the new data
+    // Create standard button, event passes string value of the button
     private Button createButton(String value) {
         return new Button(value, event -> {
             for (ObserverInterface listener : listeners)
@@ -29,6 +31,7 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
         });
     }
 
+    // Create button to select mood
     private Button createMoodButton(String value) {
         return new Button(value, event -> {
             selectedMood = value;
@@ -46,6 +49,11 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
     public void addObserver(ObserverInterface observer) {
         listeners.add(observer);
 
+    }
+
+    // Set presenter for explicit calls
+    public void setPresenter(MoodPresenter presenter) {
+        this.presenter = presenter;
     }
 
     ///////////////////////////////////////////////////////
@@ -146,9 +154,4 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
     public String getSelectedMood() {
         return selectedMood;
     }
-
-    public void setSelectedMood(String selectedMood) {
-        this.selectedMood = selectedMood;
-    }
-
 }

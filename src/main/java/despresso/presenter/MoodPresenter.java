@@ -13,6 +13,7 @@ public class MoodPresenter implements ObserverInterface {
         this.model = model;
         this.model.setPresenter(this);
         this.view = view;
+        this.view.setPresenter(this);
         this.view.addObserver(this);
     }
 
@@ -23,7 +24,7 @@ public class MoodPresenter implements ObserverInterface {
                 setMood();
                 break;
             case "Save":
-                view.resetView();
+                resetMoodView();
                 break;
             case "Undo":
                 undoMoodSelection();
@@ -32,7 +33,7 @@ public class MoodPresenter implements ObserverInterface {
                 showSpecificMoods();
                 break;
             case "Confirm":
-                view.resetView();
+                resetMoodView();
                 break;
             default:
                 System.out.println("Unknown command!");
@@ -61,7 +62,14 @@ public class MoodPresenter implements ObserverInterface {
 
     //View: Undo mood selection
     private void undoMoodSelection() {
+        model.undoMoodSelection();
         view.undoMoodSelection();
+    }
+
+    //Reset the view and current mood
+    private void resetMoodView() {
+        this.model.resetMood();
+        this.view.resetView();
     }
 
 }

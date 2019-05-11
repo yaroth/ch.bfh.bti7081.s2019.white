@@ -6,6 +6,7 @@ import java.util.Arrays;
 public class MoodState {
 
     private String currentMood = "None";
+    private String previousMood = "None";
 
     public MoodState () {
 
@@ -16,6 +17,7 @@ public class MoodState {
     }
 
     public void setCurrentMood(String currentMood) {
+        this.previousMood = this.currentMood;
         this.currentMood = currentMood;
     }
 
@@ -28,5 +30,9 @@ public class MoodState {
             default:
                 return null;
         }
+    }
+
+    public void undoMoodSelection() {
+        setCurrentMood(previousMood);
     }
 }
