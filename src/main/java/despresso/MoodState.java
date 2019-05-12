@@ -7,6 +7,7 @@ public class MoodState {
 
     private String currentMood = "None";
     private String previousMood = "None";
+    private int moodAccuracy = -1;
 
     public MoodState () {
 
@@ -34,5 +35,10 @@ public class MoodState {
 
     public void undoMoodSelection() {
         setCurrentMood(previousMood);
+    }
+
+    public void setMoodAccuracy(int moodAccuracy) {
+        this.moodAccuracy = moodAccuracy;
+        System.out.println("Accuracy set to: " + moodAccuracy);
     }
 }

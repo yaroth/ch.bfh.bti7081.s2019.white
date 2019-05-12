@@ -1,11 +1,14 @@
 package despresso.view;
 
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import despresso.presenter.ObserverInterface;
+import org.vaadin.zhe.PaperRangeSlider;
 
+import java.awt.print.Paper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +18,8 @@ import static java.util.Map.entry;
 public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
 
     private String selectedMood = "None";
+    private int moodSliderValue = -1;
+
     private List<ObserverInterface> listeners = new ArrayList<>();
     private VerticalLayout mainLayout = new VerticalLayout();
     private VerticalLayout previousLayout = mainLayout;
@@ -124,10 +129,12 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
         line1.add(new Label("How accurately does this mood describe your feelings?"));
 
         HorizontalLayout line2 = new HorizontalLayout();
-        line2.add(new Label("Slider here"));
+        PaperRangeSlider moodSlider = createMoodSlider();
+        moodSliderValue = (int) moodSlider.getValueMax();
+        line2.add(moodSlider);
 
         HorizontalLayout line3 = new HorizontalLayout();
-        line3.add(createButton("Confirm"));
+        line3.add(createButton("ConfirmAccuracy"));
 
         newLayout.add(line1, line2, line3);
 
@@ -152,11 +159,29 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
         return selectedMood;
     }
 
+    public int getMoodSliderValue() {
+        return moodSliderValue;
+    }
+
+    // Creates a new mood slider
+    private PaperRangeSlider createMoodSlider() {
+        PaperRangeSlider slider = new PaperRangeSlider(1, 10, 0, 10);
+        slider.setStep(1);
+        slider.setSingleSlider(true);
+        slider.addMaxValueChangeListener(
+                (ComponentEventListener<PaperRangeSlider.MaxValueChangeEvent>) event -> {
+            moodSliderValue = (int) event.getValueMax();
+            for (ObserverInterface listener : listeners)
+                listener.update("MoodSlider");
+        });
+        return slider;
+    }
+
     // Immutable map to translate commands to button labels
     private static Map<String, String> ACTIONS = Map.ofEntries(
-            entry("Save", "Shave"),
+            entry("Save", "Save"),
             entry("Undo", "Undo"),
             entry("Specify", "Specify"),
-            entry("Confirm", "Confirm")
+            entry("ConfirmAccuracy", "Confirm")
     );
 }

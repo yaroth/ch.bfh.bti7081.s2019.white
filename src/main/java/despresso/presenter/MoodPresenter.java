@@ -22,6 +22,9 @@ public class MoodPresenter implements ObserverInterface {
             case "Mood":
                 setMood();
                 break;
+            case "MoodSlider":
+                setMoodAccuracy();
+                break;
             case "Save":
                 resetMoodView();
                 break;
@@ -31,12 +34,17 @@ public class MoodPresenter implements ObserverInterface {
             case "Specify":
                 showSpecificMoods();
                 break;
-            case "Confirm":
+            case "ConfirmAccuracy":
                 resetMoodView();
                 break;
             default:
                 System.out.println("Unknown command!");
         }
+    }
+
+    // Model: Set the accuracy of the mood selected with the slider
+    private void setMoodAccuracy() {
+        model.setMoodAccuracy(view.getMoodSliderValue());
     }
 
     // Model: Set selected mood

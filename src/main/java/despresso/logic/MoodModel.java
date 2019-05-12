@@ -29,4 +29,8 @@ public class MoodModel {
     public void undoMoodSelection() {
         this.moodState.undoMoodSelection();
     }
+
+    public void setMoodAccuracy(int moodSliderValue) {
+        this.moodState.setMoodAccuracy(moodSliderValue);
+    }
 }
