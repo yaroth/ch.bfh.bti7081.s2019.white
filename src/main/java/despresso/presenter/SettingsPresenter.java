@@ -24,5 +24,6 @@ public class SettingsPresenter implements ObserverInterface {
             view.setLabel(model.deleteData());
         } else if (event.getSource().getText().equals("Delete Account")) {
             view.setLabel(model.deleteAccount());
+        }
     }
 }
