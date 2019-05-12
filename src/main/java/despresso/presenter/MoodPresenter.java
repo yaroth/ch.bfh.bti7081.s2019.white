@@ -13,7 +13,6 @@ public class MoodPresenter implements ObserverInterface {
         this.model = model;
         this.model.setPresenter(this);
         this.view = view;
-        this.view.setPresenter(this);
         this.view.addObserver(this);
     }
 
