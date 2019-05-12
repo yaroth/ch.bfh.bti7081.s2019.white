@@ -18,11 +18,11 @@ public class SettingsPresenter implements ObserverInterface {
 
     @Override
     public void update(ClickEvent<Button> event) {
-        if (event.getSource().getText().equals("click me")) {
-            // here the model is returning some value
-            view.setLabel(model.doSomething());
-        } else if (event.getSource().getText().equals("reset")) {
-            view.setLabel(model.doSomethingElse());
-        }
+        if (event.getSource().getText().equals("Save Settings")) {
+            view.setLabel(model.saveSettings());
+        } else if (event.getSource().getText().equals("Delete Data")) {
+            view.setLabel(model.deleteData());
+        } else if (event.getSource().getText().equals("Delete Account")) {
+            view.setLabel(model.deleteAccount());
     }
 }
