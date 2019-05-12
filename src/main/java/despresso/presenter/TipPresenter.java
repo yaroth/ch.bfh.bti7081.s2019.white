@@ -30,7 +30,6 @@ public class TipPresenter implements ObserverInterface{
         System.out.println("TipPresenter.update() executed...");
         this.tipModel.filterTipList(TipDuration.LONG, TipType.BODY, TipLocation.ATHOME);
         this.tipView.testLabel.setText("Some Button Clicked");
-        System.out.println("Update Method of TipPresenter executed.");
     }
 
 

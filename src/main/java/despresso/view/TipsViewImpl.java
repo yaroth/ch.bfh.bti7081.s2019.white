@@ -29,27 +29,40 @@ public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
         // Create the accordion
         Accordion accordion = new Accordion();
 
-        // Create the first tab: Filter Tipps
+
+        // Create the first tab: Tippliste
+            AccordionPanel accordionPanel2 = new AccordionPanel();
+            accordionPanel2.setSummaryText("Tippliste");
+            accordionPanel2.setContent(new Text("setContent for accordionPanel2"));
+
+            Grid<Tip> tipGrid = new Grid<>(Tip.class);
+            tipGrid.setItems(this.tipList);
+
+            accordionPanel2.addContent(tipGrid);
+            accordionPanel2.setOpened(false);
+            accordion.add(accordionPanel2);
+
+        // Create the second tab: Filter Tipps
             AccordionPanel accordionPanel1 = new AccordionPanel();
             VerticalLayout verticalLayout = new VerticalLayout();
 
-                // Radio Button Ort
-                RadioButtonGroup<String> locationButtonGroup = new RadioButtonGroup<>();
-                radioButtonGroupList.add(locationButtonGroup);
-                locationButtonGroup.setLabel("Ort");
-                locationButtonGroup.setItems("Zu Hause", "Draussen", "Bei der Arbeit");
+            // Radio Button Ort
+            RadioButtonGroup<String> locationButtonGroup = new RadioButtonGroup<>();
+            radioButtonGroupList.add(locationButtonGroup);
+            locationButtonGroup.setLabel("Ort");
+            locationButtonGroup.setItems("Zu Hause", "Draussen", "Bei der Arbeit");
 
             // Radio Button Type
-                RadioButtonGroup<String> typeButtonGroup = new RadioButtonGroup<>();
-                radioButtonGroupList.add(typeButtonGroup);
-                typeButtonGroup.setLabel("Typ");
-                typeButtonGroup.setItems("Körper", "Geist");
+            RadioButtonGroup<String> typeButtonGroup = new RadioButtonGroup<>();
+            radioButtonGroupList.add(typeButtonGroup);
+            typeButtonGroup.setLabel("Typ");
+            typeButtonGroup.setItems("Körper", "Geist");
 
             // Radio Button Duration
-                RadioButtonGroup<String> durationButtonGroup = new RadioButtonGroup<>();
-                radioButtonGroupList.add(durationButtonGroup);
-                durationButtonGroup.setLabel("Dauer");
-                durationButtonGroup.setItems("Kurz", "Mittel", "Lang");
+            RadioButtonGroup<String> durationButtonGroup = new RadioButtonGroup<>();
+            radioButtonGroupList.add(durationButtonGroup);
+            durationButtonGroup.setLabel("Dauer");
+            durationButtonGroup.setItems("Kurz", "Mittel", "Lang");
 
             // For handle Events of all RadioButtonGroups
             for(ObserverInterface listener : listeners) {
@@ -71,19 +84,8 @@ public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
             this.testLabel.setText("FirstText");
             verticalLayout.add(testLabel);
 
-
             accordion.add("Filter Tipps", verticalLayout);
 
-        // Create the second tab: Tippliste
-            AccordionPanel accordionPanel2 = new AccordionPanel();
-            accordionPanel2.setSummaryText("Tippliste");
-            accordionPanel2.setContent(new Text("setContent for accordionPanel2"));
-
-            Grid<Tip> tipGrid = new Grid<>(Tip.class);
-            tipGrid.setItems(this.tipList);
-
-            accordionPanel2.addContent(tipGrid);
-            accordion.add(accordionPanel2);
 
         // Add accordion to TipViewImpl
         this.add(accordion);
@@ -92,6 +94,8 @@ public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
 
     private Button createButton(String text) {
         return new Button(text, event -> {
+            System.out.println("Button in TipsView clicked");
+            System.out.println(listeners);
             for (ObserverInterface listener : listeners)
                 listener.update(event);
         });

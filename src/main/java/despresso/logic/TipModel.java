@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TipModel {
-    private ArrayList<Tip> tipList;
-    private List<Tip> filteredTiplist;
+    private ArrayList<Tip> tipList = new ArrayList<>();
+    private List<Tip> filteredTiplist = new ArrayList<>();
 
     public  TipModel(){
         for(int i = 0; i <= 10; i++){
