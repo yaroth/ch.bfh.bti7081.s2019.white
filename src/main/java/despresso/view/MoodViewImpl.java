@@ -1,39 +1,25 @@
 package despresso.view;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import despresso.presenter.ObserverInterface;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MoodViewImpl extends View {
 
-public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
-
-
-    private List<ObserverInterface> listeners = new ArrayList<>();
+    private Label label;
 
     public MoodViewImpl() {
         HorizontalLayout line1 = new HorizontalLayout();
-        Label label1 = new Label("Mood label 1");
-        line1.add(label1);
+        label = new Label("Click the button below");
+        line1.add(label);
         HorizontalLayout line2 = new HorizontalLayout();
-        Label label2 = new Label("Mood label 2");
-        line2.add(label2);
+        Button btn1 = createButton("click me");
+        Button btn2 = createButton("reset");
+        Button btn = new Button("test");
+//        btn.addClickListener()
+        line2.add(btn1, btn2);
         this.add(line1);
         this.add(line2);
 
     }
-
-    @Override
-    public void removeObserver(ObserverInterface observer) {
-        listeners.remove(observer);
-    }
-
-    @Override
-    public void addObserver(ObserverInterface observer) {
-        listeners.add(observer);
-
-    }
-
 }

@@ -4,6 +4,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import despresso.SettingsAction;
 import despresso.presenter.ObserverInterface;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 public class SettingsViewImpl extends VerticalLayout implements SubjectInterface {
 
     private Label label;
+    private Button clickMeBtn, resetBtn;
     private List<ObserverInterface> listeners = new ArrayList<>();
 
     public SettingsViewImpl() {
@@ -19,11 +21,11 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
         label = new Label("Click the button below");
         line1.add(label);
         HorizontalLayout line2 = new HorizontalLayout();
-        Button btn1 = createButton("click me");
-        Button btn2 = createButton("reset");
+        clickMeBtn = createButton(SettingsAction.CLICK_ME);
+        resetBtn = createButton(SettingsAction.RESET);
         Button btn = new Button("test");
 //        btn.addClickListener()
-        line2.add(btn1, btn2);
+        line2.add(clickMeBtn, resetBtn);
         this.add(line1);
         this.add(line2);
 
@@ -46,8 +48,13 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
 
     private Button createButton(String text) {
         return new Button(text, event -> {
-            for (ObserverInterface listener : listeners)
-                listener.update(event);
+            for (ObserverInterface listener : listeners) {
+                if (event.getSource().equals(clickMeBtn)) {
+                    listener.update(SettingsAction.CLICK_ME);
+                } else if (event.getSource().equals(resetBtn)){
+                    listener.update(SettingsAction.RESET);
+                }
+            }
         });
     }
 }
