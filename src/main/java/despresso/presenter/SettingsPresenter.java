@@ -19,11 +19,19 @@ public class SettingsPresenter implements ObserverInterface {
     @Override
     public void update(ClickEvent<Button> event) {
         if (event.getSource().getText().equals("Save Settings")) {
-            view.setLabel(model.saveSettings());
+            view.setLabel(model.saveSettings(view.getRadiobuttonText()));
         } else if (event.getSource().getText().equals("Delete Data")) {
-            view.setLabel(model.deleteData());
+            view.addConfirmationDialog("Do you really want to delete all your personal saved Data from the Database?");
+            System.out.println("Delete Data confirmation window opened");
         } else if (event.getSource().getText().equals("Delete Account")) {
-            view.setLabel(model.deleteAccount());
+            view.addConfirmationDialog("Do you really want to delete your account?");
+            System.out.println("Delete Account confirmation window opened");
+        } else {
+            System.out.println(event.toString());
+//                view.setLabel(model.deleteAccount());
+//            } else{
+//                view.setLabel("not confirmed");
         }
     }
 }
+
