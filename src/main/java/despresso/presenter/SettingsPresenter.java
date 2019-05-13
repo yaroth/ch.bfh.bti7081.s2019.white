@@ -26,11 +26,10 @@ public class SettingsPresenter implements ObserverInterface {
         } else if (event.getSource().getText().equals("Delete Account")) {
             view.addConfirmationDialog("Do you really want to delete your account?");
             System.out.println("Delete Account confirmation window opened");
+        } else if (event.getSource().getText().equals("Confirm")){
+            view.setLabel(model.deleteAccount());
         } else {
-            System.out.println(event.toString());
-//                view.setLabel(model.deleteAccount());
-//            } else{
-//                view.setLabel("not confirmed");
+            view.setLabel("not confirmed");
         }
     }
 }

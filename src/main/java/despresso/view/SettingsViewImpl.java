@@ -92,17 +92,17 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
         Button confirmButton;
         confirmButton = new Button("Confirm", event -> {
             messageLabel.setText("Confirmed!");
-            dialog.close();
             for (ObserverInterface listener : listeners)
                 listener.update(event);
+            dialog.close();
         });
 
         confirmButton.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_PRIMARY);
         Button cancelButton = new Button("Cancel", event -> {
             messageLabel.setText("Cancelled...");
-            dialog.close();
             for (ObserverInterface listener : listeners)
                 listener.update(event);
+            dialog.close();
         });
         dialog.add(confirmButton, cancelButton);
 
