@@ -1,10 +1,29 @@
 package despresso;
 
-public class Views {
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 
-    public final static String HOME = "Home";
-    public final static String SETTINGS = "Settings";
-    public final static String MOOD = "Mood";
-    public final static String CALENDAR = "Calendar";
-    public final static String TIPS = "Tips";
+public enum Views {
+    HOME           ("Home", new Icon(VaadinIcon.HOME_O)),
+    SETTINGS       ("Settings", new Icon(VaadinIcon.COG_O)),
+    MOOD           ("Mood", null),
+    CALENDAR       ("Calendar", null),
+    TIPS           ("Tips", null);
+
+    private String settings;
+    private Icon icon;
+
+    Views(String settings, Icon icon) {
+        this.settings = settings;
+        this.icon = icon;
+    }
+
+    @Override
+    public String toString() {
+        return this.settings;
+    }
+
+    public Icon getIcon(){
+        return this.icon;
+    }
 }
