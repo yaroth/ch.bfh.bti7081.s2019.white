@@ -1,7 +1,6 @@
 package despresso.view;
 
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -15,35 +14,56 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
 
 
     private List<ObserverInterface> listeners = new ArrayList<>();
+    HorizontalLayout line1 = new HorizontalLayout();
+    HorizontalLayout line2 = new HorizontalLayout();
+    HorizontalLayout line3 = new HorizontalLayout();
 
     public HomeViewImpl() {
-        HorizontalLayout line1 = new HorizontalLayout();
-        Label label1 = new Label("How are you feeling today?");
-        line1.add(label1);
 
-        // Create a horizontal slider
-        HorizontalLayout line2 = new HorizontalLayout();
-        PaperRangeSlider paperRangeSlider = new PaperRangeSlider(1, 10, 1, 10);
-        paperRangeSlider.setStep(1);
-        paperRangeSlider.setSingleSlider(true);
-        line2.add(new Label("Please enter a value from 1 to 10"), paperRangeSlider);
+        moodSliderHomeView();
+        showCalendarNotification();
 
-        HorizontalLayout line3 = new HorizontalLayout();
-        Label label3 = new Label("HOME label 2");
-        Label content = new Label(
-                "Hello, I am a notification with components!");
-        NativeButton buttonInside = new NativeButton("Bye");
-        Notification notification = new Notification(content, buttonInside);
-        notification.setDuration(3000);
-        buttonInside.addClickListener(event -> notification.close());
-        notification.setPosition(Notification.Position.MIDDLE);
-        //buttonInside.addClickListener(event -> notification.open());
-        line3.add(new Label("Notification: "), notification);
         this.add(line1);
         this.add(line2);
         this.add(line3);
 
     }
+
+    private void showCalendarNotification() {
+        Notification notification = Notification.show(
+                "This is a notification created with static convenience method");
+        line3.add(notification);
+        /*Label content = new Label(
+                "Hello, I am a notification with components!");
+        NativeButton buttonInside = new NativeButton("Bye");
+        Notification notification = new Notification(content, buttonInside);
+        buttonInside.addClickListener(event -> notification.close());
+        notification.setPosition(Notification.Position.MIDDLE);
+        //buttonInside.addClickListener(event -> notification.open());
+        line4.add(new Label("Notification: "), notification);*/
+    }
+
+    private void moodSliderHomeView() {
+
+        Label label1 = new Label("How are you feeling today?");
+
+        // Create a horizontal slider
+        PaperRangeSlider paperRangeSlider = new PaperRangeSlider(-1, 1, 0, 0);
+        paperRangeSlider.setStep(1);
+        paperRangeSlider.setSingleSlider(true);
+        Label currentMoodLabel = new Label("Your mood is " + paperRangeSlider.getValueMax());
+        //Add listener
+        paperRangeSlider.addMaxValueChangeListener(event -> currentMoodLabel.setText("Your mood is " + event.getValueMax()));
+        paperRangeSlider.addMaxValueChangeListener(event -> {
+            for (ObserverInterface listener : listeners)
+                listener.update(event.getValueMax());
+        });
+
+
+        line1.add(label1, currentMoodLabel);
+        line2.add(new Label("Negative "), paperRangeSlider, new Label("Positive "));
+    }
+
 
     @Override
     public void removeObserver(ObserverInterface observer) {
