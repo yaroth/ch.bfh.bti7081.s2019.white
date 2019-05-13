@@ -34,7 +34,7 @@ package view {
         Button: nextTaskDone
         + updateNextTask()
         }
-    class MainView {
+    class MainViewImpl {
         Button: home
         header("despresso")
         Button: settings
@@ -48,6 +48,8 @@ package view {
 }
 
 package presenter {
+    interface ObserverInterface
+
     class MainPresenter{
     + showHomeView()
     + showSettingsView()
@@ -105,10 +107,10 @@ package logic {
 
 /' Define entity relations (?)'/
 
-vaadin <. view
+vaadin <.. view
 
 /' Presenter - View'/
-MainPresenter "1" -- "1" MainView
+MainPresenter "1" -- "1" MainViewImpl
 SettingsView "1" -- "1" SettingsPresenter
 HomeView "1" -- "1" HomePresenter
 TipView "1" -- "1" TipPresenter
@@ -116,12 +118,12 @@ CalendarView "1" -- "1" CalendarPresenter
 MoodView "1" -- "1" MoodPresenter
 
 /' View - View'/
-MainView "1" -> "1" HomeView
-MainView "1" -> "1" SettingsView
-MainView "1" -> "1" CalendarView
-MainView "1" -> "1" TipView
-MainView "1" -> "1" HomeView
-MainView "1" -> "1" MoodView
+MainViewImpl "1" -> "1" HomeView
+MainViewImpl "1" -> "1" SettingsView
+MainViewImpl "1" -> "1" CalendarView
+MainViewImpl "1" -> "1" TipView
+MainViewImpl "1" -> "1" HomeView
+MainViewImpl "1" -> "1" MoodView
 
 /' Presenter - Model'/
 MainPresenter "1" -- "1" MainModel
@@ -136,5 +138,7 @@ CalendarModel "1" -> "n" CalendarEntry
 
 MainModel "1" -> "1" CalendarModel
 
+SubjectInterface <|-- MainViewImpl
+ObserverInterface <|-- MainPresenter
 
 @enduml
