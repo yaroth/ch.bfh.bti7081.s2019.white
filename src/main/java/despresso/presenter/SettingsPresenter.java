@@ -1,6 +1,7 @@
 package despresso.presenter;
 
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.button.Button;
 import despresso.logic.SettingsModel;
 import despresso.view.SettingsViewImpl;
@@ -24,5 +25,10 @@ public class SettingsPresenter implements ObserverInterface {
         } else if (event.getSource().getText().equals("reset")) {
             view.setLabel(model.doSomethingElse());
         }
+    }
+
+    @Override
+    public void updateFromChangeEvent(HasValue.ValueChangeEvent event) {
+
     }
 }

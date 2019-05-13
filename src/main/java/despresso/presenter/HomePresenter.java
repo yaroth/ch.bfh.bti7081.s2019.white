@@ -1,6 +1,7 @@
 package despresso.presenter;
 
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.button.Button;
 import despresso.logic.HomeModel;
 import despresso.view.HomeViewImpl;
@@ -19,6 +20,11 @@ public class HomePresenter implements ObserverInterface {
 
     @Override
     public void update(ClickEvent<Button> event) {
+
+    }
+
+    @Override
+    public void updateFromChangeEvent(HasValue.ValueChangeEvent event) {
 
     }
 }
