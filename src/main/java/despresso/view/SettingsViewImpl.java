@@ -1,18 +1,16 @@
 package despresso.view;
 
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.html.NativeButton;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
-import com.vaadin.flow.function.SerializablePredicate;
-import com.vaadin.flow.shared.Registration;
+import despresso.Views;
 import despresso.presenter.ObserverInterface;
 import com.vaadin.flow.component.dialog.Dialog;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +20,7 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
     private List<ObserverInterface> listeners = new ArrayList<>();
     private RadioButtonGroup<String> getNotifications = new RadioButtonGroup<>();
     private String getNotificationText = "Yes";
+    private Button saveButton, deleteDataButton, deleteAccButton;
 
     public SettingsViewImpl() {
         HorizontalLayout line1 = new HorizontalLayout();
@@ -37,17 +36,17 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
         line2.add(getNotifications);
 
         HorizontalLayout line3 = new HorizontalLayout();
-        Button btn0 = createButton("Save Settings");
 
-        Button btn1 = createButton("Delete Data");
-        btn1.addThemeVariants(ButtonVariant.LUMO_ERROR);
-        //add confirmation screen
-        Button btn2 = createButton("Delete Account");
-        btn2.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_PRIMARY);
-        //add confirmation screen
+        saveButton = createButton(Views.SAVE);
+
+        deleteDataButton = createButton(Views.DELETE_DATA);
+        deleteDataButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
+
+        deleteAccButton = createButton(Views.DELETE_ACCOUNT);
+        deleteAccButton.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_PRIMARY);
 
 
-        line3.add(btn0, btn1, btn2);
+        line3.add(saveButton, deleteDataButton, deleteAccButton);
         //add picker for UI settings.
 
         this.add(line1,line2,line3);
@@ -69,14 +68,27 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
         this.label.setText(label);
     }
 
-    private Button createButton(String text) {
-        return new Button(text, event -> {
-            for (ObserverInterface listener : listeners)
-                listener.update(event);
-        });
+    private Button createButton(Views view) {
+        if (view.getIcon() != null){
+            return new Button(view.getIcon(), event -> this.registerObject(event));
+        } else {
+            return new Button(view.toString(), event -> this.registerObject(event));
+        }
     }
 
-    public String getRadiobuttonText() {
+    private void registerObject(ClickEvent event) {
+        for (ObserverInterface listener : listeners) {
+            if (event.getSource().equals(saveButton)) {
+                listener.update(Views.SAVE.toString());
+            } else if (event.getSource().equals(deleteDataButton)) {
+                listener.update(Views.DELETE_DATA.toString());
+            } else if (event.getSource().equals(deleteAccButton)) {
+                listener.update(Views.DELETE_ACCOUNT.toString());
+            }
+        }
+    }
+
+    public String getRadiobuttonText () {
         return getNotificationText;
     }
 
@@ -93,7 +105,7 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
         confirmButton = new Button("Confirm", event -> {
             messageLabel.setText("Confirmed!");
             for (ObserverInterface listener : listeners)
-                listener.update(event);
+                listener.update(Views.CONFIRM.toString());
             dialog.close();
         });
 
@@ -101,7 +113,7 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
         Button cancelButton = new Button("Cancel", event -> {
             messageLabel.setText("Cancelled...");
             for (ObserverInterface listener : listeners)
-                listener.update(event);
+                listener.update(Views.CANCEL.toString());
             dialog.close();
         });
         dialog.add(confirmButton, cancelButton);
