@@ -23,8 +23,5 @@ public class HomePresenter implements ObserverInterface {
 
     }
 
-    @Override
-    public void updateFromChangeEvent(HasValue.ValueChangeEvent event) {
 
-    }
 }

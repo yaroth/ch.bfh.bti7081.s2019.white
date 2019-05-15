@@ -36,8 +36,5 @@ public class MainPresenter implements ObserverInterface {
         }
     }
 
-    @Override
-    public void updateFromChangeEvent(HasValue.ValueChangeEvent event) {
-        
-    }
+
 }

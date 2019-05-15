@@ -15,7 +15,11 @@ public enum Views {
     DELETE_DATA    ("Delete Data", null),
     DELETE_ACCOUNT ("Delete Account", null),
     CONFIRM        ("Confirm", null),
-    CANCEL         ("Cancel", null);
+    CANCEL         ("Cancel", null),
+    RADIOLOCATION  ("RadioLocation", null),
+    RADIODURATION  ("RadioDuration", null),
+    RADIOTYPE      ("RadioType", null);
+
 
     private String settings;
     private Icon icon;

@@ -29,19 +29,13 @@ public class TipPresenter implements ObserverInterface{
 //
 //    }
 
+
     @Override
-    public void update(ClickEvent<Button> event) {
+    public void update(String viewName) {
         System.out.println("TipPresenter.update() executed...");
         this.tipModel.filterTipList(TipDuration.LONG, TipType.BODY, TipLocation.ATHOME);
         this.tipView.testLabel.setText("Some Button Clicked");
     }
-
-    @Override
-    public void updateFromChangeEvent(HasValue.ValueChangeEvent event) {
-        System.out.println("TipPresenter.updateFromChangeEvent executed...");
-    }
-
-
 }
 
 
