@@ -51,7 +51,10 @@ public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
             radioButtonGroupList.add(locationButtonGroup);
             locationButtonGroup.setLabel("Ort");
             locationButtonGroup.setItems("Zu Hause", "Draussen", "Bei der Arbeit");
-            locationButtonGroup.addValueChangeListener(event -> System.out.println("Radiobutton value changed..."));
+            locationButtonGroup.addValueChangeListener(event -> {
+                System.out.println("Radiobutton value changed...");
+                System.out.println(listeners);
+            });
             for(ObserverInterface listener : listeners) {
                 locationButtonGroup.addValueChangeListener(event -> listener.updateFromChangeEvent(event));
             }
