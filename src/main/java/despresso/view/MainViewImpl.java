@@ -3,6 +3,7 @@ package despresso.view;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -41,16 +42,19 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
         // home - header - settings -> navigation
         HorizontalLayout header = new HorizontalLayout();
         homeBtn = createButton(Views.HOME);
+        homeBtn.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         header.add(homeBtn);
         header.add(label);
         settingsBtn = createButton(Views.SETTINGS);
+        settingsBtn.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         header.add(settingsBtn);
         add(header);
 
         // TODO: define main area dimensions & load homeArea from HomeView
         // This is just to show that we have a main area which then will need to
         // filled with content.
-        mainArea.setHeight("200px");
+        mainArea.setHeight("300px");
+        mainArea.setWidth("300px");
         mainArea.add(this.homeView);
         add(mainArea);
 
@@ -64,22 +68,28 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
         add(footer);
     }
 
-    private Button createButton(String text) {
-        return new Button(text, event -> {
-            for (ObserverInterface listener : listeners) {
-                if (event.getSource().equals(homeBtn)) {
-                    listener.update(Views.HOME);
-                } else if (event.getSource().equals(settingsBtn)) {
-                    listener.update(Views.SETTINGS);
-                } else if (event.getSource().equals(moodBtn)) {
-                    listener.update(Views.MOOD);
-                } else if (event.getSource().equals(calendarBtn)) {
-                    listener.update(Views.CALENDAR);
-                } else if (event.getSource().equals(tipsBtn)) {
-                    listener.update(Views.TIPS);
-                }
+    private Button createButton(Views view) {
+        if (view.getIcon() != null){
+            return new Button(view.getIcon(), event -> this.registerObject(event));
+        } else {
+            return new Button(view.toString(), event -> this.registerObject(event));
+        }
+    }
+
+    private void registerObject(ClickEvent event){
+        for (ObserverInterface listener : listeners) {
+            if (event.getSource().equals(homeBtn)) {
+                listener.update(Views.HOME.toString());
+            } else if (event.getSource().equals(settingsBtn)) {
+                listener.update(Views.SETTINGS.toString());
+            } else if (event.getSource().equals(moodBtn)) {
+                listener.update(Views.MOOD.toString());
+            } else if (event.getSource().equals(calendarBtn)) {
+                listener.update(Views.CALENDAR.toString());
+            } else if (event.getSource().equals(tipsBtn)) {
+                listener.update(Views.TIPS.toString());
             }
-        });
+        }
     }
 
     @Override

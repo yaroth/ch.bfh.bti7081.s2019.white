@@ -1,11 +1,15 @@
 package despresso.view;
 
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import despresso.SettingsAction;
+import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import despresso.Views;
 import despresso.presenter.ObserverInterface;
+import com.vaadin.flow.component.dialog.Dialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,21 +17,39 @@ import java.util.List;
 public class SettingsViewImpl extends VerticalLayout implements SubjectInterface {
 
     private Label label;
-    private Button clickMeBtn, resetBtn;
     private List<ObserverInterface> listeners = new ArrayList<>();
+    private RadioButtonGroup<String> getNotifications = new RadioButtonGroup<>();
+    private String getNotificationText = "Yes";
+    private Button saveButton, deleteDataButton, deleteAccButton;
 
     public SettingsViewImpl() {
         HorizontalLayout line1 = new HorizontalLayout();
-        label = new Label("Click the button below");
+        label = new Label("Your personal settings for the despresso-app");
         line1.add(label);
         HorizontalLayout line2 = new HorizontalLayout();
-        clickMeBtn = createButton(SettingsAction.CLICK_ME);
-        resetBtn = createButton(SettingsAction.RESET);
-        Button btn = new Button("test");
-//        btn.addClickListener()
-        line2.add(clickMeBtn, resetBtn);
-        this.add(line1);
-        this.add(line2);
+
+        RadioButtonGroup<String> getNotifications = new RadioButtonGroup<>();
+        getNotifications.setLabel("Do you want to get Notifications?");
+        getNotifications.setItems("Yes", "No");
+        getNotifications.addValueChangeListener(event -> getNotificationText = String.format(event.getValue()));
+
+        line2.add(getNotifications);
+
+        HorizontalLayout line3 = new HorizontalLayout();
+
+        saveButton = createButton(Views.SAVE);
+
+        deleteDataButton = createButton(Views.DELETE_DATA);
+        deleteDataButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
+
+        deleteAccButton = createButton(Views.DELETE_ACCOUNT);
+        deleteAccButton.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_PRIMARY);
+
+
+        line3.add(saveButton, deleteDataButton, deleteAccButton);
+        //add picker for UI settings.
+
+        this.add(line1,line2,line3);
 
     }
 
@@ -46,15 +68,56 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
         this.label.setText(label);
     }
 
-    private Button createButton(String text) {
-        return new Button(text, event -> {
-            for (ObserverInterface listener : listeners) {
-                if (event.getSource().equals(clickMeBtn)) {
-                    listener.update(SettingsAction.CLICK_ME);
-                } else if (event.getSource().equals(resetBtn)){
-                    listener.update(SettingsAction.RESET);
-                }
+    private Button createButton(Views view) {
+        if (view.getIcon() != null){
+            return new Button(view.getIcon(), event -> this.registerObject(event));
+        } else {
+            return new Button(view.toString(), event -> this.registerObject(event));
+        }
+    }
+
+    private void registerObject(ClickEvent event) {
+        for (ObserverInterface listener : listeners) {
+            if (event.getSource().equals(saveButton)) {
+                listener.update(Views.SAVE.toString());
+            } else if (event.getSource().equals(deleteDataButton)) {
+                listener.update(Views.DELETE_DATA.toString());
+            } else if (event.getSource().equals(deleteAccButton)) {
+                listener.update(Views.DELETE_ACCOUNT.toString());
             }
+        }
+    }
+
+    public String getRadiobuttonText () {
+        return getNotificationText;
+    }
+
+    public void addConfirmationDialog(String text){
+
+        Dialog dialog = new Dialog();
+        dialog.add(new Label(text));
+
+        dialog.setCloseOnEsc(false);
+        dialog.setCloseOnOutsideClick(false);
+        Label messageLabel = new Label();
+
+        Button confirmButton;
+        confirmButton = new Button("Confirm", event -> {
+            messageLabel.setText("Confirmed!");
+            for (ObserverInterface listener : listeners)
+                listener.update(Views.CONFIRM.toString());
+            dialog.close();
         });
+
+        confirmButton.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_PRIMARY);
+        Button cancelButton = new Button("Cancel", event -> {
+            messageLabel.setText("Cancelled...");
+            for (ObserverInterface listener : listeners)
+                listener.update(Views.CANCEL.toString());
+            dialog.close();
+        });
+        dialog.add(confirmButton, cancelButton);
+
+        dialog.open();
     }
 }
