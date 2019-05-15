@@ -2,13 +2,16 @@ package despresso.view;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import despresso.CalendarAction;
+import despresso.logic.CalendarModel;
+import despresso.presenter.CalendarPresenter;
 import despresso.presenter.ObserverInterface;
+import org.vaadin.stefan.fullcalendar.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class CalendarViewImpl extends VerticalLayout implements SubjectInterface {
 
@@ -16,19 +19,28 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
     private List<ObserverInterface> listeners = new ArrayList<>();
     private Button clickMeBtn, resetBtn;
     private Label label;
+    private CalendarPresenter _presenter;
 
     public CalendarViewImpl() {
-        HorizontalLayout line1 = new HorizontalLayout();
-        label = new Label("let's get ready to see a calendar!");
-        line1.add(label);
-        HorizontalLayout line2 = new HorizontalLayout();
-        clickMeBtn = createButton(CalendarAction.CLICK_ME);
-        resetBtn = createButton(CalendarAction.RESET);
-        Button btn = new Button(CalendarAction.CLICK_ME);
-//        btn.addClickListener()
-        line2.add(clickMeBtn, resetBtn);
-        this.add(line1);
-        this.add(line2);
+
+        FullCalendarScheduler calendar = new FullCalendarScheduler();
+        calendar.changeView(SchedulerView.TIMELINE_DAY);
+        calendar.setHeightAuto();
+        calendar.setSchedulerLicenseKey("GPL-My-Project-Is-Open-Source");
+                //FullCalendarBuilder.create().withScheduler().build();
+
+        Resource resource = new Resource("asdf1", "testResource", "#fff");
+        calendar.addResource(resource);
+
+        LocalDateTime startTime = LocalDateTime.now();
+        LocalDateTime endTime = startTime.plusHours(2);
+
+        ResourceEntry resourceEntry = new ResourceEntry("asdf1.1", "testEntry", startTime, endTime, false, true, "#fff", "blablabla");
+        resourceEntry.setResource(resource);
+
+        //calendar.addEntry(new Entry());
+
+        this.add(calendar);
     }
 
     @Override
