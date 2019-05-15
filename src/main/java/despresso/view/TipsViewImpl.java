@@ -1,12 +1,16 @@
 package despresso.view;
 
-import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.AbstractField;
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.accordion.AccordionPanel;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import despresso.logic.Tip;
 import despresso.presenter.ObserverInterface;
 
 import java.util.ArrayList;
@@ -14,54 +18,99 @@ import java.util.List;
 
 public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
 
-
     private List<ObserverInterface> listeners = new ArrayList<>();
+    private List<RadioButtonGroup> radioButtonGroupList = new ArrayList<>();
+    private ArrayList<Tip> tipList = new ArrayList<>();
+
+    // Testlabel
+    public Label testLabel = new Label();
 
     public TipsViewImpl() {
-//        HorizontalLayout line1 = new HorizontalLayout();
-//        Label label1 = new Label("Tips label 1");
-//        line1.add(label1);
-//        HorizontalLayout line2 = new HorizontalLayout();
-//        Label label2 = new Label("Tips label 2");
-//        line2.add(label2);
-//        this.add(line1);
-//        this.add(line2);
-
-
         // Create the accordion
         Accordion accordion = new Accordion();
 
-        // Create the first tab, specify caption when adding
-        AccordionPanel accordionPanel1 = new AccordionPanel();
-        accordionPanel1.setContent(new Text("setContent for accordionPanel1"));
-        accordion.add(accordionPanel1);
 
-        // Create the second tab, specify caption when adding
-        AccordionPanel accordionPanel2 = new AccordionPanel();
-        accordionPanel2.setContent(new Text("setContent for accordionPanel2"));
-        accordion.add(accordionPanel2);
+        // Create the first tab: Tippliste
+            AccordionPanel accordionPanel2 = new AccordionPanel();
+            accordionPanel2.setSummaryText("Tippliste");
+            accordionPanel2.setContent(new Text("setContent for accordionPanel2"));
+
+            Grid<Tip> tipGrid = new Grid<>(Tip.class);
+            tipGrid.setItems(this.tipList);
+
+            accordionPanel2.addContent(tipGrid);
+            accordionPanel2.setOpened(false);
+            accordion.add(accordionPanel2);
+
+        // Create the second tab: Filter Tipps
+            AccordionPanel accordionPanel1 = new AccordionPanel();
+            VerticalLayout verticalLayout = new VerticalLayout();
+
+            // Radio Button Ort
+            RadioButtonGroup<String> locationButtonGroup = new RadioButtonGroup<>();
+            radioButtonGroupList.add(locationButtonGroup);
+            locationButtonGroup.setLabel("Ort");
+            locationButtonGroup.setItems("Zu Hause", "Draussen", "Bei der Arbeit");
+            locationButtonGroup.addValueChangeListener(event -> {
+                System.out.println("Radiobutton value changed...");
+                System.out.println(listeners);
+            });
+            for(ObserverInterface listener : listeners) {
+                locationButtonGroup.addValueChangeListener(event -> listener.updateFromChangeEvent(event));
+            }
+
+            // Radio Button Type
+            RadioButtonGroup<String> typeButtonGroup = new RadioButtonGroup<>();
+            radioButtonGroupList.add(typeButtonGroup);
+            typeButtonGroup.setLabel("Typ");
+            typeButtonGroup.setItems("Körper", "Geist");
+
+            // Radio Button Duration
+            RadioButtonGroup<String> durationButtonGroup = new RadioButtonGroup<>();
+            radioButtonGroupList.add(durationButtonGroup);
+            durationButtonGroup.setLabel("Dauer");
+            durationButtonGroup.setItems("Kurz", "Mittel", "Lang");
+
+            // For handle Events of all RadioButtonGroups
+            for(ObserverInterface listener : listeners) {
+                for(RadioButtonGroup eventComponent : radioButtonGroupList){
+                    eventComponent.addValueChangeListener(event -> listener.updateFromChangeEvent(event));
+                }
+            }
 
 
+            // Add Radiobuttons to panel
+            verticalLayout.add(locationButtonGroup, typeButtonGroup, durationButtonGroup);
 
 
+            // Confirm Filter Button
+            Button okButton = createButton("OK");
+            verticalLayout.add(okButton);
+
+            // add Testlabel
+            this.testLabel.setText("FirstText");
+            verticalLayout.add(testLabel);
+
+            accordion.add("Filter Tipps", verticalLayout);
+
+
+        // Add accordion to TipViewImpl
+        this.add(accordion);
+   }
+
+
+    private Button createButton(String text) {
+        return new Button(text, event -> {
+            System.out.println("Button in TipsView clicked");
+            System.out.println(listeners);
+            for (ObserverInterface listener : listeners)
+                listener.update(event);
+        });
     }
 
-    /* Elements
-     *  Main Tip-Seite:
-     *  Button/Leiste zum runterziehen: "Filter setzen"
-     *  Liste mit tips
-     *  Button: Tip hinzufügen
-     *  Meldung, falls gefilterte Liste keine Tipps enthält
-     *  Filter-Setzen-Seite: --> Ev. mit Accordion
-     * Mood-Auswahl: Kreis mit Sektoren zur Auswahl
-     * Ort: Dreiwertiger Button/Schieber: Zu Hause, draussen, Arbeitsplatz
-     * Typ: Zweiwertiger Button/Schieber: Körper, Geist
-     * Zeit: Dreiwertiger Button/Schieber: Kurz, Mittel, Lang
-     * Clear-Button: Alle Filter löschen
-     * OK-Button: Filter auf Liste anwenden
-
-     *
-     * */
+    public void setTipList(ArrayList<Tip> tipList) {
+        this.tipList = tipList;
+    }
 
 
     @Override

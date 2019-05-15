@@ -1,6 +1,7 @@
 package despresso.presenter;
 
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.button.Button;
 import despresso.Views;
 import despresso.logic.MainModel;
@@ -33,5 +34,10 @@ public class MainPresenter implements ObserverInterface {
         } else if (button.equals(Views.TIPS.toString())) {
             view.loadTipsView();
         }
+    }
+
+    @Override
+    public void updateFromChangeEvent(HasValue.ValueChangeEvent event) {
+        
     }
 }
