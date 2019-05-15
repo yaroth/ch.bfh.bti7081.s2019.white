@@ -1,7 +1,5 @@
 package despresso.view;
 
-import com.vaadin.flow.component.AbstractField;
-import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.accordion.AccordionPanel;
@@ -46,18 +44,12 @@ public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
             AccordionPanel accordionPanel1 = new AccordionPanel();
             VerticalLayout verticalLayout = new VerticalLayout();
 
-            // Radio Button Ort
+            // Radio Button Location
+
             RadioButtonGroup<String> locationButtonGroup = new RadioButtonGroup<>();
             radioButtonGroupList.add(locationButtonGroup);
             locationButtonGroup.setLabel("Ort");
             locationButtonGroup.setItems("Zu Hause", "Draussen", "Bei der Arbeit");
-            locationButtonGroup.addValueChangeListener(event -> {
-                System.out.println("Radiobutton value changed...");
-                System.out.println(listeners);
-            });
-            for(ObserverInterface listener : listeners) {
-                locationButtonGroup.addValueChangeListener(event -> listener.updateFromChangeEvent(event));
-            }
 
             // Radio Button Type
             RadioButtonGroup<String> typeButtonGroup = new RadioButtonGroup<>();
@@ -74,7 +66,7 @@ public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
             // For handle Events of all RadioButtonGroups
             for(ObserverInterface listener : listeners) {
                 for(RadioButtonGroup eventComponent : radioButtonGroupList){
-                    eventComponent.addValueChangeListener(event -> listener.updateFromChangeEvent(event));
+                    eventComponent.addValueChangeListener(event -> listener.update(eventComponent.toString()));
                 }
             }
 
@@ -104,7 +96,7 @@ public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
             System.out.println("Button in TipsView clicked");
             System.out.println(listeners);
             for (ObserverInterface listener : listeners)
-                listener.update(event);
+                listener.update("test");
         });
     }
 
