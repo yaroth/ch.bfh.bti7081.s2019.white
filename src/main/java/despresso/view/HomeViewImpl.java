@@ -27,6 +27,7 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
     private Label label;
 
     public HomeViewImpl() {
+        label = new Label();
         showCalendarNotification();
         moodSliderHomeView();
         add(line1, line2, line3);
@@ -99,7 +100,7 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
         this.label.setText(label);
     }
 
-    /*public void addConfirmationDialog(String text){
+    public void addConfirmationDialog(String text){
 
         Dialog dialog = new Dialog();
         dialog.add(new Label(text));
@@ -126,7 +127,7 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
         dialog.add(confirmButton, cancelButton);
 
         dialog.open();
-    }*/
+    }
 
 
 }
