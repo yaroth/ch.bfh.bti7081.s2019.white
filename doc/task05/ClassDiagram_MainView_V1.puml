@@ -1,7 +1,7 @@
 @startuml
 
 skinparam nodesep 100
-/'skinparam ranksep 200'/
+skinparam ranksep 40
 
 title Class diagram: Main View
 
@@ -16,19 +16,21 @@ package vaadin {
 }
 
 package view {
-    class SettingsView {
+    interface SubjectInterface
+
+    class SettingsViewImpl {
     + addListener()
     }
-    class CalendarView {
+    class CalendarViewImpl {
     + addListener()
     }
-    class MoodView {
+    class MoodViewImpl {
     + addListener()
     }
-    class TipView {
+    class TipsViewImpl {
     + addListener()
     }
-    class HomeView {
+    class HomeViewImpl {
         Slider: moodSlider
         Label: nextTask
         Button: nextTaskDone
@@ -71,7 +73,7 @@ package presenter {
     + showCalendarView()
     }
     class TipPresenter {
-    + showTipView()
+    + showTipsView()
     }
     class MoodPresenter {
     + showMoodView()
@@ -89,20 +91,15 @@ package logic {
     + getNextEntry()
     }
 
-    class MoodModel {
-        }
+    class MoodModel
 
-    class TipModel {
-    }
+    class TipModel
 
-    class SettingsModel {
-    }
+    class SettingsModel
 
-    class HomeModel {
-    }
+    class HomeModel
 
-    class CalendarEntry {
-    }
+    class CalendarEntry
 }
 
 /' Define entity relations (?)'/
@@ -111,19 +108,18 @@ vaadin <.. view
 
 /' Presenter - View'/
 MainPresenter "1" -- "1" MainViewImpl
-SettingsView "1" -- "1" SettingsPresenter
-HomeView "1" -- "1" HomePresenter
-TipView "1" -- "1" TipPresenter
-CalendarView "1" -- "1" CalendarPresenter
-MoodView "1" -- "1" MoodPresenter
+SettingsViewImpl "1" -- "1" SettingsPresenter
+HomeViewImpl "1" -- "1" HomePresenter
+TipsViewImpl "1" -- "1" TipPresenter
+CalendarViewImpl "1" -- "1" CalendarPresenter
+MoodViewImpl "1" -- "1" MoodPresenter
 
 /' View - View'/
-MainViewImpl "1" -> "1" HomeView
-MainViewImpl "1" -> "1" SettingsView
-MainViewImpl "1" -> "1" CalendarView
-MainViewImpl "1" -> "1" TipView
-MainViewImpl "1" -> "1" HomeView
-MainViewImpl "1" -> "1" MoodView
+MainViewImpl "1" -> "1" HomeViewImpl
+MainViewImpl "1" -> "1" SettingsViewImpl
+MainViewImpl "1" -> "1" CalendarViewImpl
+MainViewImpl "1" -> "1" TipsViewImpl
+MainViewImpl "1" -> "1" MoodViewImpl
 
 /' Presenter - Model'/
 MainPresenter "1" -- "1" MainModel
@@ -139,6 +135,17 @@ CalendarModel "1" -> "n" CalendarEntry
 MainModel "1" -> "1" CalendarModel
 
 SubjectInterface <|-- MainViewImpl
+SubjectInterface <|-- MoodViewImpl
+SubjectInterface <|-- TipsViewImpl
+SubjectInterface <|-- CalendarViewImpl
+SubjectInterface <|-- SettingsViewImpl
+SubjectInterface <|-- HomeViewImpl
+
 ObserverInterface <|-- MainPresenter
+ObserverInterface <|-- MoodPresenter
+ObserverInterface <|-- TipPresenter
+ObserverInterface <|-- CalendarPresenter
+ObserverInterface <|-- SettingsPresenter
+ObserverInterface <|-- HomePresenter
 
 @enduml
