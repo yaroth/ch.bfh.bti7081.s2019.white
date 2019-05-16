@@ -16,6 +16,7 @@ public enum Views {
     DELETE_ACCOUNT ("Delete Account", null),
     CONFIRM        ("Confirm", null),
     CANCEL         ("Cancel", null),
+    DONE         ("Done", null),
     RADIOLOCATION  ("RadioLocation", null),
     RADIODURATION  ("RadioDuration", null),
     RADIOTYPE      ("RadioType", null);

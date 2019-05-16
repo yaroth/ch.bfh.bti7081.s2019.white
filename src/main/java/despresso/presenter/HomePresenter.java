@@ -24,9 +24,10 @@ public class HomePresenter implements ObserverInterface {
 
     @Override
     public void update(String input) {
+        homeModel.doSomething();
         if (input.equals(Views.MOOD.toString())) {
             mainView.loadMoodView();
-        } else if (input.equals(Views.CONFIRM.toString())){
+        } else if (input.equals(Views.DONE.toString())){
             if (confirmed =="ok"){
                 view.setLabel(homeModel.closeCalendarEntry());
             } else {
