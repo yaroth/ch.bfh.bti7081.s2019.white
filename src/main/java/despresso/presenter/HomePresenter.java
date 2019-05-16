@@ -1,18 +1,13 @@
 package despresso.presenter;
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.HasValue;
-import com.vaadin.flow.component.button.Button;
 import despresso.Views;
 import despresso.logic.HomeModel;
 import despresso.view.HomeViewImpl;
-import despresso.view.MainViewImpl;
 
 public class HomePresenter implements ObserverInterface {
 
     private HomeModel homeModel;
     private HomeViewImpl view;
-    private MainViewImpl mainView;
     private String confirmed = "";
 
     public HomePresenter(HomeModel homeModel, HomeViewImpl view) {
@@ -24,19 +19,18 @@ public class HomePresenter implements ObserverInterface {
 
     @Override
     public void update(String input) {
+        homeModel.doSomething();
         if (input.equals(Views.MOOD.toString())) {
-            mainView.loadMoodView();
-        } else if (input.equals(Views.CONFIRM.toString())){
+            System.out.println("Load Mood");
+        }
+        if (input.equals(Views.DONE.toString())){
+            view.addConfirmationDialog("Do you really want to close the Calendarentry?");
+            confirmed = "ok";
             if (confirmed =="ok"){
                 view.setLabel(homeModel.closeCalendarEntry());
             } else {
                 view.setLabel("not confirmed");
             }
-        } else {
-            view.setLabel("not confirmed");
-            confirmed = "";
         }
     }
-
-
 }
