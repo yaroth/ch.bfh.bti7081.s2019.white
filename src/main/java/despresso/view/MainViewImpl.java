@@ -50,7 +50,7 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
         // TODO: define main area dimensions & load homeArea from HomeView
         // This is just to show that we have a main area which then will need to
         // filled with content.
-        mainArea.setHeight("200px");
+        mainArea.setHeight("250px");
         mainArea.add(this.homeView);
         add(mainArea);
 
