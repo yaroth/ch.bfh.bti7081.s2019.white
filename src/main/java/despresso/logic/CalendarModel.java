@@ -18,22 +18,15 @@ public class CalendarModel {
 
     public FullCalendar getInitCalendar(){
         _calendar = FullCalendarBuilder.create().withScheduler().build();
-        ((Scheduler)_calendar).setSchedulerLicenseKey("");
+        ((Scheduler)_calendar).setSchedulerLicenseKey(Scheduler.GPL_V3_LICENSE_KEY);
+
 
         return _calendar;
     }
 
     private void addResource(String title, String color) {
-        Resource resource = new Resource(null, title, color);
+        //Resource resource = new Resource(null, title, color);
 
-        /*
-        _calendar..addResource(resource);
 
-        // When we want to link an entry with a resource, we need to use ResourceEntry
-        // (a subclass of Entry)
-        ResourceEntry entry = new ResourceEntry(null, title, start.atStartOfDay(), start.plusDays(days).atStartOfDay(), true, true, color, "Some description...");
-        entry.setResource(resource);
-        calendar.addEntry(entry);
-    }   */
     }
 }
