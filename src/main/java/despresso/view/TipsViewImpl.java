@@ -1,32 +1,42 @@
 package despresso.view;
 
+import com.sun.tools.javac.comp.Check;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.accordion.AccordionPanel;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import despresso.logic.Tip;
-import despresso.presenter.ObserverInterface;
+import despresso.presenter.TipObserverInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
+public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface {
 
-    private List<ObserverInterface> listeners = new ArrayList<>();
-    private List<RadioButtonGroup> radioButtonGroupList = new ArrayList<>();
+    private List<TipObserverInterface> listeners = new ArrayList<>();
     private ArrayList<Tip> tipList = new ArrayList<>();
 
-    // Testlabel
-    public Label testLabel = new Label();
+    // Create components which have to be updated
+    private Checkbox angerCheckbox;
+    private Checkbox anxietyCheckbox;
+    private Checkbox disgustCheckbox;
+    private Checkbox sadnessCheckbox;
+    private Checkbox fearCheckbox;
+
+    private RadioButtonGroup<String> locationButtonGroup;
+    private RadioButtonGroup<String> durationButtonGroup;
+    private RadioButtonGroup<String> typeButtonGroup;
+
+    private Button okButton;
 
     public TipsViewImpl() {
+        System.out.println("TipsViewImpl created");
         // Create the accordion
         Accordion accordion = new Accordion();
-
 
         // Create the first tab: Tippliste
             AccordionPanel accordionPanel2 = new AccordionPanel();
@@ -44,44 +54,41 @@ public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
             AccordionPanel accordionPanel1 = new AccordionPanel();
             VerticalLayout verticalLayout = new VerticalLayout();
 
-            // Radio Button Location
+            // Feeling Check boxes
+            this.angerCheckbox = new Checkbox("Anger");
+            this.disgustCheckbox = new Checkbox("Disgust");
+            this.anxietyCheckbox = new Checkbox("Anxiety");
+            this.sadnessCheckbox = new Checkbox("Sadness");
+            this.fearCheckbox = new Checkbox("Fear");
 
-            RadioButtonGroup<String> locationButtonGroup = new RadioButtonGroup<>();
-            radioButtonGroupList.add(locationButtonGroup);
+            verticalLayout.add(angerCheckbox, disgustCheckbox, anxietyCheckbox, sadnessCheckbox, fearCheckbox);
+
+        // Radio Button Location
+            this.locationButtonGroup = new RadioButtonGroup<>();
             locationButtonGroup.setLabel("Ort");
             locationButtonGroup.setItems("Zu Hause", "Draussen", "Bei der Arbeit");
 
             // Radio Button Type
-            RadioButtonGroup<String> typeButtonGroup = new RadioButtonGroup<>();
-            radioButtonGroupList.add(typeButtonGroup);
+            this.typeButtonGroup = new RadioButtonGroup<>();
             typeButtonGroup.setLabel("Typ");
             typeButtonGroup.setItems("Körper", "Geist");
 
             // Radio Button Duration
-            RadioButtonGroup<String> durationButtonGroup = new RadioButtonGroup<>();
-            radioButtonGroupList.add(durationButtonGroup);
+            this.durationButtonGroup = new RadioButtonGroup<>();
             durationButtonGroup.setLabel("Dauer");
             durationButtonGroup.setItems("Kurz", "Mittel", "Lang");
-
-            // For handle Events of all RadioButtonGroups
-            for(ObserverInterface listener : listeners) {
-                for(RadioButtonGroup eventComponent : radioButtonGroupList){
-                    eventComponent.addValueChangeListener(event -> listener.update(eventComponent.toString()));
-                }
-            }
 
 
             // Add Radiobuttons to panel
             verticalLayout.add(locationButtonGroup, typeButtonGroup, durationButtonGroup);
 
-
             // Confirm Filter Button
-            Button okButton = createButton("OK");
-            verticalLayout.add(okButton);
+            this.okButton = new Button("OK");
 
-            // add Testlabel
-            this.testLabel.setText("FirstText");
-            verticalLayout.add(testLabel);
+            // Candel Button
+            Button cancelButton = new Button("Reset all Filters");
+
+            verticalLayout.add(okButton, cancelButton);
 
             accordion.add("Filter Tipps", verticalLayout);
 
@@ -91,14 +98,6 @@ public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
    }
 
 
-    private Button createButton(String text) {
-        return new Button(text, event -> {
-            System.out.println("Button in TipsView clicked");
-            System.out.println(listeners);
-            for (ObserverInterface listener : listeners)
-                listener.update("test");
-        });
-    }
 
     public void setTipList(ArrayList<Tip> tipList) {
         this.tipList = tipList;
@@ -106,13 +105,33 @@ public class TipsViewImpl extends VerticalLayout implements SubjectInterface {
 
 
     @Override
-    public void removeObserver(ObserverInterface observer) {
+    public void removeObserver(TipObserverInterface observer) {
         listeners.remove(observer);
     }
 
     @Override
-    public void addObserver(ObserverInterface observer) {
+    public void addObserver(TipObserverInterface observer) {
+        System.out.println("TipsViewImpl.addObserver executed");
         listeners.add(observer);
+        System.out.println(listeners);
+
+        for(TipObserverInterface listener : listeners){
+            this.angerCheckbox.addValueChangeListener(event -> listener.updateFeelingAnger());
+            this.disgustCheckbox.addValueChangeListener(event -> listener.updateFeelingDisgust());
+            this.anxietyCheckbox.addValueChangeListener(event -> listener.updateFeelingAnxiety());
+            this.sadnessCheckbox.addValueChangeListener(event -> listener.updateFeelingSadness());
+            this.fearCheckbox.addValueChangeListener(event -> listener.updateFeelingFear());
+            this.locationButtonGroup.addValueChangeListener(event -> listener.updateLocation());
+            this.typeButtonGroup.addValueChangeListener(event -> listener.updateType());
+            this.durationButtonGroup.addValueChangeListener(event -> listener.updateDuration());
+            this.okButton.addClickListener(event -> listener.updateOk());
+
+
+
+
+
+        }
+
 
     }
 

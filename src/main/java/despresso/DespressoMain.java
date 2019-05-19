@@ -48,7 +48,8 @@ public class DespressoMain extends VerticalLayout {
         // Tips View MVP
         TipsViewImpl tipsView = new TipsViewImpl();
         TipModel tipModel = new TipModel();
-        TipPresenter tipPresenter = new TipPresenter(tipsView, tipModel);
+//        TipPresenter tipPresenter = new TipPresenter(tipsView, tipModel);
+        new TipPresenter(tipsView, tipModel);
 
         MainViewImpl view = new MainViewImpl(homeView, settingsView, moodView, calendarView, tipsView);
         // The presenter connects the model and view

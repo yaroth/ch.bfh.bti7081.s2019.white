@@ -1,41 +1,77 @@
 package despresso.presenter;
 
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.HasValue;
-import com.vaadin.flow.component.button.Button;
-import despresso.logic.TipDuration;
-import despresso.logic.TipLocation;
 import despresso.logic.TipModel;
-import despresso.logic.TipType;
 import despresso.view.TipsViewImpl;
 
-import javax.swing.event.ChangeEvent;
-import java.sql.SQLOutput;
-
-public class TipPresenter implements ObserverInterface{
+public class TipPresenter implements TipObserverInterface {
 
     private TipsViewImpl tipView;
     private TipModel tipModel;
 
     public TipPresenter(TipsViewImpl view, TipModel tipModel) {
+        System.out.println("TipPresenter created");
         this.tipModel = tipModel;
         this.tipView = view;
         this.tipView.setTipList(this.tipModel.getTipList());
         this.tipView.addObserver(this);
     }
 
-//    public void updateRadioGroupButtons(AbstractField.ComponentValueChangeEvent<RadioButtonGroup<String>, String> event){
-//
-//    }
-
 
     @Override
-    public void update(String viewName) {
-        System.out.println("TipPresenter.update() executed...");
-        this.tipModel.filterTipList(TipDuration.LONG, TipType.BODY, TipLocation.ATHOME);
-        this.tipView.testLabel.setText("Some Button Clicked");
+    public void updateFeelingAnger() {
+        System.out.println("TipPresenter.updateFeelingAnger clicked");
     }
+
+    @Override
+    public void updateFeelingDisgust() {
+        System.out.println("TipPresenter.updateFeelingDisgust clicked");
+
+    }
+
+    @Override
+    public void updateFeelingAnxiety() {
+        System.out.println("TipPresenter.updateFeelingAnxiety clicked");
+
+    }
+
+    @Override
+    public void updateFeelingSadness() {
+        System.out.println("TipPresenter.updateFeelingSadness clicked");
+
+    }
+
+    @Override
+    public void updateFeelingFear() {
+        System.out.println("TipPresenter.updateFeelingFear clicked");
+
+    }
+
+    @Override
+    public void updateLocation() {
+        System.out.println("TipPresenter.updateLocation clicked");
+
+    }
+
+    @Override
+    public void updateType() {
+        System.out.println("TipPresenter.updateType clicked");
+
+    }
+
+    @Override
+    public void updateDuration() {
+        System.out.println("TipPresenter.updateDuration clicked");
+
+    }
+
+    @Override
+    public void updateOk() {
+        System.out.println("TipPresenter.updateOk clicked");
+
+    }
+
+
 }
 
 
