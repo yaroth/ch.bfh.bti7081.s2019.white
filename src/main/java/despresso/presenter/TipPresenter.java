@@ -76,6 +76,11 @@ public class TipPresenter implements TipObserverInterface {
     }
 
     @Override
+    public void updateCancel() {
+        System.out.println("TipPresenter.updateCancel clicked");
+    }
+
+    @Override
     public void updateTiplist(ArrayList<Tip> tipList) {
         System.out.println("TipPresenter.updateTiplist clicked");
         this.tipView.setTipList(tipList);

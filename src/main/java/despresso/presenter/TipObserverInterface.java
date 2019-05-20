@@ -18,6 +18,7 @@ public interface TipObserverInterface {
     void updateDuration();
     // Update functions for confirm/cancel buttons
     void updateOk();
+    void updateCancel();
     // Update Tiplist
     void updateTiplist(ArrayList<Tip> tipList);
 

@@ -32,6 +32,7 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
     private RadioButtonGroup<String> typeButtonGroup;
 
     private Button okButton;
+    private Button cancelButton;
 
     private Grid<Tip> tipGrid = new Grid<>();
 
@@ -46,7 +47,7 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
             //accordionPanel2.setContent(new Text("Tippliste"));
 
             this.tipGrid = new Grid<>(Tip.class);
-            this.tipGrid.setWidth("800");
+            this.tipGrid.setWidth("800px");
             tipGrid.setItems(this.tipList);
 
             accordionPanel2.addContent(tipGrid);
@@ -89,7 +90,7 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
             this.okButton = new Button("OK");
 
             // Candel Button
-            Button cancelButton = new Button("Reset all Filters");
+            this.cancelButton = new Button("Reset all Filters");
 
             verticalLayout.add(okButton, cancelButton);
 
@@ -129,10 +130,6 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
             this.typeButtonGroup.addValueChangeListener(event -> listener.updateType());
             this.durationButtonGroup.addValueChangeListener(event -> listener.updateDuration());
             this.okButton.addClickListener(event -> listener.updateOk());
-
-
-
-
 
         }
 
