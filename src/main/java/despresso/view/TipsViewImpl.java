@@ -33,6 +33,8 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
 
     private Button okButton;
 
+    private Grid<Tip> tipGrid = new Grid<>();
+
     public TipsViewImpl() {
         System.out.println("TipsViewImpl created");
         // Create the accordion
@@ -41,9 +43,10 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
         // Create the first tab: Tippliste
             AccordionPanel accordionPanel2 = new AccordionPanel();
             accordionPanel2.setSummaryText("Tippliste");
-            accordionPanel2.setContent(new Text("setContent for accordionPanel2"));
+            //accordionPanel2.setContent(new Text("Tippliste"));
 
-            Grid<Tip> tipGrid = new Grid<>(Tip.class);
+            this.tipGrid = new Grid<>(Tip.class);
+            this.tipGrid.setWidth("800");
             tipGrid.setItems(this.tipList);
 
             accordionPanel2.addContent(tipGrid);
@@ -101,6 +104,7 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
 
     public void setTipList(ArrayList<Tip> tipList) {
         this.tipList = tipList;
+        this.tipGrid.setItems(this.tipList);
     }
 
 

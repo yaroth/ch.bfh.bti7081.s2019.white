@@ -102,6 +102,19 @@ package logic {
     class CalendarEntry
 }
 
+package persistence {
+    package repository{
+    interface RepositoryInterface
+
+    class TipRepository
+
+    class CalendarRepository
+
+    class MoodRepository
+    }
+}
+
+
 /' Define entity relations (?)'/
 
 vaadin <.. view
@@ -147,5 +160,14 @@ ObserverInterface <|-- TipPresenter
 ObserverInterface <|-- CalendarPresenter
 ObserverInterface <|-- SettingsPresenter
 ObserverInterface <|-- HomePresenter
+
+/' Persistence '/
+RepositoryInterface <|-- TipRepository
+RepositoryInterface <|-- CalendarRepository
+RepositoryInterface <|-- MoodRepository
+TipModel --> TipRepository
+MoodModel --> MoodRepository
+CalendarModel --> CalendarRepository
+
 
 @enduml

@@ -1,8 +1,11 @@
 package despresso.presenter;
 
 
+import despresso.logic.Tip;
 import despresso.logic.TipModel;
 import despresso.view.TipsViewImpl;
+
+import java.util.ArrayList;
 
 public class TipPresenter implements TipObserverInterface {
 
@@ -15,6 +18,7 @@ public class TipPresenter implements TipObserverInterface {
         this.tipView = view;
         this.tipView.setTipList(this.tipModel.getTipList());
         this.tipView.addObserver(this);
+        this.updateTiplist(this.tipModel.getTipList());
     }
 
 
@@ -68,7 +72,14 @@ public class TipPresenter implements TipObserverInterface {
     @Override
     public void updateOk() {
         System.out.println("TipPresenter.updateOk clicked");
+        this.updateTiplist(this.tipModel.getTipList());
+    }
 
+    @Override
+    public void updateTiplist(ArrayList<Tip> tipList) {
+        System.out.println("TipPresenter.updateTiplist clicked");
+        this.tipView.setTipList(tipList);
+        System.out.println(tipList);
     }
 
 
