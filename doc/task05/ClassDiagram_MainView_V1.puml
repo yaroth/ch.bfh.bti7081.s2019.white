@@ -103,7 +103,7 @@ package logic {
 }
 
 package persistence {
-    package repository{
+
     interface RepositoryInterface
 
     class TipRepository
@@ -111,7 +111,7 @@ package persistence {
     class CalendarRepository
 
     class MoodRepository
-    }
+
 }
 
 
