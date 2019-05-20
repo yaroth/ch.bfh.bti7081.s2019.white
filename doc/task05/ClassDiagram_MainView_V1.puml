@@ -3,12 +3,7 @@
 skinparam nodesep 100
 skinparam ranksep 40
 
-title Class diagram: Main View
-
-/' Define the dependencies
-Entry <|-- ToDo
-'/
-
+title Class diagram: despresso
 
 /' Define the class details'/
 
@@ -16,7 +11,12 @@ package vaadin {
 }
 
 package view {
-    interface SubjectInterface
+    interface SubjectMainInterface
+    interface SubjectMoodInterface
+    interface SubjectCalendarInterface
+    interface SubjectSettingsInterface
+    interface SubjectHomeInterface
+    interface SubjectTipInterface
 
     class SettingsViewImpl {
     + addListener()
@@ -50,7 +50,12 @@ package view {
 }
 
 package presenter {
-    interface ObserverInterface
+    interface MoodObserverInterface
+    interface TipObserverInterface
+    interface MainObserverInterface
+    interface CalendarObserverInterface
+    interface SettingsObserverInterface
+    interface HomeObserverInterface
 
     class MainPresenter{
     + showHomeView()
@@ -112,10 +117,16 @@ package persistence {
 
     class MoodRepository
 
+    package database <<Database>> {
+      class DBhandler
+    }
+
 }
 
 
-/' Define entity relations (?)'/
+
+
+/' Define relations'/
 
 vaadin <.. view
 
@@ -147,19 +158,19 @@ CalendarModel "1" -> "n" CalendarEntry
 
 MainModel "1" -> "1" CalendarModel
 
-SubjectInterface <|-- MainViewImpl
-SubjectInterface <|-- MoodViewImpl
-SubjectInterface <|-- TipsViewImpl
-SubjectInterface <|-- CalendarViewImpl
-SubjectInterface <|-- SettingsViewImpl
-SubjectInterface <|-- HomeViewImpl
+SubjectMainInterface <|-- MainViewImpl
+SubjectMoodInterface <|-- MoodViewImpl
+SubjectTipInterface <|-- TipsViewImpl
+SubjectCalendarInterface <|-- CalendarViewImpl
+SubjectSettingsInterface <|-- SettingsViewImpl
+SubjectHomeInterface <|-- HomeViewImpl
 
-ObserverInterface <|-- MainPresenter
-ObserverInterface <|-- MoodPresenter
-ObserverInterface <|-- TipPresenter
-ObserverInterface <|-- CalendarPresenter
-ObserverInterface <|-- SettingsPresenter
-ObserverInterface <|-- HomePresenter
+MainObserverInterface <|-- MainPresenter
+MoodObserverInterface <|-- MoodPresenter
+TipObserverInterface <|-- TipPresenter
+HomeObserverInterface <|-- CalendarPresenter
+CalendarObserverInterface <|-- SettingsPresenter
+SettingsObserverInterface <|-- HomePresenter
 
 /' Persistence '/
 RepositoryInterface <|-- TipRepository
@@ -169,5 +180,8 @@ TipModel --> TipRepository
 MoodModel --> MoodRepository
 CalendarModel --> CalendarRepository
 
+CalendarRepository --> DBhandler
+MoodRepository --> DBhandler
+TipRepository --> DBhandler
 
 @enduml
