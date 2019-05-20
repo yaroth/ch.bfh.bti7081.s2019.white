@@ -117,12 +117,12 @@ package persistence {
 
     class MoodRepository
 
-    package database <<Database>> {
-      class DBhandler
-    }
+
 
 }
-
+  package database <<Database>> {
+      class DBhandler
+    }
 
 
 
