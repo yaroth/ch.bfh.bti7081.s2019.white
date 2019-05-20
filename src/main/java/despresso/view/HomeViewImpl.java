@@ -8,6 +8,7 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import despresso.Views;
+import despresso.presenter.MainObserverInterface;
 import despresso.presenter.ObserverInterface;
 import org.vaadin.zhe.PaperRangeSlider;
 

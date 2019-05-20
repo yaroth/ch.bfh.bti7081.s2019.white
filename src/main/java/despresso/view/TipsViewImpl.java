@@ -9,6 +9,7 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import despresso.logic.Tip;
+import despresso.presenter.MainObserverInterface;
 import despresso.presenter.ObserverInterface;
 
 import java.util.ArrayList;

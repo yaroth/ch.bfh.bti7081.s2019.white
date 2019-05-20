@@ -1,19 +1,13 @@
 package despresso.presenter;
 
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.HasValue;
-import com.vaadin.flow.component.button.Button;
 import despresso.logic.TipDuration;
 import despresso.logic.TipLocation;
 import despresso.logic.TipModel;
 import despresso.logic.TipType;
 import despresso.view.TipsViewImpl;
 
-import javax.swing.event.ChangeEvent;
-import java.sql.SQLOutput;
-
-public class TipPresenter implements ObserverInterface{
+public class TipPresenter implements ObserverInterface {
 
     private TipsViewImpl tipView;
     private TipModel tipModel;
