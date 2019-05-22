@@ -8,15 +8,16 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import despresso.Views;
+import despresso.presenter.HomeObserverInterface;
 import despresso.presenter.ObserverInterface;
 import org.vaadin.zhe.PaperRangeSlider;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
+public class HomeViewImpl extends VerticalLayout implements SubjectHomeInterface {
 
-    private List<ObserverInterface> listeners = new ArrayList<>();
+    private List<HomeObserverInterface> listeners = new ArrayList<>();
 
     HorizontalLayout line1 = new HorizontalLayout();
     HorizontalLayout line2 = new HorizontalLayout();
@@ -31,17 +32,6 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
         showCalendarNotification();
         moodSliderHomeView();
         add(line1, line2, line3);
-    }
-
-    @Override
-    public void removeObserver(ObserverInterface observer) {
-        listeners.remove(observer);
-    }
-
-    @Override
-    public void addObserver(ObserverInterface observer) {
-        listeners.add(observer);
-
     }
 
     private void showCalendarNotification() {
@@ -81,17 +71,17 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
     }
 
     private void registerObject(ClickEvent event) {
-        for (ObserverInterface listener : listeners) {
+        for (HomeObserverInterface listener : listeners) {
             if (event.getSource().equals(calendarConfirmButton)) {
-                listener.update(Views.DONE.toString());
+                listener.handleHomeView(Views.DONE.toString());
             }
         }
     }
 
     private void registerSliderObject(PaperRangeSlider.MaxValueChangeEvent event) {
-        for (ObserverInterface listener : listeners) {
+        for (HomeObserverInterface listener : listeners) {
             if (event.getSource().equals(paperRangeSlider)) {
-                listener.update(Views.MOOD.toString());
+                listener.handleHomeView(Views.MOOD.toString());
             }
         }
     }
@@ -112,16 +102,16 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
         Button confirmButton;
         confirmButton = new Button("Confirm", event -> {
             messageLabel.setText("Confirmed!");
-            for (ObserverInterface listener : listeners)
-                listener.update(Views.CONFIRM.toString());
+            for (HomeObserverInterface listener : listeners)
+                listener.handleHomeView(Views.CONFIRM.toString());
             dialog.close();
         });
 
         confirmButton.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_PRIMARY);
         Button cancelButton = new Button("Cancel", event -> {
             messageLabel.setText("Cancelled...");
-            for (ObserverInterface listener : listeners)
-                listener.update(Views.CANCEL.toString());
+            for (HomeObserverInterface listener : listeners)
+                listener.handleHomeView(Views.CANCEL.toString());
             dialog.close();
         });
         dialog.add(confirmButton, cancelButton);
@@ -130,4 +120,14 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
     }
 
 
+    @Override
+    public void removeObserver(HomeObserverInterface observer) {
+        listeners.remove(observer);
+
+    }
+
+    @Override
+    public void addObserver(HomeObserverInterface observer) {
+        listeners.add(observer);
+    }
 }

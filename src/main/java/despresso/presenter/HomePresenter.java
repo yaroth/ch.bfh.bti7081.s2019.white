@@ -4,7 +4,7 @@ import despresso.Views;
 import despresso.logic.HomeModel;
 import despresso.view.HomeViewImpl;
 
-public class HomePresenter implements ObserverInterface {
+public class HomePresenter implements HomeObserverInterface {
 
     private HomeModel homeModel;
     private HomeViewImpl view;
@@ -18,7 +18,7 @@ public class HomePresenter implements ObserverInterface {
 
 
     @Override
-    public void update(String input) {
+    public void handleHomeView(String input) {
         homeModel.doSomething();
         if (input.equals(Views.MOOD.toString())) {
             System.out.println("Load Mood");
