@@ -22,6 +22,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,35 +42,32 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
         _calendar.setNumberClickable(true);
         _calendar.setTimeslotsSelectable(true);
         _calendar.setBusinessHours(
-                new BusinessHours(LocalTime.of(9, 0), LocalTime.of(17, 0), BusinessHours.DEFAULT_BUSINESS_WEEK),
+                new BusinessHours(LocalTime.of(8, 0), LocalTime.of(17, 0), BusinessHours.DEFAULT_BUSINESS_WEEK),
                 new BusinessHours(LocalTime.of(12, 0), LocalTime.of(15, 0), DayOfWeek.SATURDAY)
         );
 
-        // scheduler options
-        //((Scheduler)_calendar).setSchedulerLicenseKey(Scheduler.GPL_V3_LICENSE_KEY);
-
         // events
-        //_calendar.addEntryClickedListener(event -> new DemoDialog(_calendar, event.getEntry(), false).open());
-        //_calendar.addViewRenderedListener(event -> updateIntervalLabel(buttonDatePicker, comboBoxView.getValue(), event.getIntervalStart()));
-//        _calendar.addTimeslotsSelectedListener((org.vaadin.stefan.fullcalendar.TimeslotsSelectedSchedulerEvent event) -> {
-//            Optional<Resource> resource = event.getResource();
-//            Entry entry;
+        _calendar.addEntryClickedListener(event -> new DemoDialog(_calendar, event.getEntry(), false).open());
+        _calendar.addTimeslotsSelectedListener((org.vaadin.stefan.fullcalendar.TimeslotsSelectedEvent event) -> {
+            //Optional<Resource> resource = event.getResource();
+            Entry entry;
 //            if (resource.isPresent()) {
 //                ResourceEntry resourceEntry = new ResourceEntry();
 //                resourceEntry.setResource(resource.get());
 //                entry = resourceEntry;
 //            } else {
-//                entry = new Entry();
+                entry = new Entry();
 //            }
-//
-//            entry.setStart(_calendar.getTimezone().convertToUTC(event.getStartDateTime()));
-//            entry.setEnd(_calendar.getTimezone().convertToUTC(event.getEndDateTime()));
-//            entry.setAllDay(event.isAllDay());
-//            System.out.println(resource);
-//
-//            entry.setColor("dodgerblue");
-//            new DemoDialog(_calendar, entry, true).open();
-//        });
+
+            entry.setStart(_calendar.getTimezone().convertToUTC(event.getStartDateTime()));
+            entry.setEnd(_calendar.getTimezone().convertToUTC(event.getEndDateTime()));
+            entry.setAllDay(event.isAllDay());
+            //System.out.println(resource);
+
+            entry.setColor("dodgerblue");
+            new DemoDialog(_calendar, entry, true).open();
+        });
+        //_calendar.addViewRenderedListener(event -> updateIntervalLabel(buttonDatePicker, comboBoxView.getValue(), event.getIntervalStart()));
 
         initBaseLayoutSettings();
 
@@ -90,18 +88,6 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
         this.label.setText(label);
     }
 
-//    private Button createButton(String text) {
-//        return new Button(text, event -> {
-//            for (ObserverInterface listener : listeners) {
-//                if (event.getSource().equals(clickMeBtn)) {
-//                    listener.update(CalendarAction.CLICK_ME);
-//                } else if (event.getSource().equals(resetBtn)){
-//                    listener.update(CalendarAction.RESET);
-//                }
-//            }
-//        });
-//    }
-
     private void initBaseLayoutSettings() {
         setSizeFull();
         _calendar.setHeightByParent();
@@ -119,6 +105,40 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
             getElement().getStyle().remove("flex-direction");
         }
     }
+
+    private Resource createResource(Scheduler calendar, String s, String color) {
+        Resource resource = new Resource(null, s, color);
+        calendar.addResource(resource);
+        return resource;
+    }
+
+    private void createDayEntry(FullCalendar calendar, String title, LocalDate start, int days, String color) {
+        ResourceEntry entry = new ResourceEntry();
+        setValues(calendar, entry, title, start.atStartOfDay(), days, ChronoUnit.DAYS, color);
+        calendar.addEntry(entry);
+    }
+
+    private void createTimedEntry(FullCalendar calendar, String title, LocalDateTime start, int minutes, String color) {
+        createTimedEntry(calendar, title, start, minutes, color, (Resource[]) null);
+    }
+
+    private void createTimedEntry(FullCalendar calendar, String title, LocalDateTime start, int minutes, String color, Resource... resources) {
+        ResourceEntry entry = new ResourceEntry();
+        setValues(calendar, entry, title, start, minutes, ChronoUnit.MINUTES, color);
+        if (resources != null && resources.length > 0) {
+            entry.addResources(Arrays.asList(resources));
+        }
+        calendar.addEntry(entry);
+    }
+
+    private void setValues(FullCalendar calendar, ResourceEntry entry, String title, LocalDateTime start, int amountToAdd, ChronoUnit unit, String color) {
+        entry.setTitle(title);
+        entry.setStart(start, calendar.getTimezone());
+        entry.setEnd(entry.getStartUTC().plus(amountToAdd, unit));
+        entry.setAllDay(unit == ChronoUnit.DAYS);
+        entry.setColor(color);
+    }
+
 
     public static class DemoDialog extends Dialog {
 
