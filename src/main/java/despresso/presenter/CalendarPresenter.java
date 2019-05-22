@@ -1,10 +1,8 @@
 package despresso.presenter;
 
 
-import despresso.CalendarAction;
 import despresso.logic.CalendarModel;
 import despresso.view.CalendarViewImpl;
-import org.vaadin.stefan.fullcalendar.FullCalendar;
 
 public class CalendarPresenter implements ObserverInterface {
 
