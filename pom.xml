@@ -24,8 +24,8 @@
 
         <!-- Repository used by many Vaadin add-ons -->
         <repository>
-             <id>Vaadin Directory</id>
-             <url>http://maven.vaadin.com/vaadin-addons</url>
+            <id>Vaadin Directory</id>
+            <url>http://maven.vaadin.com/vaadin-addons</url>
         </repository>
         <!-- Repository needed for prerelease versions of Vaadin -->
         <repository>
@@ -90,6 +90,12 @@
             <groupId>org.vaadin.stefan</groupId>
             <artifactId>fullcalendar-scheduler</artifactId>
             <version>1.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.vaadin.zhe</groupId>
+            <artifactId>paper-range-slider</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

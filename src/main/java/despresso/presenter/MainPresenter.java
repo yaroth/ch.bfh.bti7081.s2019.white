@@ -1,12 +1,10 @@
 package despresso.presenter;
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.button.Button;
 import despresso.Views;
 import despresso.logic.MainModel;
 import despresso.view.MainViewImpl;
 
-public class MainPresenter implements ObserverInterface {
+public class MainPresenter implements MainObserverInterface {
 
     private MainModel model;
     private MainViewImpl view;
@@ -17,21 +15,35 @@ public class MainPresenter implements ObserverInterface {
         this.view.addObserver(this);
     }
 
-    // generic implementation so that presenter COULD do sth
-    // when loading a new view into the main area.
     @Override
-    public void update(String viewName) {
+    public void loadHomeView() {
         model.doSomething();
-        if (viewName.equals(Views.HOME)) {
-            view.loadHomeView();
-        } else if (viewName.equals(Views.SETTINGS)) {
-            view.loadSettingsView();
-        } else if (viewName.equals(Views.MOOD)) {
-            view.loadMoodView();
-        } else if (viewName.equals(Views.CALENDAR)) {
-            view.loadCalendarView();
-        } else if (viewName.equals(Views.TIPS )) {
-            view.loadTipsView();
-        }
+        view.loadHomeView();
     }
+
+    @Override
+    public void loadSettingsView() {
+        model.doSomething();
+        view.loadSettingsView();
+    }
+
+    @Override
+    public void loadMoodView() {
+        model.doSomething();
+        view.loadMoodView();
+    }
+
+    @Override
+    public void loadCalendarView() {
+        model.doSomething();
+        view.loadCalendarView();
+    }
+
+    @Override
+    public void loadTipsView() {
+        model.doSomething();
+        view.loadTipsView();
+    }
+
+
 }

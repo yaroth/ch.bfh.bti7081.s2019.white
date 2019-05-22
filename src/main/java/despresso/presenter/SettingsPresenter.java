@@ -1,6 +1,6 @@
 package despresso.presenter;
 
-import despresso.SettingsAction;
+import despresso.Views;
 import despresso.logic.SettingsModel;
 import despresso.view.SettingsViewImpl;
 
@@ -8,6 +8,7 @@ public class SettingsPresenter implements ObserverInterface {
 
     private SettingsModel model;
     private SettingsViewImpl view;
+    private String deleteWhat = "";
 
     public SettingsPresenter(SettingsModel model, SettingsViewImpl view) {
         this.model = model;
@@ -16,12 +17,28 @@ public class SettingsPresenter implements ObserverInterface {
     }
 
     @Override
-    public void update(String actionName) {
-        if (actionName.equals(SettingsAction.CLICK_ME)) {
-            // here the model is returning some value
-            view.setLabel(model.getClickMeResult());
-        } else if (actionName.equals(SettingsAction.RESET)) {
-            view.setLabel(model.getResetResult());
+    public void update(String string) {
+        if (string.equals(Views.SAVE.toString())) {
+            view.setLabel(model.saveSettings(view.getRadiobuttonText()));
+        } else if (string.equals(Views.DELETE_DATA.toString())) {
+            view.addConfirmationDialog("Do you really want to delete all your personal saved Data from the Database?");
+            deleteWhat = "data";
+            System.out.println("Delete Data confirmation window opened");
+        } else if (string.equals(Views.DELETE_ACCOUNT.toString())) {
+            view.addConfirmationDialog("Do you really want to delete your account?");
+            deleteWhat="account";
+            System.out.println("Delete Account confirmation window opened");
+        } else if (string.equals(Views.CONFIRM.toString())){
+            if (deleteWhat=="data"){
+                view.setLabel(model.deleteData());
+            } else if (deleteWhat=="account"){
+                view.setLabel(model.deleteAccount());
+            } else {
+                view.setLabel("not confirmed");
+            }
+        } else {
+            view.setLabel("not confirmed");
+            deleteWhat = "";
         }
     }
 }

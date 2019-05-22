@@ -3,12 +3,8 @@ package despresso;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
-import despresso.logic.MainModel;
-import despresso.logic.MoodModel;
-import despresso.logic.SettingsModel;
-import despresso.presenter.MainPresenter;
-import despresso.presenter.MoodPresenter;
-import despresso.presenter.SettingsPresenter;
+import despresso.logic.*;
+import despresso.presenter.*;
 import despresso.view.*;
 
 /**
@@ -34,6 +30,8 @@ public class DespressoMain extends VerticalLayout {
 
         // Home MVP
         HomeViewImpl homeView = new HomeViewImpl();
+        HomeModel homeModel = new HomeModel();
+        HomePresenter homePresenter = new HomePresenter(homeModel, homeView);
 
         // Settings MVP
         SettingsViewImpl settingsView = new SettingsViewImpl();
@@ -47,12 +45,17 @@ public class DespressoMain extends VerticalLayout {
 
         CalendarViewImpl calendarView = new CalendarViewImpl();
 
+        // Tips View MVP
         TipsViewImpl tipsView = new TipsViewImpl();
+        TipModel tipModel = new TipModel();
+//        TipPresenter tipPresenter = new TipPresenter(tipsView, tipModel);
+        new TipPresenter(tipsView, tipModel);
 
         MainViewImpl view = new MainViewImpl(homeView, settingsView, moodView, calendarView, tipsView);
         // The presenter connects the model and view
         new MainPresenter(model, view);
         // The view implementation is a Vaadin component
+
         add(view);
 
     }

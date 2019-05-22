@@ -106,3 +106,34 @@
             - Marco: Scrum Doku
             - Yann: für Task 1 Grundgerüst nach Vaadin erstellen
             - Sprint Planning für Sprint 1 durchgeführt
+
+6.5.2019:   - Projektstruktur erstellt
+
+8.5.2019:   - Beginn Implementierung Views
+                -MainView, MainModel, MainPresenter
+
+10.05.2019: - Fortsetzung Implementierung Views (Grundstruktur)
+                -HomeView, HomeModel, HomePresenter
+                -MoodView, MoodModel, MoodPresenter
+                -SettingsView, SettingsModel, SettingsPresenter
+                -TipView, TipModel, TipPresenter
+                -CalendarView, CalendarModel, CalendarPresenter
+            - Einrichten Webserver
+
+13.05.2019: - Fortsetzung Implementierung Views (Inhalt der einzelnen Seiten)
+                -HomeView, HomeModel, HomePresenter
+                -MoodView, MoodModel, MoodPresenter
+                -SettingsView, SettingsModel, SettingsPresenter
+                -TipView, TipModel, TipPresenter
+                -CalendarView, CalendarModel, CalendarPresenter
+
+15.05.2019: - Fortsetzung Implementierung Views (Inhalt der einzelnen Seiten)
+                -HomeView, HomeModel, HomePresenter
+                -MoodView, MoodModel, MoodPresenter
+                -SettingsView, SettingsModel, SettingsPresenter
+                -TipView, TipModel, TipPresenter
+                -CalendarView, CalendarModel, CalendarPresenter
+            - Aufsetzen Repository
+
+16.05.2019: - Abschluss Implementierung Views
+                -Masterbranch zusammenmergen, Testen

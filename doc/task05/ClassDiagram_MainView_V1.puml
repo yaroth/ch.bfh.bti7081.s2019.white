@@ -1,14 +1,9 @@
 @startuml
 
 skinparam nodesep 100
-/'skinparam ranksep 200'/
+skinparam ranksep 40
 
-title Class diagram: Main View
-
-/' Define the dependencies
-Entry <|-- ToDo
-'/
-
+title Class diagram: despresso
 
 /' Define the class details'/
 
@@ -16,25 +11,27 @@ package vaadin {
 }
 
 package view {
-    class SettingsView {
+    interface SubjectInterface
+
+    class SettingsViewImpl {
     + addListener()
     }
-    class CalendarView {
+    class CalendarViewImpl {
     + addListener()
     }
-    class MoodView {
+    class MoodViewImpl {
     + addListener()
     }
-    class TipView {
+    class TipsViewImpl {
     + addListener()
     }
-    class HomeView {
+    class HomeViewImpl {
         Slider: moodSlider
         Label: nextTask
         Button: nextTaskDone
         + updateNextTask()
         }
-    class MainView {
+    class MainViewImpl {
         Button: home
         header("despresso")
         Button: settings
@@ -48,6 +45,14 @@ package view {
 }
 
 package presenter {
+    interface ObserverInterface
+    interface MoodObserverInterface
+    interface TipObserverInterface
+    interface MainObserverInterface
+    interface CalendarObserverInterface
+    interface SettingsObserverInterface
+    interface HomeObserverInterface
+
     class MainPresenter{
     + showHomeView()
     + showSettingsView()
@@ -69,7 +74,7 @@ package presenter {
     + showCalendarView()
     }
     class TipPresenter {
-    + showTipView()
+    + showTipsView()
     }
     class MoodPresenter {
     + showMoodView()
@@ -87,41 +92,51 @@ package logic {
     + getNextEntry()
     }
 
-    class MoodModel {
-        }
+    class MoodModel
 
-    class TipModel {
-    }
+    class TipModel
 
-    class SettingsModel {
-    }
+    class SettingsModel
 
-    class HomeModel {
-    }
+    class HomeModel
 
-    class CalendarEntry {
-    }
+    class CalendarEntry
 }
 
-/' Define entity relations (?)'/
+package persistence {
 
-vaadin <. view
+    interface RepositoryInterface
+
+    class TipRepository
+
+    class CalendarRepository
+
+    class MoodRepository
+
+}
+  package database <<Database>> {
+    }
+
+
+
+/' Define relations'/
+
+vaadin <.. view
 
 /' Presenter - View'/
-MainPresenter "1" -- "1" MainView
-SettingsView "1" -- "1" SettingsPresenter
-HomeView "1" -- "1" HomePresenter
-TipView "1" -- "1" TipPresenter
-CalendarView "1" -- "1" CalendarPresenter
-MoodView "1" -- "1" MoodPresenter
+MainPresenter "1" -- "1" MainViewImpl
+SettingsViewImpl "1" -- "1" SettingsPresenter
+HomeViewImpl "1" -- "1" HomePresenter
+TipsViewImpl "1" -- "1" TipPresenter
+CalendarViewImpl "1" -- "1" CalendarPresenter
+MoodViewImpl "1" -- "1" MoodPresenter
 
 /' View - View'/
-MainView "1" -> "1" HomeView
-MainView "1" -> "1" SettingsView
-MainView "1" -> "1" CalendarView
-MainView "1" -> "1" TipView
-MainView "1" -> "1" HomeView
-MainView "1" -> "1" MoodView
+MainViewImpl "1" -> "1" HomeViewImpl
+MainViewImpl "1" -> "1" SettingsViewImpl
+MainViewImpl "1" -> "1" CalendarViewImpl
+MainViewImpl "1" -> "1" TipsViewImpl
+MainViewImpl "1" -> "1" MoodViewImpl
 
 /' Presenter - Model'/
 MainPresenter "1" -- "1" MainModel
@@ -136,5 +151,38 @@ CalendarModel "1" -> "n" CalendarEntry
 
 MainModel "1" -> "1" CalendarModel
 
+SubjectInterface <|-- MainViewImpl
+SubjectInterface <|-- MoodViewImpl
+SubjectInterface <|-- TipsViewImpl
+SubjectInterface <|-- CalendarViewImpl
+SubjectInterface <|-- SettingsViewImpl
+SubjectInterface <|-- HomeViewImpl
+
+
+ObserverInterface <|-- MainObserverInterface
+ObserverInterface <|-- MoodObserverInterface
+ObserverInterface <|-- TipObserverInterface
+ObserverInterface <|-- HomeObserverInterface
+ObserverInterface <|-- CalendarObserverInterface
+ObserverInterface <|-- SettingsObserverInterface
+
+MainObserverInterface <|-- MainPresenter
+MoodObserverInterface <|-- MoodPresenter
+TipObserverInterface <|-- TipPresenter
+HomeObserverInterface <|-- CalendarPresenter
+CalendarObserverInterface <|-- SettingsPresenter
+SettingsObserverInterface <|-- HomePresenter
+
+/' Persistence '/
+RepositoryInterface <|-- TipRepository
+RepositoryInterface <|-- CalendarRepository
+RepositoryInterface <|-- MoodRepository
+TipModel --> TipRepository
+MoodModel --> MoodRepository
+CalendarModel --> CalendarRepository
+
+CalendarRepository --> database
+MoodRepository --> database
+TipRepository --> database
 
 @enduml

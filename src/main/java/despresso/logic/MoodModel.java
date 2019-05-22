@@ -1,8 +1,36 @@
 package despresso.logic;
 
-public class MoodModel {
+import despresso.MoodState;
+import despresso.presenter.MoodPresenter;
 
-    public void doSomething() {
-        System.out.println("doSomething() method in MoodModel executed!");
+import java.util.ArrayList;
+
+public class MoodModel {
+    private MoodPresenter presenter;
+    private MoodState moodState = new MoodState();
+
+    public void setPresenter(MoodPresenter presenter) {
+        this.presenter = presenter;
+    }
+
+    public void setMood(String newMood) {
+        this.moodState.setCurrentMood(newMood);
+        this.presenter.moodUpdated(newMood);
+    }
+
+    public ArrayList<String> specifyMood() {
+        return moodState.splitMood();
+    }
+
+    public void resetMood() {
+        this.moodState.setCurrentMood("None");
+    }
+
+    public void undoMoodSelection() {
+        this.moodState.undoMoodSelection();
+    }
+
+    public void setMoodAccuracy(int moodSliderValue) {
+        this.moodState.setMoodAccuracy(moodSliderValue);
     }
 }
