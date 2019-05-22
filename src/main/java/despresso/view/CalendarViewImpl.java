@@ -12,8 +12,6 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.dom.ThemeList;
-import despresso.CalendarAction;
-import despresso.logic.CalendarModel;
 import despresso.presenter.CalendarPresenter;
 import despresso.presenter.ObserverInterface;
 import org.vaadin.stefan.fullcalendar.*;
@@ -47,7 +45,7 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
         );
 
         // events
-        _calendar.addEntryClickedListener(event -> new DemoDialog(_calendar, event.getEntry(), false).open());
+        _calendar.addEntryClickedListener(event -> new EventDialog(_calendar, event.getEntry(), false).open());
         _calendar.addTimeslotsSelectedListener((org.vaadin.stefan.fullcalendar.TimeslotsSelectedEvent event) -> {
             Entry entry = new Entry();
 
@@ -56,9 +54,8 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
             entry.setAllDay(event.isAllDay());
 
             entry.setColor("dodgerblue");
-            new DemoDialog(_calendar, entry, true).open();
+            new EventDialog(_calendar, entry, true).open();
         });
-        //_calendar.addViewRenderedListener(event -> updateIntervalLabel(buttonDatePicker, comboBoxView.getValue(), event.getIntervalStart()));
 
         initBaseLayoutSettings();
 
@@ -131,9 +128,9 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
     }
 
 
-    public static class DemoDialog extends Dialog {
+    public static class EventDialog extends Dialog {
 
-        DemoDialog(FullCalendar calendar, Entry entry, boolean newInstance) {
+        EventDialog(FullCalendar calendar, Entry entry, boolean newInstance) {
             setCloseOnEsc(true);
             setCloseOnOutsideClick(true);
 
