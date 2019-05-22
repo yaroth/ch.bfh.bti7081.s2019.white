@@ -121,7 +121,6 @@ package persistence {
 
 }
   package database <<Database>> {
-      class DBhandler
     }
 
 
@@ -180,8 +179,8 @@ TipModel --> TipRepository
 MoodModel --> MoodRepository
 CalendarModel --> CalendarRepository
 
-CalendarRepository --> DBhandler
-MoodRepository --> DBhandler
-TipRepository --> DBhandler
+CalendarRepository --> database
+MoodRepository --> database
+TipRepository --> database
 
 @enduml
