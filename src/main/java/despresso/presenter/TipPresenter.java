@@ -2,6 +2,8 @@ package despresso.presenter;
 
 
 import despresso.logic.Tip;
+import despresso.logic.TipDuration;
+import despresso.logic.TipLocation;
 import despresso.logic.TipModel;
 import despresso.view.TipsViewImpl;
 

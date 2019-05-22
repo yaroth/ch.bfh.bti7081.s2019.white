@@ -1,21 +1,19 @@
 package despresso.view;
 
 import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import despresso.Views;
-import despresso.presenter.ObserverInterface;
-import org.atmosphere.interceptor.AtmosphereResourceStateRecovery;
+import despresso.presenter.MainObserverInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainViewImpl extends VerticalLayout implements SubjectInterface {
+public class MainViewImpl extends VerticalLayout implements MainSubjectInterface {
 
 
     private final Label label = new Label("despresso");
@@ -29,7 +27,7 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
     // Buttons
     private Button homeBtn, settingsBtn, moodBtn, calendarBtn, tipsBtn;
 
-    private List<ObserverInterface> listeners = new ArrayList<>();
+    private List<MainObserverInterface> listeners = new ArrayList<>();
 
     public MainViewImpl(HomeViewImpl homeView, SettingsViewImpl settingsView,
                         MoodViewImpl moodView, CalendarViewImpl calendarView, TipsViewImpl tipsView) {
@@ -77,28 +75,28 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
     }
 
     private void registerObject(ClickEvent event){
-        for (ObserverInterface listener : listeners) {
+        for (MainObserverInterface listener : listeners) {
             if (event.getSource().equals(homeBtn)) {
-                listener.update(Views.HOME.toString());
+                listener.loadHomeView();
             } else if (event.getSource().equals(settingsBtn)) {
-                listener.update(Views.SETTINGS.toString());
+                listener.loadSettingsView();
             } else if (event.getSource().equals(moodBtn)) {
-                listener.update(Views.MOOD.toString());
+                listener.loadMoodView();
             } else if (event.getSource().equals(calendarBtn)) {
-                listener.update(Views.CALENDAR.toString());
+                listener.loadCalendarView();
             } else if (event.getSource().equals(tipsBtn)) {
-                listener.update(Views.TIPS.toString());
+                listener.loadTipsView();
             }
         }
     }
 
     @Override
-    public void removeObserver(ObserverInterface observer) {
+    public void removeObserver(MainObserverInterface observer) {
         listeners.remove(observer);
     }
 
     @Override
-    public void addObserver(ObserverInterface observer) {
+    public void addObserver(MainObserverInterface observer) {
         listeners.add(observer);
 
     }

@@ -1,7 +1,5 @@
 package despresso.view;
 
-import com.sun.tools.javac.comp.Check;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.accordion.AccordionPanel;
 import com.vaadin.flow.component.button.Button;

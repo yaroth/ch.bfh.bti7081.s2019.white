@@ -8,7 +8,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import despresso.presenter.ObserverInterface;
 import org.vaadin.zhe.PaperRangeSlider;
 
-import java.awt.print.Paper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
