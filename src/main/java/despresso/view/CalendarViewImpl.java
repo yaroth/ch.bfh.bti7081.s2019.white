@@ -49,20 +49,11 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
         // events
         _calendar.addEntryClickedListener(event -> new DemoDialog(_calendar, event.getEntry(), false).open());
         _calendar.addTimeslotsSelectedListener((org.vaadin.stefan.fullcalendar.TimeslotsSelectedEvent event) -> {
-            //Optional<Resource> resource = event.getResource();
-            Entry entry;
-//            if (resource.isPresent()) {
-//                ResourceEntry resourceEntry = new ResourceEntry();
-//                resourceEntry.setResource(resource.get());
-//                entry = resourceEntry;
-//            } else {
-                entry = new Entry();
-//            }
+            Entry entry = new Entry();
 
             entry.setStart(_calendar.getTimezone().convertToUTC(event.getStartDateTime()));
             entry.setEnd(_calendar.getTimezone().convertToUTC(event.getEndDateTime()));
             entry.setAllDay(event.isAllDay());
-            //System.out.println(resource);
 
             entry.setColor("dodgerblue");
             new DemoDialog(_calendar, entry, true).open();

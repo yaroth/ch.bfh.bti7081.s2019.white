@@ -17,19 +17,8 @@ public class CalendarPresenter implements ObserverInterface {
         this.view.addObserver(this);
     }
 
-    public FullCalendar getInitCalendar(){
-        return model.getInitCalendar();
-    }
-
     @Override
     public void update(String actionName) {
-        /*
-        if (actionName.equals(CalendarAction.CLICK_ME)) {
-            // here the model is returning some value
-            view.setLabel(model.getClickMeResult());
-        } else if (actionName.equals(CalendarAction.RESET)) {
-            view.setLabel(model.getResetResult());
-        }
-        */
+
     }
 }

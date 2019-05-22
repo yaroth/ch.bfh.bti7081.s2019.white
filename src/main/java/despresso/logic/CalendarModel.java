@@ -15,18 +15,4 @@ public class CalendarModel {
     public CalendarModel(){
 
     }
-
-    public FullCalendar getInitCalendar(){
-        _calendar = FullCalendarBuilder.create().withScheduler().build();
-        ((Scheduler)_calendar).setSchedulerLicenseKey(Scheduler.GPL_V3_LICENSE_KEY);
-
-
-        return _calendar;
-    }
-
-    private void addResource(String title, String color) {
-        //Resource resource = new Resource(null, title, color);
-
-
-    }
 }
