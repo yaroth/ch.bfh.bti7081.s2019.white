@@ -8,7 +8,7 @@ import despresso.presenter.ObserverInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalendarViewImpl extends VerticalLayout implements SubjectInterface {
+public class CalendarViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 
 
     private List<ObserverInterface> listeners = new ArrayList<>();

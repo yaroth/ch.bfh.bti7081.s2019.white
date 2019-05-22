@@ -14,7 +14,7 @@ import com.vaadin.flow.component.dialog.Dialog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsViewImpl extends VerticalLayout implements SubjectInterface {
+public class SettingsViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 
     private Label label;
     private List<ObserverInterface> listeners = new ArrayList<>();

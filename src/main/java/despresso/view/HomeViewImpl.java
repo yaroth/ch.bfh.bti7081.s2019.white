@@ -15,7 +15,7 @@ import org.vaadin.zhe.PaperRangeSlider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeViewImpl extends VerticalLayout implements SubjectInterface {
+public class HomeViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 
     private List<ObserverInterface> listeners = new ArrayList<>();
 
