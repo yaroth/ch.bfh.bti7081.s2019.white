@@ -107,6 +107,7 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface {
     public void loadSettingsView() {
         mainArea.removeAll();
         mainArea.add(settingsView);
+        settingsView.updateObservers();
     }
 
     public void loadHomeView() {
