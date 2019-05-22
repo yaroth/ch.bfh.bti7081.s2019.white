@@ -62,7 +62,6 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
     @Override
     public void addObserver(ObserverInterface observer) {
         listeners.add((SettingsObserverInterface) observer);
-
     }
 
     public void setLabel(String label) {
