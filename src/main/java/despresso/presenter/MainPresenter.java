@@ -46,4 +46,8 @@ public class MainPresenter implements MainObserverInterface {
     }
 
 
+    @Override
+    public void update(String name) {
+
+    }
 }

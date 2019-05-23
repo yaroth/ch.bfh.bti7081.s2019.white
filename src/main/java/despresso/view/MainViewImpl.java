@@ -8,12 +8,13 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import despresso.Views;
 import despresso.presenter.MainObserverInterface;
+import despresso.presenter.ObserverInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainViewImpl extends VerticalLayout implements MainSubjectInterface {
+public class MainViewImpl extends VerticalLayout implements SubjectInterface<MainObserverInterface> {
 
 
     private final Label label = new Label("despresso");
@@ -62,19 +63,19 @@ public class MainViewImpl extends VerticalLayout implements MainSubjectInterface
         moodBtn = createButton(Views.MOOD);
         calendarBtn = createButton(Views.CALENDAR);
         tipsBtn = createButton(Views.TIPS);
-        footer.add(moodBtn,calendarBtn,tipsBtn);
+        footer.add(moodBtn, calendarBtn, tipsBtn);
         add(footer);
     }
 
     private Button createButton(Views view) {
-        if (view.getIcon() != null){
+        if (view.getIcon() != null) {
             return new Button(view.getIcon(), event -> this.registerObject(event));
         } else {
             return new Button(view.toString(), event -> this.registerObject(event));
         }
     }
 
-    private void registerObject(ClickEvent event){
+    private void registerObject(ClickEvent event) {
         for (MainObserverInterface listener : listeners) {
             if (event.getSource().equals(homeBtn)) {
                 listener.loadHomeView();
@@ -88,17 +89,6 @@ public class MainViewImpl extends VerticalLayout implements MainSubjectInterface
                 listener.loadTipsView();
             }
         }
-    }
-
-    @Override
-    public void removeObserver(MainObserverInterface observer) {
-        listeners.remove(observer);
-    }
-
-    @Override
-    public void addObserver(MainObserverInterface observer) {
-        listeners.add(observer);
-
     }
 
 
@@ -125,5 +115,15 @@ public class MainViewImpl extends VerticalLayout implements MainSubjectInterface
     public void loadTipsView() {
         mainArea.removeAll();
         mainArea.add(tipsView);
+    }
+
+    @Override
+    public void removeObserver(MainObserverInterface observer) {
+        listeners.remove(observer);
+    }
+
+    @Override
+    public void addObserver(MainObserverInterface observer) {
+        listeners.add(observer);
     }
 }

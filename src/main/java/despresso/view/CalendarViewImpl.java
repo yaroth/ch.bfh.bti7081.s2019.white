@@ -24,7 +24,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CalendarViewImpl extends VerticalLayout implements SubjectInterface {
+public class CalendarViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 
     private static final String[] COLORS = {"tomato", "orange", "dodgerblue", "mediumseagreen", "gray", "slateblue", "violet"};
     private List<ObserverInterface> listeners = new ArrayList<>();

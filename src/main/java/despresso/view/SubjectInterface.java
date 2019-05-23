@@ -1,10 +1,11 @@
 package despresso.view;
 
+import despresso.presenter.MainObserverInterface;
 import despresso.presenter.ObserverInterface;
 
-public interface SubjectInterface {
+public interface SubjectInterface<T> {
 
-    void removeObserver(ObserverInterface observer);
+    void removeObserver(T observer);
 
-    void addObserver(ObserverInterface observer);
+    void addObserver(T observer);
 }

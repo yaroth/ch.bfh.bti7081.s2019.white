@@ -7,7 +7,7 @@ import despresso.presenter.ObserverInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class View extends VerticalLayout implements SubjectInterface {
+public class View extends VerticalLayout implements SubjectInterface<ObserverInterface> {
     List<ObserverInterface> listeners = new ArrayList<>();
 
     Button createButton(String text) {
