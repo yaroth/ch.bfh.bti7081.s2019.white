@@ -78,7 +78,8 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
 
     private void initBaseLayoutSettings() {
         setSizeFull();
-        _calendar.setHeightByParent();
+        //_calendar.setHeightByParent();
+        _calendar.setHeight(500);
         setFlexStyles(true);
     }
 
