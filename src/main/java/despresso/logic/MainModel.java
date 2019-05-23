@@ -4,6 +4,6 @@ public class MainModel {
 
 
     public void doSomething() {
-        System.out.println("getClickMeResult() method in MainModel executed!");
+        System.out.println("MainModel.doSomething()!");
     }
 }
