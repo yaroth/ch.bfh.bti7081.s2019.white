@@ -13,3 +13,4 @@ out/
 
 # compiled binary
 target/
+db.trace.db
