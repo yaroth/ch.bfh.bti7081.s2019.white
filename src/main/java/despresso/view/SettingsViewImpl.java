@@ -15,7 +15,7 @@ import despresso.presenter.SettingsObserverInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsViewImpl extends VerticalLayout implements SubjectInterface {
+public class SettingsViewImpl extends VerticalLayout implements SubjectInterface<SettingsObserverInterface> {
 
     private Label label;
     private List<SettingsObserverInterface> listeners = new ArrayList<>();
@@ -55,13 +55,13 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
     }
 
     @Override
-    public void removeObserver(ObserverInterface observer) {
+    public void removeObserver(SettingsObserverInterface observer) {
         listeners.remove(observer);
     }
 
     @Override
-    public void addObserver(ObserverInterface observer) {
-        listeners.add((SettingsObserverInterface) observer);
+    public void addObserver(SettingsObserverInterface observer) {
+        listeners.add(observer);
     }
 
     public void setLabel(String label) {
