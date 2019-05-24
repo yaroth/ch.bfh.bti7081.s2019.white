@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 public class CalendarViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 
-    private static final String[] COLORS = {"tomato", "orange", "dodgerblue", "mediumseagreen", "gray", "slateblue", "violet"};
+    private final String[] COLORS = {"tomato", "orange", "dodgerblue", "mediumseagreen", "gray", "slateblue", "violet"};
     private List<ObserverInterface> listeners = new ArrayList<>();
     private Label label;
     private CalendarPresenter _presenter;
@@ -128,7 +128,7 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
     }
 
 
-    public static class EventDialog extends Dialog {
+    public class EventDialog extends Dialog {
 
         EventDialog(FullCalendar calendar, Entry entry, boolean newInstance) {
             setCloseOnEsc(true);

@@ -177,7 +177,7 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface<Obs
     }
 
     // Immutable map to translate commands to button labels
-    private static Map<String, String> ACTIONS = Map.ofEntries(
+    private Map<String, String> ACTIONS = Map.ofEntries(
             entry("Save", "Save"),
             entry("Undo", "Undo"),
             entry("Specify", "Specify"),
