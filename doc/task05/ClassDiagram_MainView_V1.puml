@@ -113,8 +113,10 @@ package persistence {
 
     class MoodRepository
 
+    class SettingsRepository
+
 }
-  package database <<Database>> {
+  package h2database <<Database>> {
     }
 
 
@@ -177,12 +179,16 @@ SettingsObserverInterface <|-- HomePresenter
 RepositoryInterface <|-- TipRepository
 RepositoryInterface <|-- CalendarRepository
 RepositoryInterface <|-- MoodRepository
+RepositoryInterface <|-- SettingsRepository
+
+SettingsModel --> SettingsRepository
 TipModel --> TipRepository
 MoodModel --> MoodRepository
 CalendarModel --> CalendarRepository
 
-CalendarRepository --> database
-MoodRepository --> database
-TipRepository --> database
+CalendarRepository --> h2database
+SettingsRepository --> h2database
+MoodRepository --> h2database
+TipRepository --> h2database
 
 @enduml
