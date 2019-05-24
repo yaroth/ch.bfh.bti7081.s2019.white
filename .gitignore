@@ -13,3 +13,8 @@ out/
 
 # compiled binary
 target/
+
+# H2 database stuff
+db.trace.db
+db.mv.db
+

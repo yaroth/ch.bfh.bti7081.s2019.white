@@ -1,6 +1,6 @@
 package despresso.presenter;
 
-public interface MainObserverInterface {
+public interface MainObserverInterface extends ObserverInterface{
     void loadHomeView();
     void loadSettingsView();
     void loadMoodView();

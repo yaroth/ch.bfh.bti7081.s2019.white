@@ -14,7 +14,7 @@ import java.util.Map;
 
 import static java.util.Map.entry;
 
-public class MoodViewImpl extends VerticalLayout implements SubjectInterface {
+public class MoodViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 
     private String selectedMood = "None";
     private int moodSliderValue = -1;
