@@ -6,11 +6,13 @@ import com.vaadin.flow.server.PWA;
 import despresso.logic.*;
 import despresso.presenter.*;
 import despresso.view.*;
+import org.springframework.context.annotation.Bean;
 
 /**
  * The main view contains several buttons and  listeners.
  */
 // TODO: to run despresso uncomment commented line and comment same line in CalculatorMain
+
 @Route("despresso.html")
 @PWA(name = "Project Base for Vaadin Flow", shortName = "Project Base")
 public class DespressoMain extends VerticalLayout {
