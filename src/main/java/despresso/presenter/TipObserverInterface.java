@@ -4,7 +4,7 @@ import despresso.logic.Tip;
 
 import java.util.ArrayList;
 
-public interface TipObserverInterface {
+public interface TipObserverInterface extends ObserverInterface {
     // Update functions for feeling check boxes:
     void updateFeelingAnger();
     void updateFeelingDisgust();
