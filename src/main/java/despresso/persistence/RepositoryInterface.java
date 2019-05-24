@@ -7,5 +7,5 @@ public interface RepositoryInterface<T> {
     T readByID(int ID);
     T create(T element);
     T updateByID(T element, int ID);
-    T deleteByID(int ID)
+    T deleteByID(int ID);
 }
