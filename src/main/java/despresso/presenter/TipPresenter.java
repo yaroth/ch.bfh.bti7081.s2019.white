@@ -90,6 +90,10 @@ public class TipPresenter implements TipObserverInterface {
     }
 
 
+    @Override
+    public void update(String viewName) {
+
+    }
 }
 
 

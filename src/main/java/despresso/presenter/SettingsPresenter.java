@@ -1,10 +1,9 @@
 package despresso.presenter;
 
-import despresso.Views;
 import despresso.logic.SettingsModel;
 import despresso.view.SettingsViewImpl;
 
-public class SettingsPresenter implements ObserverInterface {
+public class SettingsPresenter implements SettingsObserverInterface {
 
     private SettingsModel model;
     private SettingsViewImpl view;
@@ -17,28 +16,44 @@ public class SettingsPresenter implements ObserverInterface {
     }
 
     @Override
-    public void update(String string) {
-        if (string.equals(Views.SAVE.toString())) {
-            view.setLabel(model.saveSettings(view.getRadiobuttonText()));
-        } else if (string.equals(Views.DELETE_DATA.toString())) {
-            view.addConfirmationDialog("Do you really want to delete all your personal saved Data from the Database?");
-            deleteWhat = "data";
-            System.out.println("Delete Data confirmation window opened");
-        } else if (string.equals(Views.DELETE_ACCOUNT.toString())) {
-            view.addConfirmationDialog("Do you really want to delete your account?");
-            deleteWhat="account";
-            System.out.println("Delete Account confirmation window opened");
-        } else if (string.equals(Views.CONFIRM.toString())){
-            if (deleteWhat=="data"){
-                view.setLabel(model.deleteData());
-            } else if (deleteWhat=="account"){
-                view.setLabel(model.deleteAccount());
-            } else {
-                view.setLabel("not confirmed");
-            }
+    public void updateSaveButton() {
+        view.setLabel(model.saveSettings(view.getRadiobuttonText()));
+    }
+
+    @Override
+    public void updateDeleteDataButton() {
+        view.addConfirmationDialog("Do you really want to delete all your personal saved Data from the Database?");
+        deleteWhat = "data";
+        System.out.println("Delete Account confirmation window opened");
+
+    }
+
+    @Override
+    public void updateDeleteAccountButton() {
+        view.addConfirmationDialog("Do you really want to delete your account?");
+        deleteWhat="account";
+        System.out.println("Delete Account confirmation window opened");
+    }
+
+    @Override
+    public void updateConfirmButton() {
+        if (deleteWhat=="data"){
+            view.setLabel(model.deleteData());
+        } else if (deleteWhat=="account"){
+            view.setLabel(model.deleteAccount());
         } else {
             view.setLabel("not confirmed");
-            deleteWhat = "";
         }
+    }
+
+    @Override
+    public void updateCancelButton() {
+        view.setLabel("not confirmed");
+        deleteWhat = "";
+    }
+
+    @Override
+    public void update(String viewName) {
+        view.setLabel("Your personal settings for the despresso-app");
     }
 }

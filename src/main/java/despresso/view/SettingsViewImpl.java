@@ -10,14 +10,15 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import despresso.Views;
 import despresso.presenter.ObserverInterface;
 import com.vaadin.flow.component.dialog.Dialog;
+import despresso.presenter.SettingsObserverInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
+public class SettingsViewImpl extends VerticalLayout implements SubjectInterface<SettingsObserverInterface> {
 
     private Label label;
-    private List<ObserverInterface> listeners = new ArrayList<>();
+    private List<SettingsObserverInterface> listeners = new ArrayList<>();
     private RadioButtonGroup<String> getNotifications = new RadioButtonGroup<>();
     private String getNotificationText = "Yes";
     private Button saveButton, deleteDataButton, deleteAccButton;
@@ -54,14 +55,13 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
     }
 
     @Override
-    public void removeObserver(ObserverInterface observer) {
+    public void removeObserver(SettingsObserverInterface observer) {
         listeners.remove(observer);
     }
 
     @Override
-    public void addObserver(ObserverInterface observer) {
+    public void addObserver(SettingsObserverInterface observer) {
         listeners.add(observer);
-
     }
 
     public void setLabel(String label) {
@@ -77,13 +77,13 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
     }
 
     private void registerObject(ClickEvent event) {
-        for (ObserverInterface listener : listeners) {
+        for (SettingsObserverInterface listener : listeners) {
             if (event.getSource().equals(saveButton)) {
-                listener.update(Views.SAVE.toString());
+                listener.updateSaveButton();
             } else if (event.getSource().equals(deleteDataButton)) {
-                listener.update(Views.DELETE_DATA.toString());
+                listener.updateDeleteDataButton();
             } else if (event.getSource().equals(deleteAccButton)) {
-                listener.update(Views.DELETE_ACCOUNT.toString());
+                listener.updateDeleteAccountButton();
             }
         }
     }
@@ -104,20 +104,25 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
         Button confirmButton;
         confirmButton = new Button("Confirm", event -> {
             messageLabel.setText("Confirmed!");
-            for (ObserverInterface listener : listeners)
-                listener.update(Views.CONFIRM.toString());
+            for (SettingsObserverInterface listener : listeners)
+                listener.updateConfirmButton();
             dialog.close();
         });
 
         confirmButton.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_PRIMARY);
         Button cancelButton = new Button("Cancel", event -> {
             messageLabel.setText("Cancelled...");
-            for (ObserverInterface listener : listeners)
-                listener.update(Views.CANCEL.toString());
+            for (SettingsObserverInterface listener : listeners)
+                listener.updateCancelButton();
             dialog.close();
         });
         dialog.add(confirmButton, cancelButton);
 
         dialog.open();
+    }
+
+    public void updateObservers() {
+        for (ObserverInterface listener :listeners)
+            listener.update(null);
     }
 }
