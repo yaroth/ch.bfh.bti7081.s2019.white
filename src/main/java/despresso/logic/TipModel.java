@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class TipModel {
     private ArrayList<Tip> tipList = new ArrayList<>();
-    private List<Tip> filteredTiplist = new ArrayList<>();
+    private ArrayList<Tip> filteredTiplist = new ArrayList<>();
 
     public  TipModel(){
         for(int i = 0; i <= 10; i++){
@@ -14,16 +14,24 @@ public class TipModel {
         }
     }
 
+//    /** filterTipList() takes as input duration or type or location of tip filters the tipList accordingly. */
+//    public void filterTipList(TipDuration duration, TipType type, TipLocation location){
+//        System.out.println("TipList.filterTipList() executed...");
+//        this.filteredTiplist = this.tipList.stream()
+//                .filter(e -> e.getTipDuration() == duration || e.getTipType() == type || e.getTipLocation() == location)
+//                .collect(Collectors.toList());
+//    }
+
     /** filterTipList() takes as input duration or type or location of tip filters the tipList accordingly. */
-    public void filterTipList(TipDuration duration, TipType type, TipLocation location){
-        System.out.println("TipList.filterTipList() executed...");
-        this.filteredTiplist = this.tipList.stream()
-                .filter(e -> e.getTipDuration() == duration || e.getTipType() == type || e.getTipLocation() == location)
-                .collect(Collectors.toList());
+    public void filterTipList(Tip tip) {
+
+
     }
+
 
 
     public ArrayList<Tip> getTipList() {
         return this.tipList;
     }
+    public ArrayList<Tip> getFilteredTipList(){return this.filteredTiplist;}
 }

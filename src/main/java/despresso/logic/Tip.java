@@ -1,12 +1,36 @@
 package despresso.logic;
 
 public class Tip {
+    // tip feelings
+    private boolean anger;
+    private boolean disgust;
+    private boolean anxiety;
+    private boolean sadness;
+    private boolean fear;
+
     private TipDuration tipDuration;
     private TipType tipType;
     private TipLocation tipLocation;
     private String description;
 
+    public Tip(boolean anger, boolean disgust, boolean anxiety, boolean sadness, boolean fear, TipDuration tipDuration, TipType tipType, TipLocation tipLocation, String description){
+        this.anger = anger;
+        this.disgust = disgust;
+        this.anxiety = anxiety;
+        this.sadness = sadness;
+        this.fear = fear;
+        this.tipDuration = tipDuration;
+        this.tipLocation = tipLocation;
+        this.tipType = tipType;
+        this.description = description;
+    }
+
     public Tip(TipDuration tipDuration, TipType tipType, TipLocation tipLocation, String description){
+        this.anger = false;
+        this.disgust = false;
+        this.anxiety = false;
+        this.sadness = false;
+        this.fear = false;
         this.tipDuration = tipDuration;
         this.tipLocation = tipLocation;
         this.tipType = tipType;
@@ -41,4 +65,47 @@ public class Tip {
         return description;
     }
 
+    public boolean getAnger() {
+        return anger;
+    }
+
+    public void setAnger(boolean anger) {
+        this.anger = anger;
+    }
+
+    public boolean getDisgust() {
+        return disgust;
+    }
+
+    public void setDisgust(boolean disgust) {
+        this.disgust = disgust;
+    }
+
+    public boolean getAnxiety() {
+        return anxiety;
+    }
+
+    public void setAnxiety(boolean anxiety) {
+        this.anxiety = anxiety;
+    }
+
+    public boolean getSadness() {
+        return sadness;
+    }
+
+    public void setSadness(boolean sadness) {
+        this.sadness = sadness;
+    }
+
+    public boolean getFear() {
+        return fear;
+    }
+
+    public void setFear(boolean fear) {
+        this.fear = fear;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
