@@ -1,5 +1,6 @@
 package despresso.logic;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,11 +25,17 @@ public class TipModel {
 
     /** filterTipList() takes as input duration or type or location of tip filters the tipList accordingly. */
     public void filterTipList(Tip tip) {
-
-
+        this.filteredTiplist = (ArrayList<Tip>) this.tipList.stream()
+                .filter(e -> e.getAnger() == tip.getAnger() || !tip.getAnger())
+                .filter(e -> e.getDisgust() == tip.getDisgust() || !tip.getDisgust())
+                .filter(e -> e.getAnxiety() == tip.getAnxiety() || !tip.getAnxiety())
+                .filter(e -> e.getSadness() == tip.getSadness() || !tip.getSadness())
+                .filter(e -> e.getFear() == tip.getFear() || !tip.getFear())
+                .filter(e -> e.getTipDuration() == tip.getTipDuration() || tip.getTipDuration() == null)
+                .filter(e -> e.getTipLocation() == tip.getTipLocation() || tip.getTipLocation() == null)
+                .filter(e -> e.getTipType() == tip.getTipType() || tip.getTipType() == null)
+                .collect(Collectors.toList());
     }
-
-
 
     public ArrayList<Tip> getTipList() {
         return this.tipList;

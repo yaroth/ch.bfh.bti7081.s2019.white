@@ -97,7 +97,6 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
 
             accordion.add("Filter Tipps", verticalLayout);
 
-
         // Add accordion to TipViewImpl
         this.add(accordion);
    }
@@ -131,7 +130,7 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
             this.typeButtonGroup.addValueChangeListener(event -> listener.updateType());
             this.durationButtonGroup.addValueChangeListener(event -> listener.updateDuration());
             this.okButton.addClickListener(event -> listener.updateOk());
-
+            this.cancelButton.addClickListener(event -> listener.updateCancel());
         }
 
 
