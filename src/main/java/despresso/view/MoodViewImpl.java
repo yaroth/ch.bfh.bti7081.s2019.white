@@ -1,10 +1,12 @@
 package despresso.view;
 
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import despresso.presenter.MoodObserverInterface;
 import despresso.presenter.ObserverInterface;
 import org.vaadin.zhe.PaperRangeSlider;
 
@@ -12,16 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Map.entry;
-
-public class MoodViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
+public class MoodViewImpl extends VerticalLayout implements SubjectInterface<MoodObserverInterface> {
 
     private String selectedMood = "None";
     private int moodSliderValue = -1;
 
-    private List<ObserverInterface> listeners = new ArrayList<>();
+    private List<MoodObserverInterface> listeners = new ArrayList<>();
     private VerticalLayout mainLayout = new VerticalLayout();
     private VerticalLayout previousLayout = mainLayout;
+
+    private Button saveButton;
+    private Button undoButton;
+    private Button specifyButton;
+    private Button confirmAccuracyButton;
 
     public MoodViewImpl() {
         // Initialize view
@@ -30,28 +35,39 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface<Obs
 
     // Create standard button, event passes string value of the button
     private Button createButton(String command) {
-        return new Button(ACTIONS.get(command), event -> {
-            for (ObserverInterface listener : listeners)
-                listener.update(command);
-        });
+        return new Button(command, this::registerObject);
+    }
+
+    private void registerObject(ClickEvent event) {
+        for (MoodObserverInterface listener : listeners) {
+            if (event.getSource().equals(saveButton)) {
+                listener.saveButton();
+            } else if (event.getSource().equals(undoButton)) {
+                listener.undoButton();
+            } else if (event.getSource().equals(specifyButton)) {
+                listener.specifyButton();
+            } else if (event.getSource().equals(confirmAccuracyButton)) {
+                listener.confirmAccuracyButton();
+            }
+        }
     }
 
     // Create button to select mood
     private Button createMoodButton(String value) {
         return new Button(value, event -> {
             selectedMood = value;
-            for (ObserverInterface listener : listeners)
-                listener.update("Mood");
+            for (MoodObserverInterface listener : listeners)
+                listener.moodSelectionButton();
         });
     }
 
     @Override
-    public void removeObserver(ObserverInterface observer) {
+    public void removeObserver(MoodObserverInterface observer) {
         listeners.remove(observer);
     }
 
     @Override
-    public void addObserver(ObserverInterface observer) {
+    public void addObserver(MoodObserverInterface observer) {
         listeners.add(observer);
 
     }
@@ -87,10 +103,15 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface<Obs
 
         HorizontalLayout line2 = new HorizontalLayout();
 
+        saveButton = createButton("Save");
+        undoButton = createButton("Undo");
+        specifyButton = createButton("Specify");
+
+
         line2.add(
-            createButton("Save"),
-            createButton("Undo"),
-            createButton("Specify")
+            saveButton,
+            undoButton,
+            specifyButton
         );
 
         newLayout.add(line1, line2);
@@ -133,7 +154,9 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface<Obs
         line2.add(moodSlider);
 
         HorizontalLayout line3 = new HorizontalLayout();
-        line3.add(createButton("ConfirmAccuracy"));
+
+        confirmAccuracyButton = createButton("ConfirmAccuracy");
+        line3.add( confirmAccuracyButton );
 
         newLayout.add(line1, line2, line3);
 
@@ -170,17 +193,17 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface<Obs
         slider.addMaxValueChangeListener(
                 (ComponentEventListener<PaperRangeSlider.MaxValueChangeEvent>) event -> {
             moodSliderValue = (int) event.getValueMax();
-            for (ObserverInterface listener : listeners)
-                listener.update("MoodSlider");
+            for (MoodObserverInterface listener : listeners)
+                listener.moodSlider();
         });
         return slider;
     }
 
     // Immutable map to translate commands to button labels
-    private static Map<String, String> ACTIONS = Map.ofEntries(
-            entry("Save", "Save"),
-            entry("Undo", "Undo"),
-            entry("Specify", "Specify"),
-            entry("ConfirmAccuracy", "Confirm")
-    );
+//    private static Map<String, String> ACTIONS = Map.ofEntries(
+//            entry("Save", "Save"),
+//            entry("Undo", "Undo"),
+//            entry("Specify", "Specify"),
+//            entry("ConfirmAccuracy", "Confirm")
+//    );
 }
