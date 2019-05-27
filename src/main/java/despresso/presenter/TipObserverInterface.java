@@ -1,5 +1,7 @@
 package despresso.presenter;
 
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.logic.Tip;
 
 import java.util.ArrayList;

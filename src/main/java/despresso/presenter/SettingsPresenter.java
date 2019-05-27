@@ -1,9 +1,13 @@
 package despresso.presenter;
 
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.Views;
 import despresso.logic.SettingsModel;
 import despresso.view.SettingsViewImpl;
 
+@UIScope
+@SpringComponent
 public class SettingsPresenter implements ObserverInterface {
 
     private SettingsModel model;

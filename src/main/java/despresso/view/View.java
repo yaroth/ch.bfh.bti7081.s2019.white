@@ -2,11 +2,15 @@ package despresso.view;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.presenter.ObserverInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@UIScope
+@SpringComponent
 public class View extends VerticalLayout implements SubjectInterface<ObserverInterface> {
     List<ObserverInterface> listeners = new ArrayList<>();
 

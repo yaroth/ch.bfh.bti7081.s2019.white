@@ -7,6 +7,8 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.Views;
 import despresso.presenter.MainObserverInterface;
 import despresso.presenter.ObserverInterface;
@@ -15,6 +17,8 @@ import org.vaadin.zhe.PaperRangeSlider;
 import java.util.ArrayList;
 import java.util.List;
 
+@UIScope
+@SpringComponent
 public class HomeViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 
     private List<ObserverInterface> listeners = new ArrayList<>();

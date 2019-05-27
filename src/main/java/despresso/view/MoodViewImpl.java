@@ -5,6 +5,8 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.presenter.ObserverInterface;
 import org.vaadin.zhe.PaperRangeSlider;
 
@@ -14,6 +16,8 @@ import java.util.Map;
 
 import static java.util.Map.entry;
 
+@UIScope
+@SpringComponent
 public class MoodViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 
     private String selectedMood = "None";
