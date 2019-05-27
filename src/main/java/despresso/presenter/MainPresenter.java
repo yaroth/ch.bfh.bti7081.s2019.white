@@ -16,31 +16,31 @@ public class MainPresenter implements MainObserverInterface {
     }
 
     @Override
-    public void loadHomeView() {
+    public void homeBtnClicked() {
         model.doSomething();
         view.loadHomeView();
     }
 
     @Override
-    public void loadSettingsView() {
+    public void settingsBtnClicked() {
         model.doSomething();
         view.loadSettingsView();
     }
 
     @Override
-    public void loadMoodView() {
+    public void moodBtnClicked() {
         model.doSomething();
         view.loadMoodView();
     }
 
     @Override
-    public void loadCalendarView() {
+    public void calendarBtnClicked() {
         model.doSomething();
         view.loadCalendarView();
     }
 
     @Override
-    public void loadTipsView() {
+    public void tipsBtnClickec() {
         model.doSomething();
         view.loadTipsView();
     }
