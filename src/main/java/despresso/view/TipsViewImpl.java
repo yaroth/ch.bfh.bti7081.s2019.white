@@ -7,12 +7,16 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.logic.Tip;
 import despresso.presenter.TipObserverInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@UIScope
+@SpringComponent
 public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface {
 
     private List<TipObserverInterface> listeners = new ArrayList<>();

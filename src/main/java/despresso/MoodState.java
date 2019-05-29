@@ -1,8 +1,13 @@
 package despresso;
 
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
+@UIScope
+@SpringComponent
 public class MoodState {
 
     private String currentMood = "None";

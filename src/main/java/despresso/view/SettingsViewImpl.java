@@ -7,6 +7,8 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.Views;
 import despresso.presenter.ObserverInterface;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -15,10 +17,13 @@ import despresso.presenter.SettingsObserverInterface;
 import java.util.ArrayList;
 import java.util.List;
 
+@UIScope
+@SpringComponent
+public class SettingsViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 public class SettingsViewImpl extends VerticalLayout implements SubjectInterface<SettingsObserverInterface> {
 
     private Label label;
-    private List<SettingsObserverInterface> listeners = new ArrayList<>();
+    private List<ObserverInterface> listeners = new ArrayList<>();
     private RadioButtonGroup<String> getNotifications = new RadioButtonGroup<>();
     private String getNotificationText = "Yes";
     private Button saveButton, deleteDataButton, deleteAccButton;
@@ -62,6 +67,7 @@ public class SettingsViewImpl extends VerticalLayout implements SubjectInterface
     @Override
     public void addObserver(SettingsObserverInterface observer) {
         listeners.add(observer);
+
     }
 
     public void setLabel(String label) {
