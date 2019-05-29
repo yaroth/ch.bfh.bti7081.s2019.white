@@ -5,6 +5,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import com.vaadin.flow.spring.annotation.VaadinSessionScope;
 import despresso.logic.*;
 import despresso.presenter.*;
 import despresso.view.*;
@@ -18,7 +19,7 @@ import org.springframework.web.context.annotation.SessionScope;
 // TODO: to run despresso uncomment commented line and comment same line in CalculatorMain
 
 @SpringComponent
-@UIScope
+@VaadinSessionScope
 @Route("despresso.html")
 @PWA(name = "Project Base for Vaadin Flow", shortName = "Project Base")
 public class DespressoMain extends VerticalLayout {
