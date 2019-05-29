@@ -8,7 +8,6 @@ import despresso.view.SettingsViewImpl;
 
 @UIScope
 @SpringComponent
-public class SettingsPresenter implements ObserverInterface {
 public class SettingsPresenter implements SettingsObserverInterface {
 
     private SettingsModel model;

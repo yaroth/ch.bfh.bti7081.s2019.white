@@ -19,11 +19,10 @@ import java.util.List;
 
 @UIScope
 @SpringComponent
-public class SettingsViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 public class SettingsViewImpl extends VerticalLayout implements SubjectInterface<SettingsObserverInterface> {
 
     private Label label;
-    private List<ObserverInterface> listeners = new ArrayList<>();
+    private List<SettingsObserverInterface> listeners = new ArrayList<>();
     private RadioButtonGroup<String> getNotifications = new RadioButtonGroup<>();
     private String getNotificationText = "Yes";
     private Button saveButton, deleteDataButton, deleteAccButton;
