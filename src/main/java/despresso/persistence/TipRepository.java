@@ -6,17 +6,17 @@ import java.util.List;
 
 public class TipRepository implements RepositoryInterface<Tip> {
     @Override
-    public List<Tip> readAll() {
+    public List<Tip> getAll() {
         return null;
     }
 
     @Override
-    public Tip readByID(int ID) {
+    public Tip getByID(int ID) {
         return null;
     }
 
     @Override
-    public Tip create(Tip element) {
+    public Tip insertToDB(Tip element) {
         return null;
     }
 

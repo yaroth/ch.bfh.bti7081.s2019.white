@@ -8,17 +8,17 @@ public class MoodRepository implements RepositoryInterface<Mood> {
 
 
     @Override
-    public List<Mood> readAll() {
+    public List<Mood> getAll() {
         return null;
     }
 
     @Override
-    public Mood readByID(int ID) {
+    public Mood getByID(int ID) {
         return null;
     }
 
     @Override
-    public Mood create(Mood element) {
+    public Mood insertToDB(Mood element) {
         return null;
     }
 
