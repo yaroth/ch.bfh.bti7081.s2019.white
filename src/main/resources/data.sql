@@ -1,13 +1,15 @@
 DROP TABLE IF EXISTS user;
 
+/** must match properties of <code>despresso.logic.User</code> class
+ */
 CREATE TABLE user (
   id INT AUTO_INCREMENT  PRIMARY KEY,
-  first_name VARCHAR(250) NOT NULL,
-  last_name VARCHAR(250) NOT NULL,
+  fname VARCHAR(250) NOT NULL,
+  lname VARCHAR(250) NOT NULL,
   dob date DEFAULT NULL
 );
 
-INSERT INTO user (first_name, last_name, dob) VALUES
+INSERT INTO user (fname, lname, dob) VALUES
   ( 'Yann', 'Roth',  '1974-01-14'),
   ( 'Remo', 'Hofmann', '1987-06-09');
 
@@ -22,5 +24,5 @@ CREATE TABLE tip (
 );
 
 INSERT INTO tip (description, tipDuration, tipLocation, tipType) VALUES
-    ('Testen', 'LONG', 'ATWORK', 'MIND'),
-    ('Kaffe trinken', 'LONG', 'ATWORK', 'MIND');
+    ('Yoga', 'MEDIUM', 'ATWORK', 'MIND'),
+    ('Kaffe trinken', 'SHORT', 'ATHOME', 'BODY');
