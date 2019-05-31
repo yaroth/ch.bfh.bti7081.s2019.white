@@ -14,9 +14,10 @@ public class H2DBConnector {
     private final String DB_URL = "jdbc:h2:mem:database";
     private final String JDBC_DRIVER = "org.h2.Driver";
 
-    static final String USER = "sa";
-    static final String PASS = "";
+    private static final String USER = "sa";
+    private static final String PASS = "";
 
+    // TODO: do we need a H2DBConnector Singleton????
     public H2DBConnector() {
 
     }
@@ -45,17 +46,15 @@ public class H2DBConnector {
             // STEP 4: Clean-up environment
             statement.close();
             connection.close();
-        } catch (SQLException se) {
+        } catch (Exception se) {
             //Handle errors for JDBC
             se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        } finally {
+        }//Handle errors for Class.forName
+        finally {
             //finally block used to close resources
             try {
                 if (statement != null) statement.close();
-            } catch (SQLException se2) {
+            } catch (SQLException ignored) {
             } // nothing we can do
             try {
                 if (connection != null) connection.close();
@@ -103,6 +102,7 @@ public class H2DBConnector {
                 }
             }
             try {
+                assert connection != null;
                 connection.setAutoCommit(true);
             } catch (SQLException e) {
                 e.printStackTrace();

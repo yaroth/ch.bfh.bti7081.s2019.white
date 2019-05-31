@@ -11,7 +11,7 @@ import java.util.List;
 @SpringComponent
 public class SettingsModel {
 
-    H2DBConnector database = new H2DBConnector();
+    H2DBConnector h2DBConnector = new H2DBConnector();
 
     public String getClickMeResult() {
         return "Button clicked!";
@@ -32,31 +32,31 @@ public class SettingsModel {
         //do the actual changes
 
         // TODO: TESTING purpose *remove these lines* once testing is done ********************************************.
-        DataTypeInterface user = database.getById(DataType.USER, 1);
+        DataTypeInterface user = h2DBConnector.getById(DataType.USER, 1);
         System.out.println("getbyid: " + user);
 
         User lukas = new User ("Lukas", "Zoller", LocalDate.of(1981,5,25));
-        database.insert(lukas);
+        h2DBConnector.insert(lukas);
 
-        List<DataTypeInterface> userList = database.getAll(DataType.USER);
+        List<DataTypeInterface> userList = h2DBConnector.getAll(DataType.USER);
         System.out.println(userList);
 
-        DataTypeInterface newLukas = database.getById(DataType.USER, 3);
+        DataTypeInterface newLukas = h2DBConnector.getById(DataType.USER, 3);
         lukas = ((User) newLukas);
         lukas.setDob(LocalDate.of(1981,5, 11));
 
-        database.update(lukas);
+        h2DBConnector.update(lukas);
 
-        userList = database.getAll(DataType.USER);
+        userList = h2DBConnector.getAll(DataType.USER);
         System.out.println(userList);
 
-        database.delete(lukas);
+        h2DBConnector.delete(lukas);
 
-        userList = database.getAll(DataType.USER);
+        userList = h2DBConnector.getAll(DataType.USER);
         System.out.println(userList);
         // TODO: END of *remove these lines *******************************************************
 
-        return ("Personal Database deleted!");
+        return ("Personal h2DBConnector deleted!");
     }
 
     public String deleteAccount() {
