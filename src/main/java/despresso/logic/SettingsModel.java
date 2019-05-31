@@ -31,7 +31,7 @@ public class SettingsModel {
     public String deleteData() {
         //do the actual changes
 
-        // TODO: *remove these lines* once testing is done.
+        // TODO: TESTING purpose *remove these lines* once testing is done ********************************************.
         DataTypeInterface user = database.getById(DataType.USER, 1);
         System.out.println("getbyid: " + user);
 
@@ -54,7 +54,7 @@ public class SettingsModel {
 
         userList = database.getAll(DataType.USER);
         System.out.println(userList);
-        // TODO: END of *remove these lines*
+        // TODO: END of *remove these lines *******************************************************
 
         return ("Personal Database deleted!");
     }
