@@ -1,6 +1,12 @@
 package despresso.logic;
 
+import despresso.DataType;
+
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class H2DBConnector {
     //JDBC drivername and database URL
@@ -15,11 +21,10 @@ public class H2DBConnector {
 
     }
 
-    public String databaseGet(String query) {
+    private List<DataTypeInterface> databaseGet(DataType type, String query) {
+        List<DataTypeInterface> resultList = new ArrayList<>();
         Connection connection = null;
         Statement statement = null;
-
-        String returnParameter = "null";
 
         try {
             //Register server
@@ -28,24 +33,22 @@ public class H2DBConnector {
             //open connection
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            //execute query
             statement = connection.createStatement();
 
-            ResultSet response = statement.executeQuery(query);
-
-            ResultSetMetaData metadata = response.getMetaData();
-            int columnCount = metadata.getColumnCount();
-            for (int i = 1; i <= columnCount; i++) {
-                returnParameter += metadata.getColumnName(i) + ", ";
-            }
-            while (response.next()) {
-                String row = "";
-                for (int i = 1; i <= columnCount; i++) {
-                    row += response.getString(i) + ", ";
+            //execute query
+            ResultSet resultSet = statement.executeQuery(query);
+            // TODO: case for each DataType (SETTING, MOOD, CALENDAR_ENTRY, TIP)
+            if (type.equals(DataType.USER)) {
+                while (resultSet.next()) {
+                    User user = new User();
+                    user.setId(Integer.parseInt(resultSet.getString("id")));
+                    user.setFname(resultSet.getString("fname"));
+                    user.setLname(resultSet.getString("lname"));
+                    user.setDob(LocalDate.parse(resultSet.getString("dob")));
+                    resultList.add(user);
                 }
-                returnParameter += row;
-
             }
+
             // STEP 4: Clean-up environment
             statement.close();
             connection.close();
@@ -67,16 +70,113 @@ public class H2DBConnector {
                 se.printStackTrace();
             } //end finally try
         } //end try
-        return returnParameter;
+        return resultList;
     }
 
-    public boolean databasePut(String query){
-        return false;
+    private void databaseModify(String query) {
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+
+        try {
+            //Register server
+            Class.forName(JDBC_DRIVER);
+
+            //open connection
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    System.err.print("Transaction is being rolled back");
+                    connection.rollback();
+                } catch (SQLException excep) {
+                    excep.printStackTrace();
+                }
+            }
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public boolean databaseDelete(String query){
-        return false;
+    public List<DataTypeInterface> getAll(DataType type) {
+        String query = "SELECT * FROM ";
+        // TODO: lots of cases for the different type sets
+        if (type.equals(DataType.USER)) {
+            query += "user";
+        }
+        List<DataTypeInterface> resultList = databaseGet(type, query);
+        return resultList;
     }
 
+    public DataTypeInterface getById(DataType type, int id) {
+        String query = "SELECT * FROM ";
+        // TODO: lots of case for the different type sets
+        if (type.equals(DataType.USER)) {
+            query += "user where id='" + id + "'";
+        }
+        List<DataTypeInterface> resultList = databaseGet(type, query);
+        // TODO: catch error if size is > 1
+        return resultList.get(0);
+    }
 
+    public void insert(DataTypeInterface dataTypeInterface) {
+        String query = "INSERT INTO ";
+        // TODO: lots of cases for the different type sets
+        if (dataTypeInterface instanceof User) {
+            User user = (User) dataTypeInterface;
+            query += "user (fname, lname, dob) VALUES (";
+            query += "'" + user.getFname() + "', ";
+            query += "'" + user.getLname() + "', ";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+            query += "'" + user.getDob().format(formatter) + "'";
+            query += ")";
+        }
+        databaseModify(query);
+
+    }
+
+    public void update(DataTypeInterface dataTypeInterface) {
+        String query = "UPDATE";
+        // TODO: lots of cases for the different type sets
+        if (dataTypeInterface instanceof User) {
+            User user = (User) dataTypeInterface;
+            query += " user SET";
+            query += " fname='" + user.getFname() + "', ";
+            query += " lname='" + user.getLname() + "', ";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+            query += " dob = '" + user.getDob().format(formatter) + "'";
+            query += " WHERE id='" + user.getId() + "'";
+        }
+        databaseModify(query);
+    }
+
+    public void delete(DataTypeInterface dataTypeInterface) {
+        String query = "DELETE FROM";
+        // TODO: lots of cases for the different type sets
+        if (dataTypeInterface instanceof User) {
+            User user = (User) dataTypeInterface;
+            query += " user";
+            query += " WHERE id='" + user.getId() + "'";
+        }
+        databaseModify(query);
+    }
 }
