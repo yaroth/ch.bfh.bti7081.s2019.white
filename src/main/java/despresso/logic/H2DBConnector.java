@@ -39,14 +39,7 @@ public class H2DBConnector {
             ResultSet resultSet = statement.executeQuery(query);
             // TODO: case for each DataType (SETTING, MOOD, CALENDAR_ENTRY, TIP)
             if (type.equals(DataType.USER)) {
-                while (resultSet.next()) {
-                    User user = new User();
-                    user.setId(Integer.parseInt(resultSet.getString("id")));
-                    user.setFname(resultSet.getString("fname"));
-                    user.setLname(resultSet.getString("lname"));
-                    user.setDob(LocalDate.parse(resultSet.getString("dob")));
-                    resultList.add(user);
-                }
+                resultList = populateUserList(resultSet);
             }
 
             // STEP 4: Clean-up environment
@@ -115,6 +108,19 @@ public class H2DBConnector {
                 e.printStackTrace();
             }
         }
+    }
+
+    private List<DataTypeInterface> populateUserList(ResultSet resultSet) throws SQLException {
+        List<DataTypeInterface> userList = new ArrayList<>();
+        while (resultSet.next()) {
+            User user = new User();
+            user.setId(Integer.parseInt(resultSet.getString("id")));
+            user.setFname(resultSet.getString("fname"));
+            user.setLname(resultSet.getString("lname"));
+            user.setDob(LocalDate.parse(resultSet.getString("dob")));
+            userList.add(user);
+        }
+        return userList;
     }
 
     public List<DataTypeInterface> getAll(DataType type) {
