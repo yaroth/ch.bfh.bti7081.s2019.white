@@ -8,6 +8,9 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import despresso.logic.Tip;
+import despresso.logic.TipDuration;
+import despresso.logic.TipLocation;
+import despresso.logic.TipType;
 import despresso.presenter.TipObserverInterface;
 
 import java.util.ArrayList;
@@ -25,9 +28,9 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
     private Checkbox sadnessCheckbox;
     private Checkbox fearCheckbox;
 
-    private RadioButtonGroup<String> locationButtonGroup;
-    private RadioButtonGroup<String> durationButtonGroup;
-    private RadioButtonGroup<String> typeButtonGroup;
+    private RadioButtonGroup<TipLocation> locationButtonGroup;
+    private RadioButtonGroup<TipDuration> durationButtonGroup;
+    private RadioButtonGroup<TipType> typeButtonGroup;
 
     private Button okButton;
     private Button cancelButton;
@@ -68,17 +71,17 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
         // Radio Button Location
             this.locationButtonGroup = new RadioButtonGroup<>();
             locationButtonGroup.setLabel("Ort");
-            locationButtonGroup.setItems("Zu Hause", "Draussen", "Bei der Arbeit");
+            locationButtonGroup.setItems(TipLocation.ATHOME, TipLocation.ATWORK, TipLocation.OUTDOOR);
 
             // Radio Button Type
             this.typeButtonGroup = new RadioButtonGroup<>();
             typeButtonGroup.setLabel("Typ");
-            typeButtonGroup.setItems("Körper", "Geist");
+            typeButtonGroup.setItems(TipType.BODY, TipType.MIND);
 
             // Radio Button Duration
             this.durationButtonGroup = new RadioButtonGroup<>();
             durationButtonGroup.setLabel("Dauer");
-            durationButtonGroup.setItems("Kurz", "Mittel", "Lang");
+            durationButtonGroup.setItems(TipDuration.SHORT, TipDuration.MEDIUM, TipDuration.LONG);
 
 
             // Add Radiobuttons to panel
@@ -93,7 +96,6 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
             verticalLayout.add(okButton, cancelButton);
 
             accordion.add("Filter Tipps", verticalLayout);
-
 
         // Add accordion to TipViewImpl
         this.add(accordion);
@@ -128,10 +130,90 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
             this.typeButtonGroup.addValueChangeListener(event -> listener.updateType());
             this.durationButtonGroup.addValueChangeListener(event -> listener.updateDuration());
             this.okButton.addClickListener(event -> listener.updateOk());
-
+            this.cancelButton.addClickListener(event -> listener.updateCancel());
         }
 
 
+    }
+
+    @Override
+    public boolean getAnger() {
+        return this.angerCheckbox.getValue();
+    }
+
+    @Override
+    public boolean getDisgust() {
+        return this.disgustCheckbox.getValue();
+    }
+
+    @Override
+    public boolean getAnxiety() {
+        return this.disgustCheckbox.getValue();
+    }
+
+    @Override
+    public boolean getSadness() {
+        return this.sadnessCheckbox.getValue();
+    }
+
+    @Override
+    public boolean getFear() {
+        return this.fearCheckbox.getValue();
+    }
+
+    @Override
+    public TipDuration getDuration() {
+        return this.durationButtonGroup.getValue();
+    }
+
+    @Override
+    public TipType getTipType() {
+        return this.typeButtonGroup.getValue();
+    }
+
+    @Override
+    public TipLocation getTipLocation() {
+        return this.locationButtonGroup.getValue();
+    }
+
+    @Override
+    public void clearAnger() {
+        this.angerCheckbox.clear();
+    }
+
+    @Override
+    public void clearDisgust() {
+        this.disgustCheckbox.clear();
+    }
+
+    @Override
+    public void clearAnxiety() {
+        this.anxietyCheckbox.clear();
+    }
+
+    @Override
+    public void clearSadness() {
+        this.sadnessCheckbox.clear();
+    }
+
+    @Override
+    public void clearFear() {
+        this.fearCheckbox.clear();
+    }
+
+    @Override
+    public void clearDuration() {
+        this.durationButtonGroup.clear();
+    }
+
+    @Override
+    public void clearType() {
+        this.typeButtonGroup.clear();
+    }
+
+    @Override
+    public void clearLocation() {
+        this.locationButtonGroup.clear();
     }
 
 }

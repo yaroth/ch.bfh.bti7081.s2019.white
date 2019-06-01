@@ -20,6 +20,5 @@ public interface TipObserverInterface extends ObserverInterface {
     void updateOk();
     void updateCancel();
     // Update Tiplist
-    void updateTiplist(ArrayList<Tip> tipList);
 
 }
