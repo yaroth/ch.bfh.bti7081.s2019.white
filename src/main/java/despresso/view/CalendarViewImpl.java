@@ -12,6 +12,8 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.dom.ThemeList;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.presenter.CalendarPresenter;
 import despresso.presenter.ObserverInterface;
 import org.vaadin.stefan.fullcalendar.*;
@@ -24,9 +26,11 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@UIScope
+@SpringComponent
 public class CalendarViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 
-    private static final String[] COLORS = {"tomato", "orange", "dodgerblue", "mediumseagreen", "gray", "slateblue", "violet"};
+    private final String[] COLORS = {"tomato", "orange", "dodgerblue", "mediumseagreen", "gray", "slateblue", "violet"};
     private List<ObserverInterface> listeners = new ArrayList<>();
     private Label label;
     private CalendarPresenter _presenter;
@@ -129,7 +133,7 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
     }
 
 
-    public static class EventDialog extends Dialog {
+    public class EventDialog extends Dialog {
 
         EventDialog(FullCalendar calendar, Entry entry, boolean newInstance) {
             setCloseOnEsc(true);

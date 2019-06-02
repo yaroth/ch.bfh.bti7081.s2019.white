@@ -1,9 +1,13 @@
 package despresso.presenter;
 
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.Views;
 import despresso.logic.HomeModel;
 import despresso.view.HomeViewImpl;
 
+@UIScope
+@SpringComponent
 public class HomePresenter implements ObserverInterface {
 
     private HomeModel homeModel;

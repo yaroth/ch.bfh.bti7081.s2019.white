@@ -6,14 +6,16 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.Views;
 import despresso.presenter.MainObserverInterface;
-import despresso.presenter.ObserverInterface;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@UIScope
+@SpringComponent
 public class MainViewImpl extends VerticalLayout implements SubjectInterface<MainObserverInterface> {
 
 
@@ -78,15 +80,15 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface<Mai
     private void registerObject(ClickEvent event) {
         for (MainObserverInterface listener : listeners) {
             if (event.getSource().equals(homeBtn)) {
-                listener.loadHomeView();
+                listener.homeBtnClicked();
             } else if (event.getSource().equals(settingsBtn)) {
-                listener.loadSettingsView();
+                listener.settingsBtnClicked();
             } else if (event.getSource().equals(moodBtn)) {
-                listener.loadMoodView();
+                listener.moodBtnClicked();
             } else if (event.getSource().equals(calendarBtn)) {
-                listener.loadCalendarView();
+                listener.calendarBtnClicked();
             } else if (event.getSource().equals(tipsBtn)) {
-                listener.loadTipsView();
+                listener.tipsBtnClickec();
             }
         }
     }
