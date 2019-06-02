@@ -1,5 +1,7 @@
 package despresso.logic;
 
-public class CalendarList {
+import java.util.ArrayList;
+
+public class CalendarList extends ArrayList<CalendarEntry> {
 
 }

@@ -12,8 +12,12 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.dom.ThemeList;
+import despresso.logic.CalendarEntry;
+import despresso.logic.CalendarList;
+import despresso.presenter.CalendarObserverInterface;
 import despresso.presenter.CalendarPresenter;
-import despresso.presenter.ObserverInterface;
+//import com.vaadin.flow.spring.annotation.SpringComponent;
+//import com.vaadin.flow.spring.annotation.UIScope;
 import org.vaadin.stefan.fullcalendar.*;
 
 import java.time.DayOfWeek;
@@ -24,15 +28,22 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CalendarViewImpl extends VerticalLayout implements SubjectInterface {
+//@UIScope
+//@SpringComponent
+public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarInterface {
 
     private static final String[] COLORS = {"tomato", "orange", "dodgerblue", "mediumseagreen", "gray", "slateblue", "violet"};
-    private List<ObserverInterface> listeners = new ArrayList<>();
+    private List<CalendarObserverInterface> _listeners = new ArrayList<>();
     private Label label;
     private CalendarPresenter _presenter;
     private FullCalendar _calendar;
+    private CalendarList _calendarList;
 
     public CalendarViewImpl() {
+
+        System.out.println("CalendarViewImpl created");
+
+        _calendarList = new CalendarList();
 
         _calendar = new FullCalendar();
         _calendar.changeView(org.vaadin.stefan.fullcalendar.CalendarViewImpl.AGENDA_DAY);
@@ -63,13 +74,19 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
     }
 
     @Override
-    public void removeObserver(ObserverInterface observer) {
-        listeners.remove(observer);
+    public void removeObserver(CalendarObserverInterface observer) {
+        _listeners.remove(observer);
     }
 
     @Override
-    public void addObserver(ObserverInterface observer) {
-        listeners.add(observer);
+    public void addObserver(CalendarObserverInterface observer) {
+        _listeners.add(observer);
+    }
+
+
+    public void setCalendarList(CalendarList calendarEntries) {
+        _calendarList = calendarEntries;
+        loadCalendarEntries();
     }
 
     public void setLabel(String label) {
@@ -129,7 +146,7 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
     }
 
 
-    public static class EventDialog extends Dialog {
+    public class EventDialog extends Dialog {
 
         EventDialog(FullCalendar calendar, Entry entry, boolean newInstance) {
             setCloseOnEsc(true);
@@ -184,6 +201,7 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
                 buttonSave = new Button("Create", e -> {
                     if (binder.validate().isOk()) {
                         calendar.addEntry(entry);
+                        createCalendarEntry(entry);
                     }
                 });
             } else {
@@ -212,6 +230,17 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
             }
 
             add(layout, buttons);
+        }
+    }
+
+    private void createCalendarEntry(Entry entry) {
+        _calendarList.add(new CalendarEntry("currentUserId", entry.getStart(), entry.getEnd(), entry.getTitle(), entry.getDescription(), entry.getColor()));
+        System.out.println("calendar entry created!");
+    }
+
+    private void loadCalendarEntries(){
+        for (CalendarEntry entry : _calendarList){
+            _calendar.addEntry(new Entry("", entry.getTitle(), entry.getStart(), entry.getEnd(), false, true, entry.getDescription(), entry.getColor()));
         }
     }
 }
