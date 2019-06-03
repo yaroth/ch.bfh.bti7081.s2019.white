@@ -16,7 +16,7 @@ import despresso.presenter.TipObserverInterface;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface {
+public class TipsViewImpl extends VerticalLayout implements SubjectInterface<TipObserverInterface> {
 
     private List<TipObserverInterface> listeners = new ArrayList<>();
     private ArrayList<Tip> tipList = new ArrayList<>();
@@ -136,82 +136,66 @@ public class TipsViewImpl extends VerticalLayout implements SubjectTipInterface 
 
     }
 
-    @Override
     public boolean getAnger() {
         return this.angerCheckbox.getValue();
     }
 
-    @Override
     public boolean getDisgust() {
         return this.disgustCheckbox.getValue();
     }
 
-    @Override
     public boolean getAnxiety() {
         return this.disgustCheckbox.getValue();
     }
 
-    @Override
     public boolean getSadness() {
         return this.sadnessCheckbox.getValue();
     }
 
-    @Override
     public boolean getFear() {
         return this.fearCheckbox.getValue();
     }
 
-    @Override
     public TipDuration getDuration() {
         return this.durationButtonGroup.getValue();
     }
 
-    @Override
     public TipType getTipType() {
         return this.typeButtonGroup.getValue();
     }
 
-    @Override
     public TipLocation getTipLocation() {
         return this.locationButtonGroup.getValue();
     }
 
-    @Override
     public void clearAnger() {
         this.angerCheckbox.clear();
     }
 
-    @Override
     public void clearDisgust() {
         this.disgustCheckbox.clear();
     }
 
-    @Override
     public void clearAnxiety() {
         this.anxietyCheckbox.clear();
     }
 
-    @Override
     public void clearSadness() {
         this.sadnessCheckbox.clear();
     }
 
-    @Override
     public void clearFear() {
         this.fearCheckbox.clear();
     }
 
-    @Override
     public void clearDuration() {
         this.durationButtonGroup.clear();
     }
 
-    @Override
     public void clearType() {
         this.typeButtonGroup.clear();
     }
 
-    @Override
     public void clearLocation() {
         this.locationButtonGroup.clear();
     }
