@@ -35,25 +35,28 @@ public class SettingsModel {
         DataTypeInterface user = h2DBConnector.getById(DataType.USER, 1);
         System.out.println("getbyid: " + user);
 
-        User lukas = new User ("Lukas", "Zoller", LocalDate.of(1981,5,25));
+        User lukas = new User("Lukas", "Zoller", LocalDate.of(1981, 5, 25));
         h2DBConnector.insert(lukas);
 
         List<DataTypeInterface> userList = h2DBConnector.getAll(DataType.USER);
+        System.out.println("Added new user");
         System.out.println(userList);
 
         DataTypeInterface newLukas = h2DBConnector.getById(DataType.USER, 3);
-        lukas = ((User) newLukas);
-        lukas.setDob(LocalDate.of(1981,5, 11));
+        if (newLukas != null) {
+            lukas = ((User) newLukas);
+            lukas.setDob(LocalDate.of(1981, 5, 11));
+            h2DBConnector.update(lukas);
+            userList = h2DBConnector.getAll(DataType.USER);
+            System.out.println("Modified user with id=3");
+            System.out.println(userList);
 
-        h2DBConnector.update(lukas);
+            h2DBConnector.delete(lukas);
 
-        userList = h2DBConnector.getAll(DataType.USER);
-        System.out.println(userList);
-
-        h2DBConnector.delete(lukas);
-
-        userList = h2DBConnector.getAll(DataType.USER);
-        System.out.println(userList);
+            userList = h2DBConnector.getAll(DataType.USER);
+            System.out.println("Deleted user with id=3");
+            System.out.println(userList);
+        }
         // TODO: END of *remove these lines *******************************************************
 
         return ("Personal h2DBConnector deleted!");

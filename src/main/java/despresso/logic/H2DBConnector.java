@@ -141,7 +141,8 @@ public class H2DBConnector {
         }
         List<DataTypeInterface> resultList = databaseGet(type, query);
         // TODO: catch error if size is > 1
-        return resultList.get(0);
+        if (resultList.size() > 0) return resultList.get(0);
+        else return null;
     }
 
     public void insert(DataTypeInterface dataTypeInterface) {
