@@ -12,11 +12,12 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.dom.ThemeList;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.logic.CalendarEntry;
 import despresso.logic.CalendarList;
 import despresso.presenter.CalendarObserverInterface;
 import despresso.presenter.CalendarPresenter;
-import despresso.presenter.ObserverInterface;
 import org.vaadin.stefan.fullcalendar.*;
 
 import java.time.DayOfWeek;
@@ -27,6 +28,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+@UIScope
+@SpringComponent
 public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarInterface {
 
     private static final String[] COLORS = {"tomato", "orange", "dodgerblue", "mediumseagreen", "gray", "slateblue", "violet"};
@@ -199,12 +203,15 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
                     if (binder.validate().isOk()) {
                         calendar.addEntry(entry);
                         createCalendarEntry(entry);
+                        close();
                     }
                 });
             } else {
                 buttonSave = new Button("Save", e -> {
                     if (binder.validate().isOk()) {
                         calendar.updateEntry(entry);
+                        updateCalendarEntry(entry);
+                        close();
                     }
                 });
             }
@@ -233,6 +240,10 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
     private void createCalendarEntry(Entry entry) {
         _calendarList.addCalendarEntry("currentUserId", entry.getStart(), entry.getEnd(), entry.getTitle(), entry.getDescription(), entry.getColor(), false);
         System.out.println("calendar entry created!");
+    }
+
+    private void updateCalendarEntry(Entry entry){
+        _calendarList.updateCalendarEntry(entry);
     }
 
     private void loadCalendarEntries(){

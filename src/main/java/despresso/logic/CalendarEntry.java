@@ -1,7 +1,13 @@
 package despresso.logic;
 
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
+
 import java.time.LocalDateTime;
 
+
+@UIScope
+@SpringComponent
 public class CalendarEntry {
     private String _userId;
     private LocalDateTime _startTime;
