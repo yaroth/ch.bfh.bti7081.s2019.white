@@ -27,6 +27,7 @@ INSERT INTO tip (description, tipDuration, tipLocation, tipType) VALUES
     ('Yoga', 'MEDIUM', 'ATWORK', 'MIND'),
     ('Kaffe trinken', 'SHORT', 'ATHOME', 'BODY');
 
+DROP TABLE IF EXISTS calendarEntry;
 
 CREATE TABLE calendarEntry (
    id INT AUTO_INCREMENT PRIMARY KEY,
