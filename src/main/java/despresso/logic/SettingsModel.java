@@ -1,6 +1,13 @@
 package despresso.logic;
 
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
+
+@UIScope
+@SpringComponent
 public class SettingsModel {
+
+    H2DBConnector database = new H2DBConnector();
 
     public String getClickMeResult() {
         return "Button clicked!";
@@ -19,7 +26,9 @@ public class SettingsModel {
 
     public String deleteData() {
         //do the actual changes
+        String teststring = database.databaseGet("SELECT * FROM user");
         System.out.println("Personal Database deleted");
+        System.out.println(teststring);
         return("Personal Database deleted!");
     }
 

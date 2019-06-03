@@ -1,10 +1,14 @@
 package despresso.logic;
 
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.MoodState;
 import despresso.presenter.MoodPresenter;
 
 import java.util.ArrayList;
 
+@UIScope
+@SpringComponent
 public class MoodModel {
     private MoodPresenter presenter;
     private MoodState moodState = new MoodState();

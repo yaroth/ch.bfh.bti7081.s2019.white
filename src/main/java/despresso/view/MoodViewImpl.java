@@ -6,7 +6,10 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+
 import despresso.presenter.MoodObserverInterface;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.presenter.ObserverInterface;
 import org.vaadin.zhe.PaperRangeSlider;
 
@@ -14,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+
+@UIScope
+@SpringComponent
 public class MoodViewImpl extends VerticalLayout implements SubjectInterface<MoodObserverInterface> {
 
     private String selectedMood = "None";
@@ -198,12 +204,4 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface<Moo
         });
         return slider;
     }
-
-    // Immutable map to translate commands to button labels
-//    private static Map<String, String> ACTIONS = Map.ofEntries(
-//            entry("Save", "Save"),
-//            entry("Undo", "Undo"),
-//            entry("Specify", "Specify"),
-//            entry("ConfirmAccuracy", "Confirm")
-//    );
 }

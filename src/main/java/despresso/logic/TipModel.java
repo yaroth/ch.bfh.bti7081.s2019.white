@@ -1,9 +1,14 @@
 package despresso.logic;
 
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@UIScope
+@SpringComponent
 public class TipModel {
     private ArrayList<Tip> tipList = new ArrayList<>();
     private List<Tip> filteredTiplist = new ArrayList<>();

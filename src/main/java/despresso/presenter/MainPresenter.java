@@ -1,9 +1,13 @@
 package despresso.presenter;
 
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.Views;
 import despresso.logic.MainModel;
 import despresso.view.MainViewImpl;
 
+@UIScope
+@SpringComponent
 public class MainPresenter implements MainObserverInterface {
 
     private MainModel model;
@@ -16,31 +20,31 @@ public class MainPresenter implements MainObserverInterface {
     }
 
     @Override
-    public void loadHomeView() {
+    public void homeBtnClicked() {
         model.doSomething();
         view.loadHomeView();
     }
 
     @Override
-    public void loadSettingsView() {
+    public void settingsBtnClicked() {
         model.doSomething();
         view.loadSettingsView();
     }
 
     @Override
-    public void loadMoodView() {
+    public void moodBtnClicked() {
         model.doSomething();
         view.loadMoodView();
     }
 
     @Override
-    public void loadCalendarView() {
+    public void calendarBtnClicked() {
         model.doSomething();
         view.loadCalendarView();
     }
 
     @Override
-    public void loadTipsView() {
+    public void tipsBtnClickec() {
         model.doSomething();
         view.loadTipsView();
     }

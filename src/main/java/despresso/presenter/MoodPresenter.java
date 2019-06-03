@@ -1,11 +1,14 @@
 package despresso.presenter;
 
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.logic.MoodModel;
 import despresso.view.MoodViewImpl;
 
 import java.util.ArrayList;
 
 public class MoodPresenter implements MoodObserverInterface {
+  
     private MoodModel model;
     private MoodViewImpl view;
 
