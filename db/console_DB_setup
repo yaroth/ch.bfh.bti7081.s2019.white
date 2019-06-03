@@ -3,11 +3,11 @@ create table users (id int not null auto_increment, fname varchar(200), lname va
 insert into users (fname, lname, dob) values ( 'Yann', 'Roth',  '1974-01-14');
 insert into users (fname, lname, dob) values ( 'Hannah',  'Arendt', '1999-03-12');
 
-//ALTER TABLE despresso ADD fname varchar(200);
+//ALTER TABLE users ADD fname varchar(200);
 
-//INSERT INTO despresso (dob) VALUES ('1974-01-14');
+//INSERT INTO users (dob) VALUES ('1974-01-14') WHERE id="1";
 
-//UPDATE despresso SET dob = '1974-01-15' WHERE id=1;
+//UPDATE users SET dob = '1974-01-15' WHERE id=1;
 
 //commit;
 

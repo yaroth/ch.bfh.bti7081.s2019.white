@@ -6,17 +6,17 @@ import java.util.List;
 
 public class SettingsRepository implements RepositoryInterface<Setting> {
     @Override
-    public List<Setting> readAll() {
+    public List<Setting> getAll() {
         return null;
     }
 
     @Override
-    public Setting readByID(int ID) {
+    public Setting getByID(int ID) {
         return null;
     }
 
     @Override
-    public Setting create(Setting element) {
+    public Setting insertToDB(Setting element) {
         return null;
     }
 
