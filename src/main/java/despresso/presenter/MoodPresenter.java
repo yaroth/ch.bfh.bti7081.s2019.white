@@ -7,9 +7,8 @@ import despresso.view.MoodViewImpl;
 
 import java.util.ArrayList;
 
-@UIScope
-@SpringComponent
-public class MoodPresenter implements ObserverInterface {
+public class MoodPresenter implements MoodObserverInterface {
+  
     private MoodModel model;
     private MoodViewImpl view;
 
@@ -21,33 +20,33 @@ public class MoodPresenter implements ObserverInterface {
     }
 
     @Override
-    public void update(String someString) {
-        switch(someString) {
-            case "Mood":
-                setMood();
-                break;
-            case "MoodSlider":
-                setMoodAccuracy();
-                break;
-            case "Save":
-                resetMoodView();
-                break;
-            case "Undo":
-                undoMoodSelection();
-                break;
-            case "Specify":
-                showSpecificMoods();
-                break;
-            case "ConfirmAccuracy":
-                resetMoodView();
-                break;
-            default:
-                System.out.println("Unknown command!");
-        }
+    public void moodSelectionButton() {
+        setMood();
+    }
+
+    @Override
+    public void saveButton() {
+        resetMoodView();
+    }
+
+    @Override
+    public void undoButton() {
+        undoMoodSelection();
+    }
+
+    @Override
+    public void specifyButton() {
+        showSpecificMoods();
+    }
+
+    @Override
+    public void confirmAccuracyButton() {
+        resetMoodView();
     }
 
     // Model: Set the accuracy of the mood selected with the slider
-    private void setMoodAccuracy() {
+    @Override
+    public void moodSlider() {
         model.setMoodAccuracy(view.getMoodSliderValue());
     }
 
@@ -83,4 +82,8 @@ public class MoodPresenter implements ObserverInterface {
         this.view.resetView();
     }
 
+    @Override
+    public void update(String name) {
+        System.out.println("MoodView: Something called generic update in ObservableInterface with string: " + name);
+    }
 }
