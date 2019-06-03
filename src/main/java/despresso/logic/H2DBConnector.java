@@ -54,13 +54,10 @@ public class H2DBConnector {
             //finally block used to close resources
             try {
                 if (statement != null) statement.close();
-            } catch (SQLException ignored) {
-            } // nothing we can do
-            try {
                 if (connection != null) connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            } //end finally try
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } //end try
         return resultList;
     }
