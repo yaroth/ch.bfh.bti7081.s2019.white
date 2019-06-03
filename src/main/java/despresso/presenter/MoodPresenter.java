@@ -60,7 +60,7 @@ public class MoodPresenter implements MoodObserverInterface {
     // View: Show more specific moods for the selected one
     private void showSpecificMoods() {
         ArrayList<String> specificMoods = model.specifyMood();
-
+        System.out.println("Showing specific moods: " + model.specifyMood());
         if(specificMoods == null) {
             view.showMoodSlider();
         } else

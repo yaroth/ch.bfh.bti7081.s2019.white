@@ -23,7 +23,7 @@ public class MoodModel {
     }
 
     public void resetMood() {
-        this.moodState.setCurrentMood("None");
+        this.moodState.setCurrentMood(null);
     }
 
     public void undoMoodSelection() {
