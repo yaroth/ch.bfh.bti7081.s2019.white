@@ -14,8 +14,10 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import despresso.logic.CalendarEntry;
+import despresso.logic.CalendarList;
+import despresso.presenter.CalendarObserverInterface;
 import despresso.presenter.CalendarPresenter;
-import despresso.presenter.ObserverInterface;
 import org.vaadin.stefan.fullcalendar.*;
 
 import java.time.DayOfWeek;
@@ -26,17 +28,23 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 @UIScope
 @SpringComponent
-public class CalendarViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
+public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarInterface {
 
-    private final String[] COLORS = {"tomato", "orange", "dodgerblue", "mediumseagreen", "gray", "slateblue", "violet"};
-    private List<ObserverInterface> listeners = new ArrayList<>();
+    private static final String[] COLORS = {"tomato", "orange", "dodgerblue", "mediumseagreen", "gray", "slateblue", "violet"};
+    private List<CalendarObserverInterface> _listeners = new ArrayList<>();
     private Label label;
     private CalendarPresenter _presenter;
     private FullCalendar _calendar;
+    private CalendarList _calendarList;
 
     public CalendarViewImpl() {
+
+        System.out.println("CalendarViewImpl created");
+
+        _calendarList = new CalendarList();
 
         _calendar = new FullCalendar();
         _calendar.changeView(org.vaadin.stefan.fullcalendar.CalendarViewImpl.AGENDA_DAY);
@@ -67,13 +75,19 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
     }
 
     @Override
-    public void removeObserver(ObserverInterface observer) {
-        listeners.remove(observer);
+    public void removeObserver(CalendarObserverInterface observer) {
+        _listeners.remove(observer);
     }
 
     @Override
-    public void addObserver(ObserverInterface observer) {
-        listeners.add(observer);
+    public void addObserver(CalendarObserverInterface observer) {
+        _listeners.add(observer);
+    }
+
+
+    public void setCalendarList(CalendarList calendarEntries) {
+        _calendarList = calendarEntries;
+        loadCalendarEntries();
     }
 
     public void setLabel(String label) {
@@ -83,7 +97,7 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
     private void initBaseLayoutSettings() {
         setSizeFull();
         //_calendar.setHeightByParent();
-        _calendar.setHeight(400);
+        _calendar.setHeight(500);
         setFlexStyles(true);
     }
 
@@ -188,12 +202,16 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
                 buttonSave = new Button("Create", e -> {
                     if (binder.validate().isOk()) {
                         calendar.addEntry(entry);
+                        createCalendarEntry(entry);
+                        close();
                     }
                 });
             } else {
                 buttonSave = new Button("Save", e -> {
                     if (binder.validate().isOk()) {
                         calendar.updateEntry(entry);
+                        updateCalendarEntry(entry);
+                        close();
                     }
                 });
             }
@@ -216,6 +234,21 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectInterface
             }
 
             add(layout, buttons);
+        }
+    }
+
+    private void createCalendarEntry(Entry entry) {
+        _calendarList.addCalendarEntry("currentUserId", entry.getStart(), entry.getEnd(), entry.getTitle(), entry.getDescription(), entry.getColor(), false);
+        System.out.println("calendar entry created!");
+    }
+
+    private void updateCalendarEntry(Entry entry){
+        _calendarList.updateCalendarEntry(entry);
+    }
+
+    private void loadCalendarEntries(){
+        for (CalendarEntry entry : _calendarList){
+            _calendar.addEntry(new Entry("", entry.getTitle(), entry.getStart(), entry.getEnd(), false, true, entry.getDescription(), entry.getColor()));
         }
     }
 }
