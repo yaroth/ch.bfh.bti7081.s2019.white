@@ -6,7 +6,6 @@ import java.util.List;
 public class CalendarRepository implements RepositoryInterface<Calendar>{
 
 
-
     @Override
     public List<Calendar> getAll() {
         return null;
@@ -18,17 +17,17 @@ public class CalendarRepository implements RepositoryInterface<Calendar>{
     }
 
     @Override
-    public Calendar insertToDB(Calendar element) {
-        return null;
+    public void insert(Calendar item) {
+
     }
 
     @Override
-    public Calendar updateByID(Calendar element, int ID) {
-        return null;
+    public void update(Calendar item) {
+
     }
 
     @Override
-    public Calendar deleteByID(int ID) {
-        return null;
+    public void delete(Calendar item) {
+
     }
 }

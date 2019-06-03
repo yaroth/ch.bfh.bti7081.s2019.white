@@ -3,6 +3,7 @@ package despresso.logic;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.DataType;
+import despresso.persistence.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -10,8 +11,6 @@ import java.util.List;
 @UIScope
 @SpringComponent
 public class SettingsModel {
-
-    H2DBConnector h2DBConnector = new H2DBConnector();
 
     public String getClickMeResult() {
         return "Button clicked!";
@@ -31,29 +30,30 @@ public class SettingsModel {
     public String deleteData() {
         //do the actual changes
 
+        UserRepository userRepository = new UserRepository();
         // TODO: TESTING purpose *remove these lines* once testing is done ********************************************.
-        DataTypeInterface user = h2DBConnector.getById(DataType.USER, 1);
-        System.out.println("getbyid: " + user);
+        User user = userRepository.getByID(1);
+        System.out.println("get by id: " + user);
 
         User lukas = new User("Lukas", "Zoller", LocalDate.of(1981, 5, 25));
-        h2DBConnector.insert(lukas);
+        userRepository.insert(lukas);
 
-        List<DataTypeInterface> userList = h2DBConnector.getAll(DataType.USER);
+        List<User> userList = userRepository.getAll();
         System.out.println("Added new user");
         System.out.println(userList);
 
-        DataTypeInterface newLukas = h2DBConnector.getById(DataType.USER, 3);
+        DataTypeInterface newLukas = userRepository.getByID(3);
         if (newLukas != null) {
             lukas = ((User) newLukas);
             lukas.setDob(LocalDate.of(1981, 5, 11));
-            h2DBConnector.update(lukas);
-            userList = h2DBConnector.getAll(DataType.USER);
+            userRepository.update(lukas);
+            userList = userRepository.getAll();
             System.out.println("Modified user with id=3");
             System.out.println(userList);
 
-            h2DBConnector.delete(lukas);
+            userRepository.delete(lukas);
 
-            userList = h2DBConnector.getAll(DataType.USER);
+            userList = userRepository.getAll();
             System.out.println("Deleted user with id=3");
             System.out.println(userList);
         }

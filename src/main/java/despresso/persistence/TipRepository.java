@@ -5,6 +5,7 @@ import despresso.logic.Tip;
 import java.util.List;
 
 public class TipRepository implements RepositoryInterface<Tip> {
+
     @Override
     public List<Tip> getAll() {
         return null;
@@ -16,17 +17,17 @@ public class TipRepository implements RepositoryInterface<Tip> {
     }
 
     @Override
-    public Tip insertToDB(Tip element) {
-        return null;
+    public void insert(Tip item) {
+
     }
 
     @Override
-    public Tip updateByID(Tip element, int ID) {
-        return null;
+    public void update(Tip item) {
+
     }
 
     @Override
-    public Tip deleteByID(int ID) {
-        return null;
+    public void delete(Tip item) {
+
     }
 }
