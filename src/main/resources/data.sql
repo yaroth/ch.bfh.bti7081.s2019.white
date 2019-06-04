@@ -45,3 +45,9 @@ INSERT INTO calendarEntry (title, startTime, endTime, description, color, isDone
 VALUES
     ('Wandern', '2019-06-23 09:00:00', '2019-06-23 10:00:00', 'ins Berner Oberland', 'gray', false),
     ('Rechnungen', '2019-06-27 09:00:00', '2019-06-23 10:00:00', 'Rechnungen bezahlen', 'orange', false);
+
+DROP TABLE IF EXISTS environmentSettings;
+
+CREATE TABLE colorSettings {
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    color VARCHAR(20) NOT NULL;
