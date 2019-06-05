@@ -1,6 +1,8 @@
-package despresso.logic;
+package despresso.persistence;
 
 import despresso.DataType;
+import despresso.logic.User;
+import despresso.logic.User;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -8,8 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class H2DBConnector {
-    //JDBC drivername and database URL
+public class UserRepository implements RepositoryInterface<User> {
 
     private final String DB_URL = "jdbc:h2:mem:database";
     private final String JDBC_DRIVER = "org.h2.Driver";
@@ -17,13 +18,35 @@ public class H2DBConnector {
     private static final String USER = "sa";
     private static final String PASS = "";
 
-    // TODO: do we need a H2DBConnector Singleton????
-    public H2DBConnector() {
-
+    // TODO: never make a call to get ALL data!!!
+    @Override
+    public List<User> getAll() {
+        String query = "SELECT * FROM user";
+        List<User> resultList = databaseGet(query);
+        return resultList;
     }
 
-    private List<DataTypeInterface> databaseGet(DataType type, String query) {
-        List<DataTypeInterface> resultList = new ArrayList<>();
+    @Override
+    public User getByID(int id) {
+        String query = "SELECT * FROM user where id='" + id + "'";
+        List<User> resultList = databaseGet(query);
+        if (resultList.size() > 0) return resultList.get(0);
+        else return null;
+    }
+
+    @Override
+    public void update(User user) {
+        String query = "UPDATE user SET";
+        query += " fname='" + user.getFname() + "', ";
+        query += " lname='" + user.getLname() + "', ";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+        query += " dob = '" + user.getDob().format(formatter) + "'";
+        query += " WHERE id='" + user.getId() + "'";
+        databaseModify(query);
+    }
+
+    private List<User> databaseGet(String query) {
+        List<User> resultList = new ArrayList<>();
         Connection connection = null;
         Statement statement = null;
 
@@ -38,10 +61,7 @@ public class H2DBConnector {
 
             //execute query
             ResultSet resultSet = statement.executeQuery(query);
-            // TODO: case for each DataType (SETTING, MOOD, CALENDAR_ENTRY, TIP)
-            if (type.equals(DataType.USER)) {
-                resultList = populateUserList(resultSet);
-            }
+            resultList = populateUserList(resultSet);
 
             // STEP 4: Clean-up environment
             statement.close();
@@ -107,8 +127,8 @@ public class H2DBConnector {
         }
     }
 
-    private List<DataTypeInterface> populateUserList(ResultSet resultSet) throws SQLException {
-        List<DataTypeInterface> userList = new ArrayList<>();
+    private List<User> populateUserList(ResultSet resultSet) throws SQLException {
+        List<User> userList = new ArrayList<>();
         while (resultSet.next()) {
             User user = new User();
             user.setId(Integer.parseInt(resultSet.getString("id")));
@@ -120,67 +140,24 @@ public class H2DBConnector {
         return userList;
     }
 
-    public List<DataTypeInterface> getAll(DataType type) {
-        String query = "SELECT * FROM ";
-        // TODO: lots of cases for the different type sets
-        if (type.equals(DataType.USER)) {
-            query += "user";
-        }
-        List<DataTypeInterface> resultList = databaseGet(type, query);
-        return resultList;
-    }
 
-    public DataTypeInterface getById(DataType type, int id) {
-        String query = "SELECT * FROM ";
-        // TODO: lots of case for the different type sets
-        if (type.equals(DataType.USER)) {
-            query += "user where id='" + id + "'";
-        }
-        List<DataTypeInterface> resultList = databaseGet(type, query);
-        // TODO: catch error if size is > 1
-        if (resultList.size() > 0) return resultList.get(0);
-        else return null;
-    }
-
-    public void insert(DataTypeInterface dataTypeInterface) {
+    @Override
+    public void insert(User User) {
         String query = "INSERT INTO ";
-        // TODO: lots of cases for the different type sets
-        if (dataTypeInterface instanceof User) {
-            User user = (User) dataTypeInterface;
-            query += "user (fname, lname, dob) VALUES (";
-            query += "'" + user.getFname() + "', ";
-            query += "'" + user.getLname() + "', ";
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
-            query += "'" + user.getDob().format(formatter) + "'";
-            query += ")";
-        }
+        User user = (User) User;
+        query += "user (fname, lname, dob) VALUES (";
+        query += "'" + user.getFname() + "', ";
+        query += "'" + user.getLname() + "', ";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+        query += "'" + user.getDob().format(formatter) + "'";
+        query += ")";
         databaseModify(query);
 
     }
 
-    public void update(DataTypeInterface dataTypeInterface) {
-        String query = "UPDATE";
-        // TODO: lots of cases for the different type sets
-        if (dataTypeInterface instanceof User) {
-            User user = (User) dataTypeInterface;
-            query += " user SET";
-            query += " fname='" + user.getFname() + "', ";
-            query += " lname='" + user.getLname() + "', ";
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
-            query += " dob = '" + user.getDob().format(formatter) + "'";
-            query += " WHERE id='" + user.getId() + "'";
-        }
-        databaseModify(query);
-    }
-
-    public void delete(DataTypeInterface dataTypeInterface) {
-        String query = "DELETE FROM";
-        // TODO: lots of cases for the different type sets
-        if (dataTypeInterface instanceof User) {
-            User user = (User) dataTypeInterface;
-            query += " user";
-            query += " WHERE id='" + user.getId() + "'";
-        }
+    @Override
+    public void delete(User user) {
+        String query = "DELETE FROM user WHERE id='" + user.getId() + "'";
         databaseModify(query);
     }
 }

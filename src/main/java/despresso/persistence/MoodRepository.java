@@ -18,17 +18,17 @@ public class MoodRepository implements RepositoryInterface<Mood> {
     }
 
     @Override
-    public Mood insertToDB(Mood element) {
-        return null;
+    public void insert(Mood item) {
+
     }
 
     @Override
-    public Mood updateByID(Mood element, int ID) {
-        return null;
+    public void update(Mood item) {
+
     }
 
     @Override
-    public Mood deleteByID(int ID) {
-        return null;
+    public void delete(Mood item) {
+
     }
 }

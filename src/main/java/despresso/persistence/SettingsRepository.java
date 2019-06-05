@@ -5,6 +5,8 @@ import despresso.logic.Setting;
 import java.util.List;
 
 public class SettingsRepository implements RepositoryInterface<Setting> {
+
+
     @Override
     public List<Setting> getAll() {
         return null;
@@ -16,17 +18,17 @@ public class SettingsRepository implements RepositoryInterface<Setting> {
     }
 
     @Override
-    public Setting insertToDB(Setting element) {
-        return null;
+    public void insert(Setting item) {
+
     }
 
     @Override
-    public Setting updateByID(Setting element, int ID) {
-        return null;
+    public void update(Setting item) {
+
     }
 
     @Override
-    public Setting deleteByID(int ID) {
-        return null;
+    public void delete(Setting item) {
+
     }
 }

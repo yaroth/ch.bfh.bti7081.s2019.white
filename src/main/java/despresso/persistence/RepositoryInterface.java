@@ -5,7 +5,7 @@ import java.util.List;
 public interface RepositoryInterface<T> {
     List<T> getAll();
     T getByID(int ID);
-    T insertToDB(T element);
-    T updateByID(T element, int ID);
-    T deleteByID(int ID);
+    void insert(T item);
+    void update(T item);
+    void delete(T item);
 }
