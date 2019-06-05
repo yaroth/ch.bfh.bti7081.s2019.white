@@ -3,10 +3,7 @@ package despresso.presenter;
 
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import despresso.logic.Tip;
-import despresso.logic.TipDuration;
-import despresso.logic.TipLocation;
-import despresso.logic.TipModel;
+import despresso.logic.*;
 import despresso.view.TipsViewImpl;
 
 import java.util.ArrayList;
@@ -24,7 +21,8 @@ public class TipPresenter implements TipObserverInterface {
         this.tipView = view;
         this.tipView.setTipList(this.tipModel.getTipList());
         this.tipView.addObserver(this);
-        this.updateTiplist(this.tipModel.getTipList());
+//        this.updateTiplist(this.tipModel.getTipList());
+        this.tipView.setTipList(this.tipModel.getTipList());
     }
 
 
@@ -77,8 +75,27 @@ public class TipPresenter implements TipObserverInterface {
 
     @Override
     public void updateOk() {
+//        System.out.println("TipPresenter.updateOk clicked");
+//        this.updateTiplist(this.tipModel.getTipList());
+
+        // make new tip with filters from view. This tip is used from the model to filter the tiplist.
+        boolean anger = this.tipView.getAnger();
+        boolean disgust = this.tipView.getDisgust();
+        boolean anxiety = this.tipView.getAnxiety();
+        boolean sadness = this.tipView.getSadness();
+        boolean fear = this.tipView.getFear();
+
+        TipLocation tipLocation = this.tipView.getTipLocation();
+        TipType tipType = this.tipView.getTipType();
+        TipDuration tipDuration = this.tipView.getDuration();
+
+        Tip filterTip = new Tip(anger, disgust, anxiety, sadness, fear, tipDuration, tipType, tipLocation, "");
+        // filter tiplist
+        this.tipModel.filterTipList(filterTip);
+        // display filtered Tiplist
+        this.tipView.setTipList(this.tipModel.getFilteredTipList());
+
         System.out.println("TipPresenter.updateOk clicked");
-        this.updateTiplist(this.tipModel.getTipList());
     }
 
     @Override
@@ -96,11 +113,11 @@ public class TipPresenter implements TipObserverInterface {
         this.tipView.setTipList(this.tipModel.getTipList());
         System.out.println("TipPresenter.updateCancel clicked");
     }
-    public void updateTiplist(ArrayList<Tip> tipList) {
-        System.out.println("TipPresenter.updateTiplist clicked");
-        this.tipView.setTipList(tipList);
-        System.out.println(tipList);
-    }
+//    public void updateTiplist(ArrayList<Tip> tipList) {
+//        System.out.println("TipPresenter.updateTiplist clicked");
+//        this.tipView.setTipList(tipList);
+//        System.out.println(tipList);
+//    }
 
 
     @Override

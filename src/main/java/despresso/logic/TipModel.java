@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @SpringComponent
 public class TipModel {
     private ArrayList<Tip> tipList = new ArrayList<>();
-    private List<Tip> filteredTiplist = new ArrayList<>();
+    private ArrayList<Tip> filteredTiplist = new ArrayList<>();
 
     public  TipModel(){
         for(int i = 0; i <= 10; i++){
@@ -20,10 +20,16 @@ public class TipModel {
     }
 
     /** filterTipList() takes as input duration or type or location of tip filters the tipList accordingly. */
-    public void filterTipList(TipDuration duration, TipType type, TipLocation location){
-        System.out.println("TipList.filterTipList() executed...");
-        this.filteredTiplist = this.tipList.stream()
-                .filter(e -> e.getTipDuration() == duration || e.getTipType() == type || e.getTipLocation() == location)
+    public void filterTipList(Tip tip) {
+        this.filteredTiplist = (ArrayList<Tip>) this.tipList.stream()
+                .filter(e -> e.getAnger() == tip.getAnger() || !tip.getAnger())
+                .filter(e -> e.getDisgust() == tip.getDisgust() || !tip.getDisgust())
+                .filter(e -> e.getAnxiety() == tip.getAnxiety() || !tip.getAnxiety())
+                .filter(e -> e.getSadness() == tip.getSadness() || !tip.getSadness())
+                .filter(e -> e.getFear() == tip.getFear() || !tip.getFear())
+                .filter(e -> e.getTipDuration() == tip.getTipDuration() || tip.getTipDuration() == null)
+                .filter(e -> e.getTipLocation() == tip.getTipLocation() || tip.getTipLocation() == null)
+                .filter(e -> e.getTipType() == tip.getTipType() || tip.getTipType() == null)
                 .collect(Collectors.toList());
     }
 
@@ -31,4 +37,5 @@ public class TipModel {
     public ArrayList<Tip> getTipList() {
         return this.tipList;
     }
+    public ArrayList<Tip> getFilteredTipList(){return this.filteredTiplist;}
 }
