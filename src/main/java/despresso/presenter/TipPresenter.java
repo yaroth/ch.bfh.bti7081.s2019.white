@@ -83,9 +83,19 @@ public class TipPresenter implements TipObserverInterface {
 
     @Override
     public void updateCancel() {
+        // clear Buttons
+        this.tipView.clearAnger();
+        this.tipView.clearAnxiety();
+        this.tipView.clearDisgust();
+        this.tipView.clearFear();
+        this.tipView.clearSadness();
+        this.tipView.clearLocation();
+        this.tipView.clearType();
+        this.tipView.clearDuration();
+        // display unfiltered tiplist
+        this.tipView.setTipList(this.tipModel.getTipList());
         System.out.println("TipPresenter.updateCancel clicked");
     }
-
     public void updateTiplist(ArrayList<Tip> tipList) {
         System.out.println("TipPresenter.updateTiplist clicked");
         this.tipView.setTipList(tipList);
