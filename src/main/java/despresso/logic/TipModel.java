@@ -14,8 +14,9 @@ public class TipModel {
     private ArrayList<Tip> filteredTiplist = new ArrayList<>();
 
     public  TipModel(){
-        for(int i = 0; i <= 10; i++){
-            tipList.add(new Tip(TipDuration.values()[i%3], TipType.values()[i%2], TipLocation.values()[i%3], "description"+i));
+        for(int i = 0; i <= 30; i++){
+            this.tipList.add(new Tip(this.convertToBoolean(i), this.convertToBoolean(i), this.convertToBoolean(i), this.convertToBoolean(i+1), this.convertToBoolean(i+1),
+                    TipDuration.values()[i%3], TipType.values()[i%2], TipLocation.values()[i%3], "description"+i));
         }
     }
 
@@ -38,4 +39,7 @@ public class TipModel {
         return this.tipList;
     }
     public ArrayList<Tip> getFilteredTipList(){return this.filteredTiplist;}
+    private Boolean convertToBoolean(int i) {
+        return (i%2) == 1;
+    }
 }
