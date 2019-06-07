@@ -1,0 +1,27 @@
+[INFO] Done SpotBugs Analysis....
+[INFO] 
+[INFO] <<< spotbugs-maven-plugin:3.1.11:check (default-cli) < :spotbugs @ despresso <<<
+[INFO] 
+[INFO] --- spotbugs-maven-plugin:3.1.11:check (default-cli) @ despresso ---
+[INFO] BugInstance size is 19
+[INFO] Error size is 0
+[INFO] Total bugs: 19
+[ERROR] Dead store to homePresenter in new despresso.DespressoMain() [despresso.DespressoMain] At DespressoMain.java:[line 43] DLS_DEAD_LOCAL_STORE
+[ERROR] Dead store to moodPresenter in new despresso.DespressoMain() [despresso.DespressoMain] At DespressoMain.java:[line 53] DLS_DEAD_LOCAL_STORE
+[ERROR] Dead store to settingsPresenter in new despresso.DespressoMain() [despresso.DespressoMain] At DespressoMain.java:[line 48] DLS_DEAD_LOCAL_STORE
+[ERROR] Unread field: despresso.MoodState.moodAccuracy [despresso.MoodState] At MoodState.java:[line 15] URF_UNREAD_FIELD
+[ERROR] Switch statement found in despresso.calculator.CalculatorPresenter.buttonClick(char) where default case is missing [despresso.calculator.CalculatorPresenter] At CalculatorPresenter.java:[lines 23-37] SF_SWITCH_NO_DEFAULT
+[ERROR] Empty database password in despresso.persistence.H2DBConnector.databaseGet(DataType, String) [despresso.persistence.H2DBConnector] At H2DBConnector.java:[line 36] DMI_EMPTY_DB_PASSWORD
+[ERROR] Empty database password in despresso.persistence.H2DBConnector.databaseModify(String) [despresso.persistence.H2DBConnector] At H2DBConnector.java:[line 75] DMI_EMPTY_DB_PASSWORD
+[ERROR] despresso.persistence.H2DBConnector.databaseGet(DataType, String) may fail to clean up java.sql.ResultSet on checked exception [despresso.persistence.H2DBConnector, despresso.persistence.H2DBConnector, despresso.persistence.H2DBConnector, despresso.persistence.H2DBConnector, despresso.persistence.H2DBConnector, despresso.persistence.H2DBConnector, despresso.persistence.H2DBConnector, despresso.persistence.H2DBConnector, despresso.persistence.H2DBConnector] Obligation to clean up resource created at H2DBConnector.java:[line 41] is not dischargedPath continues at H2DBConnector.java:[line 43]Path continues at H2DBConnector.java:[line 44]Path continues at H2DBConnector.java:[line 50]Path continues at H2DBConnector.java:[line 52]Path continues at H2DBConnector.java:[line 57]Path continues at H2DBConnector.java:[line 58]Path continues at H2DBConnector.java:[line 61]Path continues at H2DBConnector.java:[line 63] OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE
+[ERROR] despresso.persistence.H2DBConnector.databaseModify(String) may fail to close Connection [despresso.persistence.H2DBConnector] At H2DBConnector.java:[line 75] ODR_OPEN_DATABASE_RESOURCE
+[ERROR] Empty database password in despresso.persistence.UserRepository.databaseGet(String) [despresso.persistence.UserRepository] At UserRepository.java:[line 58] DMI_EMPTY_DB_PASSWORD
+[ERROR] Empty database password in despresso.persistence.UserRepository.databaseModify(String) [despresso.persistence.UserRepository] At UserRepository.java:[line 94] DMI_EMPTY_DB_PASSWORD
+[ERROR] despresso.persistence.UserRepository.databaseGet(String) may fail to clean up java.sql.ResultSet on checked exception [despresso.persistence.UserRepository, despresso.persistence.UserRepository, despresso.persistence.UserRepository, despresso.persistence.UserRepository, despresso.persistence.UserRepository, despresso.persistence.UserRepository, despresso.persistence.UserRepository, despresso.persistence.UserRepository] Obligation to clean up resource created at UserRepository.java:[line 63] is not dischargedPath continues at UserRepository.java:[line 64]Path continues at UserRepository.java:[line 69]Path continues at UserRepository.java:[line 71]Path continues at UserRepository.java:[line 76]Path continues at UserRepository.java:[line 77]Path continues at UserRepository.java:[line 80]Path continues at UserRepository.java:[line 82] OBL_UNSATISFIED_OBLIGATION_EXCEPTION_EDGE
+[ERROR] despresso.persistence.UserRepository.databaseModify(String) may fail to close Connection [despresso.persistence.UserRepository] At UserRepository.java:[line 94] ODR_OPEN_DATABASE_RESOURCE
+[ERROR] Read of unwritten field label in despresso.view.CalendarViewImpl.setLabel(String) [despresso.view.CalendarViewImpl] At CalendarViewImpl.java:[line 94] NP_UNWRITTEN_FIELD
+[ERROR] Class despresso.view.CalendarViewImpl defines non-transient non-serializable instance field _presenter [despresso.view.CalendarViewImpl] In CalendarViewImpl.java SE_BAD_FIELD
+[ERROR] Private method despresso.view.CalendarViewImpl.createTimedEntry(FullCalendar, String, LocalDateTime, int, String) is never called [despresso.view.CalendarViewImpl] At CalendarViewImpl.java:[lines 129-130] UPM_UNCALLED_PRIVATE_METHOD
+[ERROR] Unwritten field: despresso.view.CalendarViewImpl.label [despresso.view.CalendarViewImpl] At CalendarViewImpl.java:[line 94] UWF_UNWRITTEN_FIELD
+[ERROR] Dead store to accordionPanel1 in new despresso.view.TipsViewImpl() [despresso.view.TipsViewImpl] At TipsViewImpl.java:[line 63] DLS_DEAD_LOCAL_STORE
+[ERROR] Class despresso.view.TipsViewImpl defines non-transient non-serializable instance field tipList [despresso.view.TipsViewImpl] In TipsViewImpl.java SE_BAD_FIELD
