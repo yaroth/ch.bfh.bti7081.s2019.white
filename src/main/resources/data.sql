@@ -1,9 +1,12 @@
+-- Start data.sql
+
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS tip;
 DROP TABLE IF EXISTS tipLocation;
 DROP TABLE IF EXISTS tipType;
 DROP TABLE IF EXISTS tipDuration;
 DROP TABLE IF EXISTS feeling;
+DROP TABLE IF EXISTS tipFeeling;
 
 /** must match properties of <code>despresso.logic.User</code> class
  */
@@ -105,6 +108,24 @@ insert into tip (location, type, duration, description) values ( 2, 1, 2, 'descr
 insert into tip (location, type, duration, description) values ( 3, 2, 3, 'description39');
 insert into tip (location, type, duration, description) values ( 1, 1, 1, 'description31');
 
+-- create a table listing all the feelings for each tip, i.e.
+-- id: 1, tipID: 2, feelingID: 4
+-- id: 2, tipID: 2, feelingID: 5
+-- id: 3, tipID: 2, feelingID: 6
+CREATE TABLE tipFeeling (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tipID INT NOT NULL,
+    feelingID int not null,
+    foreign key (tipID) references tip,
+    foreign key (feelingID) references feeling
+);
+insert into tipFeeling (tipID, feelingID) values ( 1,3 );
+insert into tipFeeling (tipID, feelingID) values ( 1,5 );
+insert into tipFeeling (tipID, feelingID) values ( 1,6 );
+insert into tipFeeling (tipID, feelingID) values ( 1,7 );
+insert into tipFeeling (tipID, feelingID) values ( 2,2 );
+insert into tipFeeling (tipID, feelingID) values ( 2,4 );
+insert into tipFeeling (tipID, feelingID) values ( 2,5 );
 
 -- Calendar
 DROP TABLE IF EXISTS calendarEntry;
