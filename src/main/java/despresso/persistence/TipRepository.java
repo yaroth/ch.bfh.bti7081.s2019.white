@@ -1,6 +1,9 @@
 package despresso.persistence;
 
 import despresso.logic.Tip;
+import despresso.logic.TipDuration;
+import despresso.logic.TipLocation;
+import despresso.logic.TipType;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -20,8 +23,12 @@ public class TipRepository implements RepositoryInterface<Tip> {
     @Override
     public List<Tip> getAll() {
         String query = "SELECT * FROM tip";
-        List<Tip> resultList = databaseGet(query);
-        return resultList;
+        List<Tip> tipList = databaseGet(query);
+        TipFeelingRepository tipFeelingRepository = new TipFeelingRepository();
+        for (Tip tip : tipList) {
+            tip.setFeelingList(tipFeelingRepository.getFeelingListforTip(tip));
+        }
+        return tipList;
     }
 
     @Override
@@ -131,10 +138,13 @@ public class TipRepository implements RepositoryInterface<Tip> {
         while (resultSet.next()) {
             Tip tip = new Tip();
             tip.setId(Integer.parseInt(resultSet.getString("id")));
-            // TODO: implement correct methods
-            /*tip.setFname(resultSet.getString("fname"));
-            tip.setLname(resultSet.getString("lname"));
-            tip.setDob(LocalDate.parse(resultSet.getString("dob")));*/
+            int locationInt = Integer.parseInt(resultSet.getString("location"))-1;
+            tip.setTipLocation(TipLocation.values()[locationInt]);
+            int typeInt = Integer.parseInt(resultSet.getString("type"))-1;
+            tip.setTipType(TipType.values()[typeInt]);
+            int durationInt = Integer.parseInt(resultSet.getString("duration"))-1;
+            tip.setTipDuration(TipDuration.values()[durationInt]);
+            tip.setDescription(resultSet.getString("description"));
             tipList.add(tip);
         }
         return tipList;
