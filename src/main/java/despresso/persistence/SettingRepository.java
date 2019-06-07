@@ -1,14 +1,12 @@
 package despresso.persistence;
 
-import despresso.logic.Tip;
+import despresso.logic.Setting;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TipRepository implements RepositoryInterface<Tip> {
+public class SettingRepository implements RepositoryInterface<Setting> {
 
     private final String DB_URL = "jdbc:h2:mem:database";
     private final String JDBC_DRIVER = "org.h2.Driver";
@@ -18,34 +16,34 @@ public class TipRepository implements RepositoryInterface<Tip> {
 
     // TODO: never make a call to get ALL data!!!
     @Override
-    public List<Tip> getAll() {
-        String query = "SELECT * FROM tip";
-        List<Tip> resultList = databaseGet(query);
+    public List<Setting> getAll() {
+        String query = "SELECT * FROM setting";
+        List<Setting> resultList = databaseGet(query);
         return resultList;
     }
 
     @Override
-    public Tip getByID(int id) {
-        String query = "SELECT * FROM tip where id='" + id + "'";
-        List<Tip> resultList = databaseGet(query);
+    public Setting getByID(int id) {
+        String query = "SELECT * FROM setting where id='" + id + "'";
+        List<Setting> resultList = databaseGet(query);
         if (resultList.size() > 0) return resultList.get(0);
         else return null;
     }
 
     @Override
-    public void update(Tip tip) {
-        String query = "UPDATE tip SET";
+    public void update(Setting setting) {
+        String query = "UPDATE setting SET";
         // TODO: implement correct methods
-        /*query += " fname='" + tip.getFname() + "', ";
-        query += " lname='" + tip.getLname() + "', ";
+        /*query += " fname='" + setting.getFname() + "', ";
+        query += " lname='" + setting.getLname() + "', ";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
-        query += " dob = '" + tip.getDob().format(formatter) + "'";*/
-        query += " WHERE id='" + tip.getId() + "'";
+        query += " dob = '" + setting.getDob().format(formatter) + "'";
+        query += " WHERE id='" + setting.getId() + "'";*/
         databaseModify(query);
     }
 
-    private List<Tip> databaseGet(String query) {
-        List<Tip> resultList = new ArrayList<>();
+    private List<Setting> databaseGet(String query) {
+        List<Setting> resultList = new ArrayList<>();
         Connection connection = null;
         Statement statement = null;
 
@@ -60,7 +58,7 @@ public class TipRepository implements RepositoryInterface<Tip> {
 
             //execute query
             ResultSet resultSet = statement.executeQuery(query);
-            resultList = populateTipList(resultSet);
+            resultList = populateSettingList(resultSet);
 
             // STEP 4: Clean-up environment
             statement.close();
@@ -126,38 +124,40 @@ public class TipRepository implements RepositoryInterface<Tip> {
         }
     }
 
-    private List<Tip> populateTipList(ResultSet resultSet) throws SQLException {
-        List<Tip> tipList = new ArrayList<>();
+    private List<Setting> populateSettingList(ResultSet resultSet) throws SQLException {
+        List<Setting> userList = new ArrayList<>();
         while (resultSet.next()) {
-            Tip tip = new Tip();
-            tip.setId(Integer.parseInt(resultSet.getString("id")));
+            Setting setting = new Setting();
             // TODO: implement correct methods
-            /*tip.setFname(resultSet.getString("fname"));
-            tip.setLname(resultSet.getString("lname"));
-            tip.setDob(LocalDate.parse(resultSet.getString("dob")));*/
-            tipList.add(tip);
+          /*  setting.setId(Integer.parseInt(resultSet.getString("id")));
+            setting.setFname(resultSet.getString("fname"));
+            setting.setLname(resultSet.getString("lname"));
+            setting.setDob(LocalDate.parse(resultSet.getString("dob")));*/
+            userList.add(setting);
         }
-        return tipList;
+        return userList;
     }
 
 
     @Override
-    public void insert(Tip tip) {
+    public void insert(Setting Setting) {
         String query = "INSERT INTO ";
+        Setting setting = (Setting) Setting;
         // TODO: implement correct methods
-/*        query += "tip (fname, lname, dob) VALUES (";
-        query += "'" + tip.getFname() + "', ";
-        query += "'" + tip.getLname() + "', ";
+
+      /*  query += "setting (fname, lname, dob) VALUES (";
+        query += "'" + setting.getFname() + "', ";
+        query += "'" + setting.getLname() + "', ";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
-        query += "'" + tip.getDob().format(formatter) + "'";*/
+        query += "'" + setting.getDob().format(formatter) + "'";*/
         query += ")";
         databaseModify(query);
 
     }
 
     @Override
-    public void delete(Tip tip) {
-        String query = "DELETE FROM tip WHERE id='" + tip.getId() + "'";
+    public void delete(Setting setting) {
+        String query = "DELETE FROM setting WHERE id='" + setting.getId() + "'";
         databaseModify(query);
     }
 }

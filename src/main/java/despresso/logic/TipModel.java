@@ -18,6 +18,9 @@ public class TipModel {
             this.tipList.add(new Tip(this.convertToBoolean(i), this.convertToBoolean(i), this.convertToBoolean(i), this.convertToBoolean(i+1), this.convertToBoolean(i+1),
                     TipDuration.values()[i%3], TipType.values()[i%2], TipLocation.values()[i%3], "description"+i));
         }
+        for (Tip t : tipList) {
+            System.out.println(t);
+        }
     }
 
     /** filterTipList() takes as input duration or type or location of tip filters the tipList accordingly. */

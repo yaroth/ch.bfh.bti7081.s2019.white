@@ -13,11 +13,13 @@ public class Tip {
     private boolean sadness;
     private boolean fear;
 
+    private int id;
     private TipDuration tipDuration;
     private TipType tipType;
     private TipLocation tipLocation;
     private String description;
 
+    public Tip(){}
     public Tip(boolean anger, boolean disgust, boolean anxiety, boolean sadness, boolean fear, TipDuration tipDuration, TipType tipType, TipLocation tipLocation, String description){
         this.anger = anger;
         this.disgust = disgust;
@@ -112,5 +114,21 @@ public class Tip {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString(){
+
+        String tiptoDB = String.format("insert into tip (location, type, duration, description) values ( %d, %d, %d, '%s');", tipLocation.ordinal(), tipType.ordinal(), tipDuration.ordinal(), description);
+
+        return tiptoDB;
     }
 }
