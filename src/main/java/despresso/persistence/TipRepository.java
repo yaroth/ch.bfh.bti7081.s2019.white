@@ -1,9 +1,6 @@
 package despresso.persistence;
 
-import despresso.logic.Tip;
-import despresso.logic.TipDuration;
-import despresso.logic.TipLocation;
-import despresso.logic.TipType;
+import despresso.logic.*;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -35,8 +32,12 @@ public class TipRepository implements RepositoryInterface<Tip> {
     public Tip getByID(int id) {
         String query = "SELECT * FROM tip where id='" + id + "'";
         List<Tip> resultList = databaseGet(query);
-        if (resultList.size() > 0) return resultList.get(0);
-        else return null;
+        if (resultList.size() > 0) {
+            Tip tip = resultList.get(0);
+            TipFeelingRepository tipFeelingRepository = new TipFeelingRepository();
+            tip.setFeelingList(tipFeelingRepository.getFeelingListforTip(tip));
+            return tip;
+        } else return null;
     }
 
     @Override
@@ -138,11 +139,11 @@ public class TipRepository implements RepositoryInterface<Tip> {
         while (resultSet.next()) {
             Tip tip = new Tip();
             tip.setId(Integer.parseInt(resultSet.getString("id")));
-            int locationInt = Integer.parseInt(resultSet.getString("location"))-1;
+            int locationInt = Integer.parseInt(resultSet.getString("location")) - 1;
             tip.setTipLocation(TipLocation.values()[locationInt]);
-            int typeInt = Integer.parseInt(resultSet.getString("type"))-1;
+            int typeInt = Integer.parseInt(resultSet.getString("type")) - 1;
             tip.setTipType(TipType.values()[typeInt]);
-            int durationInt = Integer.parseInt(resultSet.getString("duration"))-1;
+            int durationInt = Integer.parseInt(resultSet.getString("duration")) - 1;
             tip.setTipDuration(TipDuration.values()[durationInt]);
             tip.setDescription(resultSet.getString("description"));
             tipList.add(tip);
@@ -154,14 +155,20 @@ public class TipRepository implements RepositoryInterface<Tip> {
     @Override
     public void insert(Tip tip) {
         String query = "INSERT INTO ";
-        // TODO: implement correct methods
-/*        query += "tip (fname, lname, dob) VALUES (";
-        query += "'" + tip.getFname() + "', ";
-        query += "'" + tip.getLname() + "', ";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
-        query += "'" + tip.getDob().format(formatter) + "'";*/
+        query += "tip (duration, type, location, description) VALUES (";
+        query += "'" + tip.getTipDuration() + "', ";
+        query += "'" + tip.getTipType() + "', ";
+        query += "'" + tip.getTipLocation() + "', ";
+        query += "'" + tip.getDescription() + "', ";
         query += ")";
         databaseModify(query);
+        // insert into tipfeeling table!
+        for (Feeling feeling : tip.getFeelingList()) {
+            // TODO: get id from DB, NOT from Feeling class!!!
+            int feelingID_in_DB = feeling.ordinal()+1;
+            query = "Insert into tipfeeling (tipID, feelingID) values ( "+tip.getId()+","+feelingID_in_DB+" );";
+            databaseModify(query);
+        }
 
     }
 

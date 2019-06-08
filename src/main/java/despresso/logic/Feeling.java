@@ -1,6 +1,7 @@
 package despresso.logic;
 
 public enum Feeling {
+    // DO NOT change order of feelings!
     ANGER,
     DISGUST,
     ANXIETY,

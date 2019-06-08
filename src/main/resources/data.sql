@@ -28,6 +28,7 @@ CREATE TABLE feeling (
      id INT AUTO_INCREMENT  PRIMARY KEY,
      description VARCHAR(50) NOT NULL
 );
+-- DO NOT change order of feelings!
 INSERT INTO feeling (description) VALUES
 ('ANGER'),('DISGUST'),('ANXIETY'),('SADNESS'),('FEAR'),('JOY'),('HAPPINESS'),
 ('LOVE'),('FREEDOM'),('TRUST'),('SHAME'),('KINDNESS'),('PITY'),('SELFPITY'),
@@ -112,6 +113,7 @@ insert into tip (location, type, duration, description) values ( 1, 1, 1, 'descr
 -- id: 1, tipID: 2, feelingID: 4
 -- id: 2, tipID: 2, feelingID: 5
 -- id: 3, tipID: 2, feelingID: 6
+-- TODO: if tip is deleted, delete tipfeeling with same tipid too
 CREATE TABLE tipFeeling (
     id INT AUTO_INCREMENT PRIMARY KEY,
     tipID INT NOT NULL,
