@@ -10,10 +10,13 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.Views;
-import despresso.presenter.MainObserverInterface;
+import despresso.logic.CalendarEntry;
 import despresso.presenter.ObserverInterface;
-import org.vaadin.zhe.PaperRangeSlider;
+import org.vaadin.stefan.fullcalendar.Entry;
+import org.vaadin.stefan.fullcalendar.FullCalendar;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +29,10 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
     private List<ObserverInterface> listeners = new ArrayList<>();
     private MoodViewImpl moodView;
     private CalendarViewImpl calendarView;
+    private CalendarEntry calendarEntry;
+    private FullCalendar calendar = new FullCalendar();
 
-    HorizontalLayout moodTitleLine = new HorizontalLayout();
-    HorizontalLayout moodSliderContainer = new HorizontalLayout();
     HorizontalLayout calendarTitleLine = new HorizontalLayout();
-    HorizontalLayout calendarContainer = new HorizontalLayout();
 
     private Button calendarConfirmButton;
 
@@ -44,14 +46,36 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
     }
 
     private void initView() {
-        //initMoodViewContainer();
         //showCalendarNotification();
-        this.mainMoodArea.add(moodTitleLine, moodSliderContainer);
+        //adds MoodView
         mainMoodArea.add(moodView);
 
-        this.mainCalendarArea.add(calendarTitleLine, calendarContainer);
-        this.mainCalendarArea.add(calendarView);
+        //adds CalendarView
+        Label calendarTitle = new Label("Your next appointment");
+        calendarTitleLine.add(calendarTitle);
+        this.mainCalendarArea.add(calendarTitleLine);
+        calendarConfirmButton = createButton(Views.DONE);
+        //mainCalendarArea.add(calendarView, calendarConfirmButton);
+        loadNextDueCalendarEntry();
+        mainCalendarArea.add(calendar);
         this.add(mainMoodArea, mainCalendarArea);
+
+    }
+
+    private void loadNextDueCalendarEntry() {
+        LocalDateTime date = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        Label label = new Label(date.format(formatter));
+        List<CalendarEntry> nextCalendarEntries = calendarView.getNextCalendarEntriesSorted();
+        if (!nextCalendarEntries.isEmpty()) {
+            CalendarEntry nextEntry = nextCalendarEntries.get(0);
+            calendar.addEntry(new Entry("", nextEntry.getTitle(), nextEntry.getStart(), nextEntry.getEnd(), false, true, nextEntry.getDescription(), nextEntry.getColor()));
+            //calendarEntry = new CalendarEntry(nextEntry.getUserId(), nextEntry.getStart(), nextEntry.getEnd(), nextEntry.getTitle(), nextEntry.getDescription(), nextEntry.getColor(), nextEntry.getIsDone());
+        } else {
+
+        }
+
+
 
     }
 
@@ -66,10 +90,6 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
 
     }
 
-
-    private void initMoodViewContainer() {
-        mainMoodArea.add(moodView);
-    }
 
     /*private void showCalendarNotification() {
 

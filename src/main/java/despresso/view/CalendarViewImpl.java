@@ -251,4 +251,16 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
             _calendar.addEntry(new Entry("", entry.getTitle(), entry.getStart(), entry.getEnd(), false, true, entry.getDescription(), entry.getColor()));
         }
     }
+
+    public List<CalendarEntry> getNextCalendarEntriesSorted() {
+        List<CalendarEntry> calendarEntries = new ArrayList<>();
+        LocalDateTime date = LocalDateTime.now();
+        for (CalendarEntry entry: _calendarList) {
+            if (date.isBefore(entry.getStart()))
+            calendarEntries.add(entry);
+        }
+
+        calendarEntries.sort(Comparator.comparing(CalendarEntry::getStart));
+        return calendarEntries;
+    }
 }
