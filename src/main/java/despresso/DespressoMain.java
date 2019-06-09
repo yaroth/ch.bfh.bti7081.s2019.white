@@ -37,11 +37,6 @@ public class DespressoMain extends VerticalLayout {
         // Create the model and the Vaadin view implementation
         MainModel model = new MainModel();
 
-        // Home MVP
-        HomeViewImpl homeView = new HomeViewImpl();
-        HomeModel homeModel = new HomeModel();
-        HomePresenter homePresenter = new HomePresenter(homeModel, homeView);
-
         // Settings MVP
         SettingsViewImpl settingsView = new SettingsViewImpl();
         SettingsModel settingsModel = new SettingsModel();
@@ -53,6 +48,11 @@ public class DespressoMain extends VerticalLayout {
         MoodPresenter moodPresenter = new MoodPresenter(moodModel, moodView);
 
         CalendarViewImpl calendarView = new CalendarViewImpl();
+
+        // Home MVP
+        HomeViewImpl homeView = new HomeViewImpl(moodView);
+        HomeModel homeModel = new HomeModel();
+        HomePresenter homePresenter = new HomePresenter(homeModel, homeView);
 
         // Tips View MVP
         TipsViewImpl tipsView = new TipsViewImpl();

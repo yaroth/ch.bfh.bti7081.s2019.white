@@ -7,6 +7,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import despresso.Views;
 import despresso.presenter.ObserverInterface;
 import org.vaadin.zhe.PaperRangeSlider;
 
@@ -26,6 +27,7 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface<Obs
     private List<ObserverInterface> listeners = new ArrayList<>();
     private VerticalLayout mainLayout = new VerticalLayout();
     private VerticalLayout previousLayout = mainLayout;
+    PaperRangeSlider paperRangeSlider;
 
     public MoodViewImpl() {
         // Initialize view
@@ -64,22 +66,30 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface<Obs
     //  Subviews
 
     // The main view when first accessing mood view
-    private void initView() {
+    public void initView() {
 
         HorizontalLayout line1 = new HorizontalLayout();
-        line1.add(new Label("How is your mood now?"));
-
         HorizontalLayout line2 = new HorizontalLayout();
-
-        line2.add(
-            createMoodButton("Good"),
-            createMoodButton("Bad")
-        );
+        Label moodTitle = new Label("How are you feeling today?");
+        line1.add(moodTitle);
+        line2.add(new Label("Bad "), moodSliderHomeView(), new Label("Good "));
 
         this.mainLayout.add(line1);
         this.mainLayout.add(line2);
         this.previousLayout = mainLayout;
         this.add(mainLayout);
+    }
+
+    public PaperRangeSlider moodSliderHomeView() {
+
+        // Create a horizontal slider
+        paperRangeSlider = new PaperRangeSlider(-1, 1, 0, 0);
+        paperRangeSlider.setStep(1);
+        paperRangeSlider.setSingleSlider(true);
+        //Add listener
+        registerMainMoodSlider(paperRangeSlider);
+
+        return paperRangeSlider;
     }
 
     // View after choosing a mood
@@ -173,11 +183,25 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface<Obs
         slider.setSingleSlider(true);
         slider.addMaxValueChangeListener(
                 (ComponentEventListener<PaperRangeSlider.MaxValueChangeEvent>) event -> {
-            moodSliderValue = (int) event.getValueMax();
-            for (ObserverInterface listener : listeners)
-                listener.update("MoodSlider");
-        });
+                    moodSliderValue = (int) event.getValueMax();
+                    for (ObserverInterface listener : listeners)
+                        listener.update("MoodSlider");
+                });
         return slider;
+    }
+
+    private void registerMainMoodSlider(PaperRangeSlider paperRangeSlider) {
+        paperRangeSlider.addMaxValueChangeListener(
+                (ComponentEventListener<PaperRangeSlider.MaxValueChangeEvent>) event -> {
+                    double mood = event.getValueMax();
+                    if (mood < 0) {
+                        selectedMood = "Bad";
+                    } else if (mood > 0) {
+                        selectedMood = "Good";
+                    }
+                    for (ObserverInterface listener : listeners)
+                        listener.update("Mood");
+                });
     }
 
     // Immutable map to translate commands to button labels
