@@ -50,7 +50,7 @@ public class DespressoMain extends VerticalLayout {
         CalendarViewImpl calendarView = new CalendarViewImpl();
 
         // Home MVP
-        HomeViewImpl homeView = new HomeViewImpl(moodView);
+        HomeViewImpl homeView = new HomeViewImpl(moodView, calendarView);
         HomeModel homeModel = new HomeModel();
         HomePresenter homePresenter = new HomePresenter(homeModel, homeView);
 

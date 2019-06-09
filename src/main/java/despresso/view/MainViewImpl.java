@@ -102,6 +102,7 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface<Mai
 
     public void loadHomeView() {
         mainArea.removeAll();
+        homeView.resetView();
         mainArea.add(homeView);
     }
 

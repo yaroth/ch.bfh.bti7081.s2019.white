@@ -25,27 +25,32 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
     private VerticalLayout mainCalendarArea = new VerticalLayout();
     private List<ObserverInterface> listeners = new ArrayList<>();
     private MoodViewImpl moodView;
+    private CalendarViewImpl calendarView;
 
     HorizontalLayout moodTitleLine = new HorizontalLayout();
     HorizontalLayout moodSliderContainer = new HorizontalLayout();
-    HorizontalLayout line3 = new HorizontalLayout();
+    HorizontalLayout calendarTitleLine = new HorizontalLayout();
+    HorizontalLayout calendarContainer = new HorizontalLayout();
 
     private Button calendarConfirmButton;
 
     private Label label;
 
-    public HomeViewImpl(MoodViewImpl moodView) {
+    public HomeViewImpl(MoodViewImpl moodView, CalendarViewImpl calendarView) {
         this.moodView = moodView;
+        this.calendarView = calendarView;
         label = new Label();
         initView();
     }
 
     private void initView() {
         //initMoodViewContainer();
-        showCalendarNotification();
+        //showCalendarNotification();
         this.mainMoodArea.add(moodTitleLine, moodSliderContainer);
         mainMoodArea.add(moodView);
-        this.mainCalendarArea.add(line3);
+
+        this.mainCalendarArea.add(calendarTitleLine, calendarContainer);
+        this.mainCalendarArea.add(calendarView);
         this.add(mainMoodArea, mainCalendarArea);
 
     }
@@ -66,14 +71,14 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
         mainMoodArea.add(moodView);
     }
 
-    private void showCalendarNotification() {
+    /*private void showCalendarNotification() {
 
         Label calendarEntry = new Label(
                 "CalendarEntry");
         calendarConfirmButton = createButton(Views.DONE);
 
         line3.add(calendarEntry, calendarConfirmButton);
-    }
+    }*/
 
 
 
@@ -105,8 +110,10 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
 
     // Reset the home view
     public void resetView() {
-        remove(mainMoodArea);
+        remove(mainMoodArea, mainCalendarArea);
         mainMoodArea = new VerticalLayout();
+        mainCalendarArea = new VerticalLayout();
+        moodView.resetView();
         initView();
     }
 
