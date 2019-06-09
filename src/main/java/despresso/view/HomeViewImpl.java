@@ -2,8 +2,6 @@ package despresso.view;
 
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.spring.annotation.SpringComponent;
@@ -28,6 +26,7 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
     private Label calendarTitleLabel;
     private Label calendarContentLabel;
     private Label calendarTitle;
+    private CalendarEntry entry = null;
 
     private Button calendarConfirmButton;
 
@@ -46,9 +45,8 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
 
         //adds CalendarView
         calendarTitle = new Label("Your next appointment:");
-        calendarConfirmButton = createButton(Views.DONE);
         loadNextDueCalendarEntry();
-        mainCalendarArea.add(calendarTitle, calendarTitleLabel, calendarContentLabel);
+        mainCalendarArea.add(calendarTitle, calendarTitleLabel, calendarContentLabel, calendarConfirmButton);
         this.add(mainMoodArea, mainCalendarArea);
 
     }
@@ -57,13 +55,15 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
         List<CalendarEntry> nextCalendarEntries = calendarView.getNextCalendarEntriesSorted();
         if (!nextCalendarEntries.isEmpty()) {
-            CalendarEntry nextEntry = nextCalendarEntries.get(0);
-            calendarTitleLabel = new Label("Titel: " + nextEntry.getTitle());
-            LocalDateTime dueDate = nextEntry.getStart();
+            entry = nextCalendarEntries.get(0);
+            calendarTitleLabel = new Label("Titel: " + entry.getTitle());
+            LocalDateTime dueDate = entry.getStart();
             calendarContentLabel = new Label(("Termin um: " + dueDate.format(formatter)));
+            calendarConfirmButton = createButton(Views.DONE);
         } else {
             calendarTitleLabel = new Label("No appointment in the next hours.");
             calendarContentLabel = new Label("Have fun and enjoy life to the fullest!");
+            calendarConfirmButton = new Button();
         }
     }
 
@@ -94,10 +94,6 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
         }
     }
 
-    public void setLabel(String label) {
-        this.label.setText(label);
-    }
-
     public void loadMoodView() {
         mainMoodArea.removeAll();
         mainMoodArea.add(moodView);
@@ -112,33 +108,8 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
         initView();
     }
 
-    public void addConfirmationDialog(String text){
-
-        Dialog dialog = new Dialog();
-        dialog.add(new Label(text));
-
-        dialog.setCloseOnEsc(false);
-        dialog.setCloseOnOutsideClick(false);
-        Label messageLabel = new Label();
-
-        Button confirmButton;
-        confirmButton = new Button("Confirm", event -> {
-            messageLabel.setText("Confirmed!");
-            for (ObserverInterface listener : listeners)
-                listener.update(Views.CONFIRM.toString());
-            dialog.close();
-        });
-
-        confirmButton.addThemeVariants(ButtonVariant.LUMO_ERROR, ButtonVariant.LUMO_PRIMARY);
-        Button cancelButton = new Button("Cancel", event -> {
-            messageLabel.setText("Cancelled...");
-            for (ObserverInterface listener : listeners)
-                listener.update(Views.CANCEL.toString());
-            dialog.close();
-        });
-        dialog.add(confirmButton, cancelButton);
-
-        dialog.open();
+    public void closeCalendarEntry() {
+        calendarView.deleteCalendarEntry(entry);
+        resetView();
     }
-
 }

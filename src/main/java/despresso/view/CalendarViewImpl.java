@@ -252,6 +252,13 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
         }
     }
 
+    public void deleteCalendarEntry(CalendarEntry entry) {
+        if (entry != null) {
+            _calendarList.remove(entry);
+        }
+
+    }
+
     public List<CalendarEntry> getNextCalendarEntriesSorted() {
         List<CalendarEntry> calendarEntries = new ArrayList<>();
         LocalDateTime date = LocalDateTime.now();
