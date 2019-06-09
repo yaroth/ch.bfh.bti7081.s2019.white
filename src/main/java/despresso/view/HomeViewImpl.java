@@ -21,21 +21,33 @@ import java.util.List;
 @SpringComponent
 public class HomeViewImpl extends VerticalLayout implements SubjectInterface<ObserverInterface> {
 
+    private VerticalLayout mainMoodArea = new VerticalLayout();
+    private VerticalLayout mainCalendarArea = new VerticalLayout();
     private List<ObserverInterface> listeners = new ArrayList<>();
+    private MoodViewImpl moodView;
 
-    HorizontalLayout line1 = new HorizontalLayout();
-    HorizontalLayout line2 = new HorizontalLayout();
+    HorizontalLayout moodTitleLine = new HorizontalLayout();
+    HorizontalLayout moodSliderContainer = new HorizontalLayout();
     HorizontalLayout line3 = new HorizontalLayout();
 
     private Button calendarConfirmButton;
-    private PaperRangeSlider paperRangeSlider;
+
     private Label label;
 
-    public HomeViewImpl() {
+    public HomeViewImpl(MoodViewImpl moodView) {
+        this.moodView = moodView;
         label = new Label();
+        initView();
+    }
+
+    private void initView() {
+        //initMoodViewContainer();
         showCalendarNotification();
-        moodSliderHomeView();
-        add(line1, line2, line3);
+        this.mainMoodArea.add(moodTitleLine, moodSliderContainer);
+        mainMoodArea.add(moodView);
+        this.mainCalendarArea.add(line3);
+        this.add(mainMoodArea, mainCalendarArea);
+
     }
 
     @Override
@@ -49,6 +61,11 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
 
     }
 
+
+    private void initMoodViewContainer() {
+        mainMoodArea.add(moodView);
+    }
+
     private void showCalendarNotification() {
 
         Label calendarEntry = new Label(
@@ -59,23 +76,7 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
     }
 
 
-    private void moodSliderHomeView() {
 
-        Label label1 = new Label("How are you feeling today?");
-
-        // Create a horizontal slider
-        paperRangeSlider = new PaperRangeSlider(-1, 1, 0, 0);
-        paperRangeSlider.setStep(1);
-        paperRangeSlider.setSingleSlider(true);
-        Label currentMoodLabel = new Label("Your mood is " + paperRangeSlider.getValueMax());
-        //Add listener
-        paperRangeSlider.addMaxValueChangeListener(event -> currentMoodLabel.setText("Your mood is " + event.getValueMax()));
-        paperRangeSlider.addMaxValueChangeListener(event -> this.registerSliderObject(event));
-
-
-        line1.add(label1, currentMoodLabel);
-        line2.add(new Label("Negative "), paperRangeSlider, new Label("Positive "));
-    }
 
     private Button createButton(Views view) {
         if (view.getIcon() != null){
@@ -93,16 +94,20 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
         }
     }
 
-    private void registerSliderObject(PaperRangeSlider.MaxValueChangeEvent event) {
-        for (ObserverInterface listener : listeners) {
-            if (event.getSource().equals(paperRangeSlider)) {
-                listener.update(Views.MOOD.toString());
-            }
-        }
-    }
-
     public void setLabel(String label) {
         this.label.setText(label);
+    }
+
+    public void loadMoodView() {
+        mainMoodArea.removeAll();
+        mainMoodArea.add(moodView);
+    }
+
+    // Reset the home view
+    public void resetView() {
+        remove(mainMoodArea);
+        mainMoodArea = new VerticalLayout();
+        initView();
     }
 
     public void addConfirmationDialog(String text){
@@ -133,6 +138,5 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
 
         dialog.open();
     }
-
 
 }

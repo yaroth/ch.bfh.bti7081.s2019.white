@@ -46,6 +46,12 @@ public class MoodPresenter implements MoodObserverInterface {
 
     // Model: Set the accuracy of the mood selected with the slider
     @Override
+    public void mainMoodSlider() {
+        setMood();
+    }
+
+    // Model: Set the accuracy of the mood selected with the slider
+    @Override
     public void moodSlider() {
         model.setMoodAccuracy(view.getMoodSliderValue());
     }

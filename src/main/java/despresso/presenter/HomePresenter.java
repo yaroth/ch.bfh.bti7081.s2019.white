@@ -23,18 +23,25 @@ public class HomePresenter implements ObserverInterface {
 
     @Override
     public void update(String input) {
-        homeModel.doSomething();
-        if (input.equals(Views.MOOD.toString())) {
-            System.out.println("Load Mood");
+        switch(input) {
+            case "MoodSliderUpdate":
+                view.loadMoodView();
+                break;
+            case "Done":
+                closeCalendar();
+                break;
+            default:
+                System.out.println("Unknown command!");
         }
-        if (input.equals(Views.DONE.toString())){
-            view.addConfirmationDialog("Do you really want to close the Calendarentry?");
-            confirmed = "ok";
-            if (confirmed =="ok"){
-                view.setLabel(homeModel.closeCalendarEntry());
-            } else {
-                view.setLabel("not confirmed");
-            }
+    }
+
+    private void closeCalendar() {
+        view.addConfirmationDialog("Do you really want to close the Calendarentry?");
+        confirmed = "ok";
+        if (confirmed =="ok"){
+            view.setLabel(homeModel.closeCalendarEntry());
+        } else {
+            view.setLabel("not confirmed");
         }
     }
 }

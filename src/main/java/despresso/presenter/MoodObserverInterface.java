@@ -11,4 +11,6 @@ public interface MoodObserverInterface extends ObserverInterface {
 
     //Slider
     void moodSlider();
+
+    void mainMoodSlider();
 }
