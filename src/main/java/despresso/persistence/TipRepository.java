@@ -44,12 +44,26 @@ public class TipRepository implements RepositoryInterface<Tip> {
     public void update(Tip tip) {
         String query = "UPDATE tip SET";
         // TODO: implement correct methods
-        /*query += " fname='" + tip.getFname() + "', ";
-        query += " lname='" + tip.getLname() + "', ";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-dd");
-        query += " dob = '" + tip.getDob().format(formatter) + "'";*/
+        query += " duration='" + tip.getTipDuration() + "', ";
+        query += " type='" + tip.getTipType() + "', ";
+        query += " location='" + tip.getTipLocation() + "', ";
+        query += " description='" + tip.getDescription() + "', ";
         query += " WHERE id='" + tip.getId() + "'";
         databaseModify(query);
+        if (tip.getFeelingList() != null) {
+            // delete the tipfeeling entries for this tip
+            query = "DELETE FROM tipfeeling WHERE tipid='" + tip.getId() + "'";
+            databaseModify(query);
+            // re-enter the tipfeeling entries
+            query = "INSERT INTO tipfeeling (tipID, feelingID) values ";
+            for (Feeling feeling : tip.getFeelingList()) {
+                int feelingID_in_DB = feeling.ordinal() + 1;
+                query += "("  + tip.getId() + "," + feelingID_in_DB + " ), ";
+            }
+            int lastCommaIndex = query.lastIndexOf(",");
+            query.substring(0, lastCommaIndex);
+            databaseModify(query);
+        }
     }
 
     private List<Tip> databaseGet(String query) {
@@ -165,8 +179,8 @@ public class TipRepository implements RepositoryInterface<Tip> {
         // insert into tipfeeling table!
         for (Feeling feeling : tip.getFeelingList()) {
             // TODO: get id from DB, NOT from Feeling class!!!
-            int feelingID_in_DB = feeling.ordinal()+1;
-            query = "Insert into tipfeeling (tipID, feelingID) values ( "+tip.getId()+","+feelingID_in_DB+" );";
+            int feelingID_in_DB = feeling.ordinal() + 1;
+            query = "Insert into tipfeeling (tipID, feelingID) values ( " + tip.getId() + "," + feelingID_in_DB + " );";
             databaseModify(query);
         }
 
