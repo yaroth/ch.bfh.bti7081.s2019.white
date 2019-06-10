@@ -3,11 +3,11 @@ package despresso.logic;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.persistence.CalendarRepository;
-import org.springframework.expression.spel.ast.NullLiteral;
 import org.vaadin.stefan.fullcalendar.Entry;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 
 @UIScope
@@ -32,5 +32,10 @@ public class CalendarList extends ArrayList<CalendarEntry> {
 
     public void deleteCalendarEntry(Entry entry){
         this.stream().filter(m -> m.getId().equals(entry.getId())).findFirst().ifPresent(currentEntry -> _repository.delete(currentEntry));
+    }
+
+    public Optional<CalendarEntry> getNextCalendarEntry(){
+        LocalDateTime now = LocalDateTime.now();
+        return this.stream().filter(m -> m.getStart().isAfter(now) && !m.getIsDone()).findFirst();
     }
 }
