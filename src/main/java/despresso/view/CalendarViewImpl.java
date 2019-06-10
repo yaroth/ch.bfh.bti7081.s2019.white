@@ -16,6 +16,7 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import despresso.logic.CalendarEntry;
 import despresso.logic.CalendarList;
+import despresso.logic.CalendarModel;
 import despresso.presenter.CalendarObserverInterface;
 import despresso.presenter.CalendarPresenter;
 import org.vaadin.stefan.fullcalendar.*;
@@ -37,10 +38,12 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
     private List<CalendarObserverInterface> _listeners = new ArrayList<>();
     private Label label;
     private CalendarPresenter _presenter;
+    private CalendarModel calendarModel;
     private FullCalendar _calendar;
     private CalendarList _calendarList;
 
     public CalendarViewImpl() {
+        calendarModel = new CalendarModel();
 
         System.out.println("CalendarViewImpl created");
 
@@ -260,14 +263,6 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
     }
 
     public List<CalendarEntry> getNextCalendarEntriesSorted() {
-        List<CalendarEntry> calendarEntries = new ArrayList<>();
-        LocalDateTime date = LocalDateTime.now();
-        for (CalendarEntry entry: _calendarList) {
-            if (date.isBefore(entry.getStart()))
-            calendarEntries.add(entry);
-        }
-
-        calendarEntries.sort(Comparator.comparing(CalendarEntry::getStart));
-        return calendarEntries;
+        return calendarModel.sortCalendarEntriesByDateNow(_calendarList);
     }
 }

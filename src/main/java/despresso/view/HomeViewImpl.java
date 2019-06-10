@@ -60,10 +60,12 @@ public class HomeViewImpl extends VerticalLayout implements SubjectInterface<Obs
             LocalDateTime dueDate = entry.getStart();
             calendarContentLabel = new Label(("Termin um: " + dueDate.format(formatter)));
             calendarConfirmButton = createButton(Views.DONE);
+            calendarConfirmButton.setVisible(true);
         } else {
             calendarTitleLabel = new Label("No appointment in the next hours.");
             calendarContentLabel = new Label("Have fun and enjoy life to the fullest!");
             calendarConfirmButton = new Button();
+            calendarConfirmButton.setVisible(false);
         }
     }
 
