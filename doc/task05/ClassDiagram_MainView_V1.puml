@@ -110,6 +110,8 @@ package persistence {
 
     class TipRepository
 
+    class TipFeelingRepository
+
     class CalendarRepository
 
     class MoodRepository
@@ -179,6 +181,7 @@ SettingsObserverInterface <|-- HomePresenter
 
 /' Persistence '/
 RepositoryInterface <|-- TipRepository
+RepositoryInterface <|-- TipFeelingRepository
 RepositoryInterface <|-- CalendarRepository
 RepositoryInterface <|-- MoodRepository
 RepositoryInterface <|-- SettingsRepository
@@ -192,5 +195,6 @@ CalendarRepository --> h2database
 SettingsRepository --> h2database
 MoodRepository --> h2database
 TipRepository --> h2database
+TipFeelingRepository --> h2database
 
 @enduml
