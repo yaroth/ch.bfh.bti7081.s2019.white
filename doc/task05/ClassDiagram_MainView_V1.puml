@@ -95,6 +95,7 @@ package logic {
     class MoodModel
 
     class TipModel
+    class Tip
 
     class SettingsModel
 
@@ -150,6 +151,7 @@ CalendarPresenter "1" -- "1" CalendarModel
 
 
 CalendarModel "1" -> "n" CalendarEntry
+TipModel "1" -> "n" Tip
 
 MainModel "1" -> "1" CalendarModel
 
