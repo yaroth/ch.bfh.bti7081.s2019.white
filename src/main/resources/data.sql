@@ -31,7 +31,6 @@ DROP TABLE IF EXISTS calendarEntry;
 
 CREATE TABLE calendarEntry (
    id INT AUTO_INCREMENT PRIMARY KEY,
-   --userId int NOT NULL FOREIGN KEY(user),
    startTime DATETIME NOT NULL,
    endTime DATETIME NOT NULL,
    title VARCHAR(250) NOT NULL,
@@ -44,4 +43,4 @@ CREATE TABLE calendarEntry (
 INSERT INTO calendarEntry (title, startTime, endTime, description, color, isDone)
 VALUES
     ('Wandern', '2019-06-23 09:00:00', '2019-06-23 10:00:00', 'ins Berner Oberland', 'gray', false),
-    ('Rechnungen', '2019-06-27 09:00:00', '2019-06-23 10:00:00', 'Rechnungen bezahlen', 'orange', false);
+    ('Rechnungen', '2019-06-27 09:00:00', '2019-06-23 10:00:00', 'Handy- & Strom-Rechnung bezahlen', 'orange', false);
