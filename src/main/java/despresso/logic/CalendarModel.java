@@ -4,10 +4,9 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import org.vaadin.stefan.fullcalendar.*;
 
-import java.awt.*;
 import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.List;
 
 @UIScope
 @SpringComponent
@@ -18,5 +17,17 @@ public class CalendarModel {
 
     public CalendarModel(){
 
+    }
+
+    public java.util.List<CalendarEntry> sortCalendarEntriesByDateNow(CalendarList _calendarList) {
+        List<CalendarEntry> calendarEntries = new ArrayList<>();
+        LocalDateTime date = LocalDateTime.now();
+        for (CalendarEntry entry: _calendarList) {
+            if (date.isBefore(entry.getStart()))
+                calendarEntries.add(entry);
+        }
+
+        calendarEntries.sort(Comparator.comparing(CalendarEntry::getStart));
+        return calendarEntries;
     }
 }

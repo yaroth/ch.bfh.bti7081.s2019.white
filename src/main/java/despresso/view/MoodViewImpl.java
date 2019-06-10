@@ -82,23 +82,21 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface<Moo
     //  Subviews
 
     // The main view when first accessing mood view
-    private void initView() {
+    public void initView() {
 
         HorizontalLayout line1 = new HorizontalLayout();
-        line1.add(new Label("How is your mood now?"));
-
         HorizontalLayout line2 = new HorizontalLayout();
 
-        line2.add(
-            createMoodButton("Good"),
-            createMoodButton("Bad")
-        );
+        Label moodTitle = new Label("How are you feeling today?");
+        line1.add(moodTitle);
+        line2.add(new Label("Bad "), createMainMoodSlider(), new Label("Good "));
 
         this.mainLayout.add(line1);
         this.mainLayout.add(line2);
         this.previousLayout = mainLayout;
         this.add(mainLayout);
     }
+
 
     // View after choosing a mood
     public void showMoodOptions(String newMood) {
@@ -189,6 +187,25 @@ public class MoodViewImpl extends VerticalLayout implements SubjectInterface<Moo
 
     public int getMoodSliderValue() {
         return moodSliderValue;
+    }
+
+    //Creates the main mood slider
+    private PaperRangeSlider createMainMoodSlider() {
+        PaperRangeSlider mainSlider = new PaperRangeSlider(-1, 1, 0, 0);
+        mainSlider.setStep(1);
+        mainSlider.setSingleSlider(true);
+        mainSlider.addMaxValueChangeListener(
+                (ComponentEventListener<PaperRangeSlider.MaxValueChangeEvent>) event -> {
+                    double mood = event.getValueMax();
+                    if (mood < 0) {
+                        selectedMood = "Bad";
+                    } else if (mood > 0) {
+                        selectedMood = "Good";
+                    }
+                    for (MoodObserverInterface listener : listeners)
+                        listener.mainMoodSlider();
+                });
+        return mainSlider;
     }
 
     // Creates a new mood slider

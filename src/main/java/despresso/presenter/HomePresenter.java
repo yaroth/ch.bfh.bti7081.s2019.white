@@ -2,7 +2,6 @@ package despresso.presenter;
 
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
-import despresso.Views;
 import despresso.logic.HomeModel;
 import despresso.view.HomeViewImpl;
 
@@ -23,18 +22,15 @@ public class HomePresenter implements ObserverInterface {
 
     @Override
     public void update(String input) {
-        homeModel.doSomething();
-        if (input.equals(Views.MOOD.toString())) {
-            System.out.println("Load Mood");
-        }
-        if (input.equals(Views.DONE.toString())){
-            view.addConfirmationDialog("Do you really want to close the Calendarentry?");
-            confirmed = "ok";
-            if (confirmed =="ok"){
-                view.setLabel(homeModel.closeCalendarEntry());
-            } else {
-                view.setLabel("not confirmed");
-            }
+        switch(input) {
+            case "MoodSliderUpdate":
+                view.loadMoodView();
+                break;
+            case "Done":
+                view.closeCalendarEntry();
+                break;
+            default:
+                System.out.println("Unknown command!");
         }
     }
 }
