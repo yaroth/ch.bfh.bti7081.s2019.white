@@ -59,7 +59,6 @@ public class FilterTipListTest {
         assertTrue(locationResult);
         assertTrue(typeResult);
         assertTrue(durationResult);
-
     }
 }
 

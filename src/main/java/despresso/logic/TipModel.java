@@ -2,6 +2,7 @@ package despresso.logic;
 
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import despresso.persistence.TipRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,13 @@ import java.util.stream.Collectors;
 public class TipModel {
     private ArrayList<Tip> tipList = new ArrayList<>();
     private ArrayList<Tip> filteredTiplist = new ArrayList<>();
+    private TipRepository tipRepository = new TipRepository();
 
     public  TipModel(){
+        // Use this line of code when tipRepository.getAll() is ready <-------------------------------------------------
+        // this. tipList = this.tipRepository.getAll();
+
+        // Delete this mock tipList after tipRepository.getAll() is ready <---------------------------------------------
         for(int i = 0; i <= 30; i++){
             this.tipList.add(new Tip(this.convertToBoolean(i), this.convertToBoolean(i), this.convertToBoolean(i), this.convertToBoolean(i+1), this.convertToBoolean(i+1),
                     TipDuration.values()[i%3], TipType.values()[i%2], TipLocation.values()[i%3], "description"+i));
