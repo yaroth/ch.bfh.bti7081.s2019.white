@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @UIScope
 @SpringComponent
 public class CalendarEntry {
-    private String _userId;
+    private String _id;
     private LocalDateTime _startTime;
     private LocalDateTime _endTime;
     private String _title;
@@ -17,8 +17,8 @@ public class CalendarEntry {
     private String _color;
     private boolean _isDone;
 
-    public CalendarEntry(String userId, LocalDateTime startTime, LocalDateTime endTime, String title, String description, String color, boolean isDone){
-        _userId = userId;
+    public CalendarEntry(String id, LocalDateTime startTime, LocalDateTime endTime, String title, String description, String color, boolean isDone){
+        _id = id;
         _startTime = startTime;
         _endTime = endTime;
         _title = title;
@@ -27,8 +27,8 @@ public class CalendarEntry {
         _isDone = isDone;
     }
 
-    public String getUserId(){
-        return _userId;
+    public String getId(){
+        return _id;
     }
 
     public LocalDateTime getStart(){
@@ -55,9 +55,9 @@ public class CalendarEntry {
         return _isDone;
     }
 
-    public void setUserId(String userId)
+    public void setId(String id)
     {
-        _userId = userId;
+        _id = id;
     }
 
     public void setStart (LocalDateTime start){
