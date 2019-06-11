@@ -12,3 +12,18 @@ Negatives:
 - Viel Aufwand für die DB
 - Testing bleibt auf der Strecke.
 - Code review ist minimal.
+
+
+Name: Remo Hofmann
+
+Positives:
+- Arbeit und Aufteilung im Team
+- Sprints nach Scrum
+- Jeder konnte das Schema des MVP-Patterns durchspielen (Konzept ist nun klar).
+- Arbeiten mit Datenbank
+
+Negatives:
+- Vaadin als neues Tool zu wenig eingeführt.
+- Applikation läuft trotz langer Fehlersuche und vielen Tutorials auf Server mit mehreren Zugriffen nicht.
+- Debugging dauert immer sehr lange.
+- Datenbank einrichten mit hohem Aufwand verbunden.
