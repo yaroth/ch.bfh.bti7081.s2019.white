@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @UIScope
 @SpringComponent
-public class User implements DataTypeInterface {
+public class User {
 
     private int id;
     private String fname, lname;
