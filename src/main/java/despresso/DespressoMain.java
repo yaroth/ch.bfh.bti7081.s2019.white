@@ -4,14 +4,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.spring.annotation.SpringComponent;
-import com.vaadin.flow.spring.annotation.UIScope;
 import com.vaadin.flow.spring.annotation.VaadinSessionScope;
 import despresso.logic.*;
 import despresso.presenter.*;
 import despresso.view.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.context.annotation.SessionScope;
 
 /**
  * The main view contains several buttons and  listeners.
@@ -47,7 +43,10 @@ public class DespressoMain extends VerticalLayout {
         MoodModel moodModel = new MoodModel();
         MoodPresenter moodPresenter = new MoodPresenter(moodModel, moodView);
 
+        // Calendar MVP
         CalendarViewImpl calendarView = new CalendarViewImpl();
+        CalendarModel calendarModel = new CalendarModel();
+        CalendarPresenter calendarPresenter = new CalendarPresenter(calendarModel, calendarView);
 
         // Home MVP
         HomeViewImpl homeView = new HomeViewImpl(moodView, calendarView);

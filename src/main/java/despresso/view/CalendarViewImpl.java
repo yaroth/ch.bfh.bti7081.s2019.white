@@ -38,18 +38,37 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
     private List<CalendarObserverInterface> _listeners = new ArrayList<>();
     private Label label;
     private CalendarPresenter _presenter;
-    private CalendarModel calendarModel;
+    private CalendarModel _calendarModel;
     private FullCalendar _calendar;
     private CalendarList _calendarList;
 
     public CalendarViewImpl() {
-        calendarModel = new CalendarModel();
+        _calendarModel = new CalendarModel();
 
         System.out.println("CalendarViewImpl created");
 
         _calendarList = new CalendarList();
 
+    }
+
+    @Override
+    public void removeObserver(CalendarObserverInterface observer) {
+        _listeners.remove(observer);
+    }
+
+    @Override
+    public void addObserver(CalendarObserverInterface observer) {
+        _listeners.add(observer);
+    }
+
+    public void initializeCalendar(){
+
+        if (_calendar != null){
+            this.remove(_calendar);
+        }
+
         _calendar = new FullCalendar();
+
         _calendar.changeView(org.vaadin.stefan.fullcalendar.CalendarViewImpl.AGENDA_DAY);
         _calendar.setNowIndicatorShown(true);
         _calendar.setNumberClickable(true);
@@ -72,25 +91,10 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
             new EventDialog(_calendar, entry, true).open();
         });
 
+        loadCalendarEntries();
         initBaseLayoutSettings();
 
         this.add(_calendar);
-    }
-
-    @Override
-    public void removeObserver(CalendarObserverInterface observer) {
-        _listeners.remove(observer);
-    }
-
-    @Override
-    public void addObserver(CalendarObserverInterface observer) {
-        _listeners.add(observer);
-    }
-
-
-    public void setCalendarList(CalendarList calendarEntries) {
-        _calendarList = calendarEntries;
-        loadCalendarEntries();
     }
 
     public void setLabel(String label) {
@@ -174,8 +178,8 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
             TextField fieldEnd = new TextField("End");
             fieldEnd.setReadOnly(true);
 
-            fieldStart.setValue(calendar.getTimezone().formatWithZoneId(entry.getStartUTC()));
-            fieldEnd.setValue(calendar.getTimezone().formatWithZoneId(entry.getEndUTC()));
+            fieldStart.setValue(entry.getStart().toString());
+            fieldEnd.setValue(entry.getEnd().toString());
 
             Checkbox fieldAllDay = new Checkbox("All day event");
             fieldAllDay.setValue(entry.isAllDay());
@@ -255,7 +259,7 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
 
     private void loadCalendarEntries(){
         for (CalendarEntry entry : _calendarList){
-            _calendar.addEntry(new Entry("", entry.getTitle(), entry.getStart(), entry.getEnd(), false, true, entry.getDescription(), entry.getColor()));
+            _calendar.addEntry(new Entry(entry.getEntryId(), entry.getTitle(), entry.getStart(), entry.getEnd(), false, true, entry.getDescription(), entry.getColor()));
         }
     }
 
@@ -267,6 +271,6 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
     }
 
     public List<CalendarEntry> getNextCalendarEntriesSorted() {
-        return calendarModel.sortCalendarEntriesByDateNow(_calendarList);
+        return _calendarModel.sortCalendarEntriesByDateNow(_calendarList);
     }
 }
