@@ -165,5 +165,4 @@ public class CalendarRepository implements RepositoryInterface<CalendarEntry>{
         }
         return userList;
     }
-
 }

@@ -9,8 +9,7 @@ import java.time.LocalDateTime;
 @UIScope
 @SpringComponent
 public class CalendarEntry {
-    private int id;
-    private String _userId;
+    private String _id;
     private LocalDateTime _startTime;
     private LocalDateTime _endTime;
     private String _title;
@@ -18,8 +17,8 @@ public class CalendarEntry {
     private String _color;
     private boolean _isDone;
 
-    public CalendarEntry(String userId, LocalDateTime startTime, LocalDateTime endTime, String title, String description, String color, boolean isDone){
-        _userId = userId;
+    public CalendarEntry(String id, LocalDateTime startTime, LocalDateTime endTime, String title, String description, String color, boolean isDone){
+        _id = id;
         _startTime = startTime;
         _endTime = endTime;
         _title = title;
@@ -28,10 +27,8 @@ public class CalendarEntry {
         _isDone = isDone;
     }
 
-    public CalendarEntry(){}
-
-    public String getUserId(){
-        return _userId;
+    public String getId(){
+        return _id;
     }
 
     public LocalDateTime getStart(){
@@ -58,9 +55,9 @@ public class CalendarEntry {
         return _isDone;
     }
 
-    public void setUserId(String userId)
+    public void setId(String id)
     {
-        _userId = userId;
+        _id = id;
     }
 
     public void setStart (LocalDateTime start){
@@ -85,69 +82,5 @@ public class CalendarEntry {
 
     public void setIsDone(boolean isDone){
         _isDone = isDone;
-    }
-
-    public String get_userId() {
-        return _userId;
-    }
-
-    public void set_userId(String _userId) {
-        this._userId = _userId;
-    }
-
-    public LocalDateTime get_startTime() {
-        return _startTime;
-    }
-
-    public void set_startTime(LocalDateTime _startTime) {
-        this._startTime = _startTime;
-    }
-
-    public LocalDateTime get_endTime() {
-        return _endTime;
-    }
-
-    public void set_endTime(LocalDateTime _endTime) {
-        this._endTime = _endTime;
-    }
-
-    public String get_title() {
-        return _title;
-    }
-
-    public void set_title(String _title) {
-        this._title = _title;
-    }
-
-    public String get_description() {
-        return _description;
-    }
-
-    public void set_description(String _description) {
-        this._description = _description;
-    }
-
-    public String get_color() {
-        return _color;
-    }
-
-    public void set_color(String _color) {
-        this._color = _color;
-    }
-
-    public boolean is_isDone() {
-        return _isDone;
-    }
-
-    public void set_isDone(boolean _isDone) {
-        this._isDone = _isDone;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

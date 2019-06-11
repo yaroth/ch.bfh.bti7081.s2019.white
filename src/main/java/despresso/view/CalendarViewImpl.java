@@ -228,6 +228,7 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
             if (!newInstance) {
                 Button buttonRemove = new Button("Remove", e -> {
                     calendar.removeEntry(entry);
+                    deleteCalendarEntry(entry);
                     close();
                 });
                 ThemeList themeList = buttonRemove.getElement().getThemeList();
@@ -241,12 +242,15 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
     }
 
     private void createCalendarEntry(Entry entry) {
-        _calendarList.addCalendarEntry("currentUserId", entry.getStart(), entry.getEnd(), entry.getTitle(), entry.getDescription(), entry.getColor(), false);
-        System.out.println("calendar entry created!");
+        _calendarList.addCalendarEntry(entry.getId(), entry.getStart(), entry.getEnd(), entry.getTitle(), entry.getDescription(), entry.getColor(), false);
     }
 
     private void updateCalendarEntry(Entry entry){
         _calendarList.updateCalendarEntry(entry);
+    }
+
+    private void deleteCalendarEntry(Entry entry){
+        _calendarList.deleteCalendarEntry(entry);
     }
 
     private void loadCalendarEntries(){
