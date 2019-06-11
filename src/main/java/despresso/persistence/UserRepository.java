@@ -1,7 +1,5 @@
 package despresso.persistence;
 
-import despresso.DataType;
-import despresso.logic.User;
 import despresso.logic.User;
 
 import java.sql.*;
