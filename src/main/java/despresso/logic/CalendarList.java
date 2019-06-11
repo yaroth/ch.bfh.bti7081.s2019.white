@@ -20,18 +20,18 @@ public class CalendarList extends ArrayList<CalendarEntry> {
         _repository = new CalendarRepository();
     }
 
-    public void addCalendarEntry(String id, LocalDateTime startTime, LocalDateTime endTime, String title, String description, String color, boolean isDone){
-        CalendarEntry newEntry = new CalendarEntry(id, startTime, endTime, title, description, color, isDone);
+    public void addCalendarEntry(int id, String calEntry, LocalDateTime startTime, LocalDateTime endTime, String title, String description, String color, boolean isDone){
+        CalendarEntry newEntry = new CalendarEntry(id, calEntry, startTime, endTime, title, description, color, isDone);
         this.add(newEntry);
         _repository.insert(newEntry);
     }
 
     public void updateCalendarEntry(Entry entry){
-        this.stream().filter(m -> m.getId().equals(entry.getId())).findFirst().ifPresent(currentEntry -> _repository.update(currentEntry));
+        this.stream().filter(m -> m.getEntryId().equals(entry.getId())).findFirst().ifPresent(currentEntry -> _repository.update(currentEntry));
     }
 
     public void deleteCalendarEntry(Entry entry){
-        this.stream().filter(m -> m.getId().equals(entry.getId())).findFirst().ifPresent(currentEntry -> _repository.delete(currentEntry));
+        this.stream().filter(m -> m.getEntryId().equals(entry.getId())).findFirst().ifPresent(currentEntry -> _repository.delete(currentEntry));
     }
 
     public Optional<CalendarEntry> getNextCalendarEntry(){

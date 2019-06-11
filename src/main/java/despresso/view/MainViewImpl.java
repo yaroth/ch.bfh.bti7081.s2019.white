@@ -114,6 +114,7 @@ public class MainViewImpl extends VerticalLayout implements SubjectInterface<Mai
     public void loadCalendarView() {
         mainArea.removeAll();
         mainArea.add(calendarView);
+        calendarView.initializeCalendar();
     }
 
     public void loadTipsView() {
