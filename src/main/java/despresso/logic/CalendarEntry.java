@@ -17,6 +17,10 @@ public class CalendarEntry {
     private String _color;
     private boolean _isDone;
 
+    public CalendarEntry(){
+        //constructor for repository
+    }
+
     public CalendarEntry(String id, LocalDateTime startTime, LocalDateTime endTime, String title, String description, String color, boolean isDone){
         _id = id;
         _startTime = startTime;

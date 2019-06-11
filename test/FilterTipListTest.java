@@ -2,6 +2,8 @@ import despresso.DataType;
 import despresso.logic.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class FilterTipListTest {
@@ -37,7 +39,7 @@ public class FilterTipListTest {
             System.out.println("anger: " + angerResult);
             System.out.println("disgust: " + disgustResult);
             System.out.println("anxiety: " + anxietyResult);
-            System.out.println("sadnessresult: " + sadnessResult + " // sadness of tip: " + this.tipModel.getFilteredTipList().get(i).getSadness());
+            System.out.println("sadness: " + sadnessResult + " // sadness of tip: " + this.tipModel.getFilteredTipList().get(i).getSadness());
             System.out.println("fear: " + fearResult);
             System.out.println("location: " + locationResult);
             System.out.println("type: " + typeResult);
@@ -54,7 +56,7 @@ public class FilterTipListTest {
         assertTrue(angerResult);
         assertTrue(disgustResult);
         assertTrue(anxietyResult);
-        assertTrue(sadnessResult);
+        assertTrue(!sadnessResult);
         assertTrue(fearResult);
         assertTrue(locationResult);
         assertTrue(typeResult);
