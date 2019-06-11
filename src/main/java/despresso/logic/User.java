@@ -66,4 +66,11 @@ public class User {
     public String toString(){
         return "User: " + this.id + ", " + this.fname + ", " + this.lname + ", " + this.dob;
     }
+
+    @Override
+    public boolean equals(Object o){
+        User obj = (User)o;
+        return this.fname.equals(obj.fname) && this.lname.equals(obj.lname) &&
+                this.dob.equals(obj.dob) && this.id == obj.id;
+    }
 }
