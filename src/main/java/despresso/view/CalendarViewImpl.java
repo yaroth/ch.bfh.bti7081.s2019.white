@@ -242,7 +242,7 @@ public class CalendarViewImpl extends VerticalLayout implements SubjectCalendarI
     }
 
     private void createCalendarEntry(Entry entry) {
-        _calendarList.addCalendarEntry(entry.getId(), entry.getStart(), entry.getEnd(), entry.getTitle(), entry.getDescription(), entry.getColor(), false);
+        _calendarList.addCalendarEntry(-1, entry.getId(), entry.getStart(), entry.getEnd(), entry.getTitle(), entry.getDescription(), entry.getColor(), false);
     }
 
     private void updateCalendarEntry(Entry entry){
