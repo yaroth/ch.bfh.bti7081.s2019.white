@@ -3,6 +3,9 @@ package despresso.logic;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @UIScope
 @SpringComponent
 public class Tip {
@@ -13,24 +16,44 @@ public class Tip {
     private boolean sadness;
     private boolean fear;
 
+    private int id;
     private TipDuration tipDuration;
     private TipType tipType;
     private TipLocation tipLocation;
     private String description;
 
-    public Tip(boolean anger, boolean disgust, boolean anxiety, boolean sadness, boolean fear, TipDuration tipDuration, TipType tipType, TipLocation tipLocation, String description){
+    public List<Feeling> getFeelingList() {
+        return feelingList;
+    }
+
+    public void setFeelingList(List<Feeling> feelingList) {
+        this.feelingList = feelingList;
+    }
+
+    private List<Feeling> feelingList = new ArrayList<>();
+
+    public Tip() {
+    }
+
+    public Tip(boolean anger, boolean disgust, boolean anxiety, boolean sadness, boolean fear,
+               TipDuration tipDuration, TipType tipType, TipLocation tipLocation, String description) {
         this.anger = anger;
         this.disgust = disgust;
         this.anxiety = anxiety;
         this.sadness = sadness;
         this.fear = fear;
+        if (this.anger) this.feelingList.add(Feeling.ANGER);
+        if (this.disgust) this.feelingList.add(Feeling.DISGUST);
+        if (this.anxiety) this.feelingList.add(Feeling.ANXIETY);
+        if (this.sadness) this.feelingList.add(Feeling.SADNESS);
+        if (this.fear) this.feelingList.add(Feeling.FEAR);
         this.tipDuration = tipDuration;
         this.tipLocation = tipLocation;
         this.tipType = tipType;
         this.description = description;
     }
 
-    public Tip(TipDuration tipDuration, TipType tipType, TipLocation tipLocation, String description){
+    public Tip(TipDuration tipDuration, TipType tipType, TipLocation tipLocation, String description) {
         this.anger = false;
         this.disgust = false;
         this.anxiety = false;
@@ -112,5 +135,24 @@ public class Tip {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+
+        String tip = description + "; " + tipDuration + "; " + tipLocation + "; " + tipType;
+        for (Feeling f : feelingList) {
+            tip += ", " + f.toString();
+        }
+        tip += "\n";
+        return tip;
     }
 }
