@@ -1,0 +1,5 @@
+- Full Java stack with Vaadin frontend and repository tied to H2 SQL database
+- MVP software pattern for general architecture
+- Observer pattern to handle program flow
+- Independent, modular design for different views that each implement their own observer pattern and tie to the main view through a common interface
+- Central repository handles persistent & user data independently of other components
