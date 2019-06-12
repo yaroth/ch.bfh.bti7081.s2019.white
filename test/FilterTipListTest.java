@@ -56,7 +56,7 @@ public class FilterTipListTest {
         assertTrue(angerResult);
         assertTrue(disgustResult);
         assertTrue(anxietyResult);
-        assertTrue(!sadnessResult);
+        assertFalse(sadnessResult);
         assertTrue(fearResult);
         assertTrue(locationResult);
         assertTrue(typeResult);

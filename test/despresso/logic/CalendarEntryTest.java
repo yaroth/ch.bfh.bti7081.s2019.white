@@ -13,12 +13,12 @@ public class CalendarEntryTest {
 
     LocalDateTime now = LocalDateTime.now();
 
-    CalendarEntry fullEntry = new CalendarEntry("20", now, now, "test1", "test1", "blue", false);
+    CalendarEntry fullEntry = new CalendarEntry(20, "20", now, now, "test1", "test1", "blue", false);
 
 
     @Test
     public void getId() {
-        assertTrue(fullEntry.getId() == "20");
+        assertTrue(fullEntry.getId() == 20);
     }
 
     @Test
