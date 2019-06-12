@@ -154,7 +154,7 @@ public class CalendarRepository implements RepositoryInterface<CalendarEntry>{
         List<CalendarEntry> userList = new ArrayList<>();
         while (resultSet.next()) {
             CalendarEntry entry = new CalendarEntry();
-            entry.setId(String.valueOf(Integer.parseInt(resultSet.getString("id"))));
+            entry.setId(Integer.parseInt(resultSet.getString("id")));
             entry.setTitle(resultSet.getString("title"));
             entry.setStart(LocalDateTime.parse(resultSet.getString("start")));
             entry.setEnd(LocalDateTime.parse(resultSet.getString("end")));
