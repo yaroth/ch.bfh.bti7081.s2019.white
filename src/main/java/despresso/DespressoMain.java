@@ -19,15 +19,6 @@ import despresso.view.*;
 @Route("despresso.html")
 @PWA(name = "Project Base for Vaadin Flow", shortName = "Project Base")
 public class DespressoMain extends VerticalLayout {
-    /*public DespressoMain() {
-        // Create the model and the Vaadin view implementation
-        CalculatorModel model = new CalculatorModel();
-        CalculatorViewImpl view = new CalculatorViewImpl();
-        // The presenter connects the model and view
-        new CalculatorPresenter(model, view);
-        // The view implementation is a Vaadin component
-        add(view);
-    }*/
 
     public DespressoMain() {
         // Create the model and the Vaadin view implementation
